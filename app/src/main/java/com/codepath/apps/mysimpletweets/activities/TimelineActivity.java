@@ -1,15 +1,18 @@
 package com.codepath.apps.mysimpletweets.activities;
 
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.codepath.apps.mysimpletweets.R;
 import com.codepath.apps.mysimpletweets.TwitterApplication;
 import com.codepath.apps.mysimpletweets.adapters.StatusesArrayAdapter;
+import com.codepath.apps.mysimpletweets.fragments.ComposeDialog;
 import com.codepath.apps.mysimpletweets.models.Status;
 import com.codepath.apps.mysimpletweets.networking.TwitterClient;
 import com.codepath.apps.mysimpletweets.utilities.EndlessRecyclerViewScrollListener;
@@ -61,6 +64,7 @@ public class TimelineActivity extends AppCompatActivity {
 
 
         client = TwitterApplication.getRestClient();
+        client.getCurrentUser();
         populateTimeline(true);
 
     }
@@ -103,12 +107,12 @@ public class TimelineActivity extends AppCompatActivity {
                 //Add them to the adapter
                 statuses.addAll(Status.fromJSONArray(json));
                 if (newTimeline == false) {
-                    aStatuses.notifyItemRangeInserted(curSize, statuses.size()-1);
+                    aStatuses.notifyItemRangeInserted(curSize, statuses.size() - 1);
                 } else {
                     aStatuses.notifyDataSetChanged();
                 }
 
-                maxId = statuses.get(statuses.size()-1).getId() - 1;
+                maxId = statuses.get(statuses.size() - 1).getId() - 1;
                 Log.d("DEBUG", "Status Array: " + statuses.toString());
             }
 
@@ -122,6 +126,13 @@ public class TimelineActivity extends AppCompatActivity {
         }, maxId);
 
     }
+
+    public void showComposeDialog(View v) {
+        FragmentManager fm = getSupportFragmentManager();
+        ComposeDialog composeDialog = ComposeDialog.newInstance();
+        composeDialog.show(fm,"fragment_compose");
+    }
+
 
     public String loadJSONFromAsset() {
         String json = null;

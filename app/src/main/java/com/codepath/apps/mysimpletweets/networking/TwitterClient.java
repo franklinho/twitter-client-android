@@ -1,11 +1,17 @@
 package com.codepath.apps.mysimpletweets.networking;
 
 import android.content.Context;
+import android.util.Log;
 
+import com.codepath.apps.mysimpletweets.models.User;
 import com.codepath.oauth.OAuthBaseClient;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
+import org.apache.http.Header;
+import org.json.JSONObject;
 import org.scribe.builder.api.Api;
 import org.scribe.builder.api.TwitterApi;
 
@@ -27,6 +33,7 @@ public class TwitterClient extends OAuthBaseClient {
 	public static final String REST_CONSUMER_KEY = "sdqP7Ytz6LLZ9evZwzo486hDd";       // Change this
 	public static final String REST_CONSUMER_SECRET = "JGQutpCG0MDmn1BtXGPHdzlQO6xLB8szP4n1OPik0HhzTzzlvh"; // Change this
 	public static final String REST_CALLBACK_URL = "oauth://cpsimpletweets"; // Change this (here and in manifest)
+    public static User currentUser;
 
 	public TwitterClient(Context context) {
 		super(context, REST_API_CLASS, REST_URL, REST_CONSUMER_KEY, REST_CONSUMER_SECRET, REST_CALLBACK_URL);
@@ -47,14 +54,6 @@ public class TwitterClient extends OAuthBaseClient {
 	//HomeTimeline - Gets us a timeline
 
 
-//    public void getHomeTimeline(AsyncHttpResponseHandler handler ) {
-//        String apiUrl = getApiUrl("statuses/home_timeline.json");
-//        RequestParams params = new RequestParams();
-//        params.put("count", 25);
-////        params.put("max", 1);
-//        getClient().get(apiUrl,handler);
-//    }
-
     public void getHomeTimeline(JsonHttpResponseHandler handler, long maxId ) {
         String apiUrl = getApiUrl("statuses/home_timeline.json");
         RequestParams params = new RequestParams();
@@ -62,7 +61,40 @@ public class TwitterClient extends OAuthBaseClient {
         if (maxId != 0L) {
             params.put("max_id", maxId);
         }
-        getClient().get(apiUrl,params, handler);
+        getClient().get(apiUrl, params, handler);
+    }
+
+    // Post a status update
+
+    public void postStatusUpdate(String text, JsonHttpResponseHandler handler) {
+        String apiUrl = getApiUrl("statuses/update.json");
+        RequestParams params = new RequestParams();
+        params.put("status",text);
+        getClient().post(apiUrl,params, handler);
+    }
+
+    public User getCurrentUser() {
+        if (currentUser == null) {
+            String apiUrl = getApiUrl("account/verify_credentials.json");
+            getClient().get(apiUrl,new JsonHttpResponseHandler(){
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                    Gson gson = new GsonBuilder().create();
+
+                    currentUser =  gson.fromJson(response.toString(), User.class);
+
+                }
+
+                @Override
+                public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                    Log.d("DEBUG","Failed to grab user object" );
+                }
+            });
+        }
+
+        return currentUser;
+
+
     }
 
     // Compose Tweet
