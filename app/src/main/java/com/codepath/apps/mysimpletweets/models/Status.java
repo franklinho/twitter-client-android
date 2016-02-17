@@ -87,6 +87,10 @@ public class Status {
     @Expose
     private Object inReplyToStatusId;
 
+    public Status() {
+        super();
+    }
+
     /**
      * 
      * @return
@@ -460,10 +464,12 @@ public class Status {
         SimpleDateFormat sf = new SimpleDateFormat(twitterFormat, Locale.ENGLISH);
         sf.setLenient(true);
 
+
         String relativeDate = "";
         try {
             DateTime createdDateTime = new DateTime(sf.parse(getCreatedAt()).getTime());
             DateTime currentDateTime = new DateTime();
+
 
 
 

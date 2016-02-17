@@ -1,5 +1,6 @@
 package com.codepath.apps.mysimpletweets.fragments;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 
 import com.codepath.apps.mysimpletweets.R;
 import com.codepath.apps.mysimpletweets.TwitterApplication;
+import com.codepath.apps.mysimpletweets.models.Status;
 import com.codepath.apps.mysimpletweets.models.User;
 import com.codepath.apps.mysimpletweets.networking.TwitterClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -21,6 +23,10 @@ import com.squareup.picasso.Picasso;
 
 import org.apache.http.Header;
 import org.json.JSONObject;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -43,11 +49,22 @@ public class ComposeDialog extends android.support.v4.app.DialogFragment{
     EditText etTweetField;
     @Bind(R.id.ivProfileImage)
     ImageView ivProfileImage;
+    InsertNewStatus dataPasser;
 
     private TwitterClient client;
 
     public ComposeDialog() {
 
+    }
+
+    public interface  InsertNewStatus {
+        public void insertNewStatus(Status status);
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        dataPasser = (InsertNewStatus) activity;
     }
 
     public static ComposeDialog newInstance() {
@@ -97,6 +114,16 @@ public class ComposeDialog extends android.support.v4.app.DialogFragment{
                         @Override
                         public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                             Toast.makeText(getContext(), "Tweet Posted Successfully", Toast.LENGTH_SHORT).show();
+                            Status status = new Status();
+                            if (client.getCurrentUser() != null) {
+                                status.setUser(client.getCurrentUser());
+                            }
+                            status.setText(etTweetField.getText().toString());
+                            String twitterFormat = "EEE MMM dd HH:mm:ss ZZZZZ yyyy";
+                            SimpleDateFormat sf = new SimpleDateFormat(twitterFormat, Locale.ENGLISH);
+                            status.setCreatedAt(sf.format(new Date()));
+
+                            dataPasser.insertNewStatus(status);
                             dismiss();
                         }
 

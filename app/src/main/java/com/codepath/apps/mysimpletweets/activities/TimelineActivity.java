@@ -30,7 +30,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class TimelineActivity extends AppCompatActivity {
+public class TimelineActivity extends AppCompatActivity implements ComposeDialog.InsertNewStatus {
 
     private TwitterClient client;
     List<Status> statuses;
@@ -157,6 +157,12 @@ public class TimelineActivity extends AppCompatActivity {
         }
         return json;
 
+    }
+
+    public void insertNewStatus(Status status) {
+        statuses.add(0,status);
+        aStatuses.notifyItemInserted(0);
+        rvTweets.scrollToPosition(0);
     }
 
 
