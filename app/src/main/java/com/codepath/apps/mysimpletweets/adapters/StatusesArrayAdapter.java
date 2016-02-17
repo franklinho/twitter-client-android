@@ -14,6 +14,9 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 /**
  * Created by franklinho on 2/16/16.
  */
@@ -26,26 +29,26 @@ public class StatusesArrayAdapter extends RecyclerView.Adapter<StatusesArrayAdap
 
     public static class ViewHolder extends  RecyclerView.ViewHolder {
 
-//        @Bind(R.id.tvUsername) TextView tvUsername;
-//        @Bind(R.id.tvRelativeTimeStamp) TextView tvRelativeTimeStamp;
-//        @Bind(R.id.tvBody) TextView tvBody;
-//        @Bind(R.id.ivProfileImage) ImageView ivProfileImage;
+        @Bind(R.id.tvUsername) TextView tvUsername;
+        @Bind(R.id.tvRelativeTimeStamp) TextView tvRelativeTimeStamp;
+        @Bind(R.id.tvBody) TextView tvBody;
+        @Bind(R.id.ivProfileImage) ImageView ivProfileImage;
 
-        TextView tvUsername;
-        TextView tvRelativeTimeStamp;
-        TextView tvBody;
-        ImageView ivProfileImage;
+//        TextView tvUsername;
+//        TextView tvRelativeTimeStamp;
+//        TextView tvBody;
+//        ImageView ivProfileImage;
 
         private Context context;
 
 
         public ViewHolder(View itemView) {
             super(itemView);
-//            ButterKnife.bind(this.itemView);
-            tvUsername = (TextView) itemView.findViewById(R.id.tvUsername);
-            tvRelativeTimeStamp = (TextView) itemView.findViewById(R.id.tvRelativeTimeStamp);
-            tvBody = (TextView) itemView.findViewById(R.id.tvBody);
-            ivProfileImage = (ImageView) itemView.findViewById(R.id.ivProfileImage);
+            ButterKnife.bind(this, itemView);
+//            tvUsername = (TextView) itemView.findViewById(R.id.tvUsername);
+//            tvRelativeTimeStamp = (TextView) itemView.findViewById(R.id.tvRelativeTimeStamp);
+//            tvBody = (TextView) itemView.findViewById(R.id.tvBody);
+//            ivProfileImage = (ImageView) itemView.findViewById(R.id.ivProfileImage);
 
             context=itemView.getContext();
         }

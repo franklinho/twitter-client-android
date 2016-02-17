@@ -3,7 +3,8 @@ package com.codepath.apps.mysimpletweets.networking;
 import android.content.Context;
 
 import com.codepath.oauth.OAuthBaseClient;
-import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 
 import org.scribe.builder.api.Api;
 import org.scribe.builder.api.TwitterApi;
@@ -46,12 +47,22 @@ public class TwitterClient extends OAuthBaseClient {
 	//HomeTimeline - Gets us a timeline
 
 
-    public void getHomeTimeline(AsyncHttpResponseHandler handler) {
-        String apiUrl = getApiUrl("statuses/home_timeline.json");
+//    public void getHomeTimeline(AsyncHttpResponseHandler handler ) {
+//        String apiUrl = getApiUrl("statuses/home_timeline.json");
 //        RequestParams params = new RequestParams();
-////        params.put("count", 25);
-////        params.put("since_id", 1);
-        getClient().get(apiUrl,handler);
+//        params.put("count", 25);
+////        params.put("max", 1);
+//        getClient().get(apiUrl,handler);
+//    }
+
+    public void getHomeTimeline(JsonHttpResponseHandler handler, long maxId ) {
+        String apiUrl = getApiUrl("statuses/home_timeline.json");
+        RequestParams params = new RequestParams();
+        params.put("count", 25);
+        if (maxId != 0L) {
+            params.put("max_id", maxId);
+        }
+        getClient().get(apiUrl,params, handler);
     }
 
     // Compose Tweet
