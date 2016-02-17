@@ -2,6 +2,8 @@ package com.codepath.apps.mysimpletweets.fragments;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -135,6 +137,37 @@ public class ComposeDialog extends android.support.v4.app.DialogFragment{
                         }
                     });
                 }
+            }
+        });
+
+        if (etTweetField.getText().length() == 0 ) {
+            btnTweet.setEnabled(false);
+        }
+
+        etTweetField.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (s.length() == 0 || s.length() > 140) {
+                    btnTweet.setEnabled(false);
+                } else {
+                    btnTweet.setEnabled(true);
+                }
+                tvCharacterCount.setText(Integer.toString(140 - s.length()));
+
+                if (s.length() > 140) {
+                    tvCharacterCount.setTextColor(getResources().getColor(R.color.red));
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
             }
         });
 
