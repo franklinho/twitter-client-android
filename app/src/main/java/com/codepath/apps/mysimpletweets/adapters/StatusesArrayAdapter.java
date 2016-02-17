@@ -36,10 +36,12 @@ public class StatusesArrayAdapter extends ArrayAdapter<Status>{
         ImageView ivProfileImage = (ImageView) convertView.findViewById(R.id.ivProfileImage);
         TextView tvUsername = (TextView) convertView.findViewById(R.id.tvUsername);
         TextView tvBody = (TextView) convertView.findViewById(R.id.tvBody);
+        TextView tvRelativeTimeStamp = (TextView) convertView.findViewById(R.id.tvRelativeTimeStamp);
         //Populate data into the subviews
 
         tvUsername.setText(status.getUser().getName());
         tvBody.setText(status.getText());
+        tvRelativeTimeStamp.setText(status.getRelativeTimeAgo());
         ivProfileImage.setImageResource(android.R.color.transparent); // Clear imageview
         Picasso.with(getContext()).load(status.getUser().getProfileImageUrl()).into(ivProfileImage);
         // Return the view to be inserted into the list

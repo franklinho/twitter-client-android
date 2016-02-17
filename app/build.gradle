@@ -16,6 +16,13 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+    }
 }
 
 repositories {
@@ -40,4 +47,5 @@ dependencies {
     compile 'org.glassfish.main:javax.annotation:4.0-b33'
     compile 'javax.validation:validation-api:1.1.0.CR2'
     compile 'com.jakewharton:butterknife:7.0.1'
+    compile 'net.danlew:android.joda:2.9.2'
 }
