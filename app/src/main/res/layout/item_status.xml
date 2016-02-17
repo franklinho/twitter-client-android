@@ -1,46 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp">
+    android:padding="10dp"
+    android:background="@android:color/white">
 
-    <ImageView
+    <com.makeramen.roundedimageview.RoundedImageView
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:id="@+id/ivProfileImage"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginRight="10dp"/>
+        android:layout_marginRight="10dp"
+        app:riv_corner_radius="5dp"
+        app:riv_border_width="2dp"
+        app:riv_border_color="#FFFFFF"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="New Text"
-        android:id="@+id/tvUsername"
+        android:id="@+id/tvName"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/ivProfileImage"
         android:layout_toEndOf="@+id/ivProfileImage"
-        android:layout_marginBottom="10dp"/>
+        android:layout_marginBottom="5dp"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="New Text"
         android:id="@+id/tvBody"
-        android:layout_below="@+id/tvUsername"
-        android:layout_alignLeft="@+id/tvUsername"
-        android:layout_alignStart="@+id/tvUsername"
+        android:layout_below="@+id/tvName"
+        android:layout_alignLeft="@+id/tvName"
+        android:layout_alignStart="@+id/tvName"
         android:autoLink="all"
         android:linksClickable="true"
-        android:textColorLink="@color/twitter_blue"/>
+        android:textColorLink="@color/twitter_blue"
+        android:textColor="@android:color/black"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="New Text"
         android:id="@+id/tvRelativeTimeStamp"
-        android:layout_alignTop="@+id/tvUsername"
+        android:layout_alignTop="@+id/tvScreenName"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/tvScreenName"
+        android:layout_marginLeft="5dp"
+        android:layout_above="@+id/tvBody"
+        android:layout_toRightOf="@+id/tvName"
+        android:layout_alignTop="@+id/tvName" />
 </RelativeLayout>

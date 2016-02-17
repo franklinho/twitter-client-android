@@ -15,13 +15,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.codepath.apps.mysimpletweets.R;
 import com.codepath.apps.mysimpletweets.TwitterApplication;
 import com.codepath.apps.mysimpletweets.models.Status;
 import com.codepath.apps.mysimpletweets.models.User;
 import com.codepath.apps.mysimpletweets.networking.TwitterClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
-import com.squareup.picasso.Picasso;
 
 import org.apache.http.Header;
 import org.json.JSONObject;
@@ -41,8 +41,8 @@ public class ComposeDialog extends android.support.v4.app.DialogFragment{
     ImageButton ibtnClose;
     @Bind(R.id.tvName)
     TextView tvName;
-    @Bind(R.id.tvUsername)
-    TextView tvUsername;
+    @Bind(R.id.tvScreenName)
+    TextView tvScreenName;
     @Bind(R.id.tvCharacterCount)
     TextView tvCharacterCount;
     @Bind(R.id.btnTweet)
@@ -91,11 +91,11 @@ public class ComposeDialog extends android.support.v4.app.DialogFragment{
                 tvName.setText(currentUser.getName());
             }
             if (currentUser.getScreenName() != null) {
-                tvUsername.setText(currentUser.getScreenName());
+                tvScreenName.setText("@"+currentUser.getScreenName());
             }
             if (currentUser.getProfileImageUrl() != null) {
-                Picasso.with(getContext()).load(currentUser.getProfileImageUrl()).into(ivProfileImage);
-
+//                Picasso.with(getContext()).load(currentUser.getProfileImageUrl()).into(ivProfileImage);
+                Glide.with(getContext()).load(currentUser.getProfileImageUrl()).into(ivProfileImage);
             }
 
         }

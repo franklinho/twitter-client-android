@@ -2,12 +2,13 @@ package com.codepath.apps.mysimpletweets.activities;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import com.codepath.apps.mysimpletweets.R;
 import com.codepath.apps.mysimpletweets.TwitterApplication;
@@ -16,6 +17,8 @@ import com.codepath.apps.mysimpletweets.fragments.ComposeDialog;
 import com.codepath.apps.mysimpletweets.models.Status;
 import com.codepath.apps.mysimpletweets.networking.TwitterClient;
 import com.codepath.apps.mysimpletweets.utilities.EndlessRecyclerViewScrollListener;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.apache.http.Header;
@@ -35,8 +38,18 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
     private TwitterClient client;
     List<Status> statuses;
     StatusesArrayAdapter aStatuses;
-    @Bind(R.id.rvTweets) RecyclerView rvTweets;
+    @Bind(R.id.rvTweets)
+    RecyclerView rvTweets;
+    @Bind(R.id.swipeContainer)
+    SwipeRefreshLayout swipeContainer;
+    @Bind(R.id.toolbar)
+    Toolbar toolbar;
     long maxId;
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client2;
 
 
     @Override
@@ -44,6 +57,8 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timeline);
         ButterKnife.bind(this);
+
+        setSupportActionBar(toolbar);
 
         //Create arraylist datasource
         statuses = new ArrayList<>();
@@ -62,21 +77,30 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
             }
         });
 
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                populateTimeline(true);
+            }
+        });
+
+        swipeContainer.setColorSchemeResources(R.color.twitter_blue);
 
         client = TwitterApplication.getRestClient();
         client.getCurrentUser();
         populateTimeline(true);
 
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client2 = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
-
 
 
     // Send api request to get timeline json and fills listview with tweet objects
     private void populateTimeline(final boolean newTimeline) {
         if (newTimeline == true) {
             maxId = 0L;
-            statuses.clear();
-            aStatuses.notifyDataSetChanged();
+            aStatuses.clear();
         }
 //
 //        JSONArray jsonArray = null;
@@ -97,10 +121,11 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
 //        }
 
         client.getHomeTimeline(new JsonHttpResponseHandler() {
+
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray json) {
                 Log.d("DEBUG", json.toString());
-                Toast.makeText(getBaseContext(), "SuccessArray", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getBaseContext(), "SuccessArray", Toast.LENGTH_SHORT).show();
 
 
                 int curSize = statuses.size();
@@ -119,18 +144,20 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                 Log.d("DEBUG", errorResponse.toString());
-                Toast.makeText(getBaseContext(), "FailureObject", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getBaseContext(), "FailureObject", Toast.LENGTH_SHORT).show();
             }
 
 
         }, maxId);
+
+        swipeContainer.setRefreshing(false);
 
     }
 
     public void showComposeDialog(View v) {
         FragmentManager fm = getSupportFragmentManager();
         ComposeDialog composeDialog = ComposeDialog.newInstance();
-        composeDialog.show(fm,"fragment_compose");
+        composeDialog.show(fm, "fragment_compose");
     }
 
 
@@ -160,7 +187,7 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
     }
 
     public void insertNewStatus(Status status) {
-        statuses.add(0,status);
+        statuses.add(0, status);
         aStatuses.notifyItemInserted(0);
         rvTweets.scrollToPosition(0);
     }

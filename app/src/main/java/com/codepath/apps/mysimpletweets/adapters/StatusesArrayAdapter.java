@@ -8,9 +8,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.codepath.apps.mysimpletweets.R;
 import com.codepath.apps.mysimpletweets.models.Status;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -29,9 +29,10 @@ public class StatusesArrayAdapter extends RecyclerView.Adapter<StatusesArrayAdap
 
     public static class ViewHolder extends  RecyclerView.ViewHolder {
 
-        @Bind(R.id.tvUsername) TextView tvUsername;
+        @Bind(R.id.tvName) TextView tvName;
         @Bind(R.id.tvRelativeTimeStamp) TextView tvRelativeTimeStamp;
         @Bind(R.id.tvBody) TextView tvBody;
+        @Bind(R.id.tvScreenName) TextView tvScreenName;
         @Bind(R.id.ivProfileImage) ImageView ivProfileImage;
 
 //        TextView tvUsername;
@@ -72,23 +73,21 @@ public class StatusesArrayAdapter extends RecyclerView.Adapter<StatusesArrayAdap
         com.codepath.apps.mysimpletweets.models.Status status = mStatuses.get(position);
 
         ImageView ivProfileImage = holder.ivProfileImage;
-        TextView tvUsername = holder.tvUsername;
+        TextView tvName = holder.tvName;
         TextView tvBody = holder.tvBody;
         TextView tvRelativeTimeStamp = holder.tvRelativeTimeStamp;
+        TextView tvScreenName = holder.tvScreenName;
 
-//        if (tvUsername != null) {
-            tvUsername.setText(status.getUser().getName());
-//        }
-//        if (tvBody != null) {
-            tvBody.setText(status.getText());
-//        }
-//        if (tvRelativeTimeStamp != null) {
-            tvRelativeTimeStamp.setText(status.getRelativeTimeAgo());
-//        }
-//        if (ivProfileImage != null) {
-            ivProfileImage.setImageResource(android.R.color.transparent); // Clear imageview
-            Picasso.with(holder.context).load(status.getUser().getProfileImageUrl()).into(ivProfileImage);
-//        }
+
+        tvName.setText(status.getUser().getName());
+        tvBody.setText(status.getText());
+        tvRelativeTimeStamp.setText(status.getRelativeTimeAgo());
+        tvScreenName.setText(status.getUser().getScreenName());
+
+        ivProfileImage.setImageResource(android.R.color.transparent); // Clear imageview
+//            Picasso.with(holder.context).load(status.getUser().getProfileImageUrl()).into(ivProfileImage);
+        Glide.with(holder.context).load(status.getUser().getProfileImageUrl()).into(ivProfileImage);
+
 
     }
 
@@ -98,4 +97,13 @@ public class StatusesArrayAdapter extends RecyclerView.Adapter<StatusesArrayAdap
     }
 
 
+    public void clear() {
+        mStatuses.clear();
+        notifyDataSetChanged();
+    }
+
+    public void addAll(List<Status> statuses) {
+        mStatuses.addAll(statuses);
+        notifyDataSetChanged();
+    }
 }
