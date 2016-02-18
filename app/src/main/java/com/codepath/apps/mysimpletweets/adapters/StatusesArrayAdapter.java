@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -34,6 +35,10 @@ public class StatusesArrayAdapter extends RecyclerView.Adapter<StatusesArrayAdap
         @Bind(R.id.tvBody) TextView tvBody;
         @Bind(R.id.tvScreenName) TextView tvScreenName;
         @Bind(R.id.ivProfileImage) ImageView ivProfileImage;
+        @Bind(R.id.tvRetweetCount) TextView tvRetweetCount;
+        @Bind(R.id.ibtnFavorite) ImageButton ibtnFavorite;
+        @Bind(R.id.ibtnRetweet) ImageButton ibtnRetweet;
+
 
 //        TextView tvUsername;
 //        TextView tvRelativeTimeStamp;
@@ -77,6 +82,9 @@ public class StatusesArrayAdapter extends RecyclerView.Adapter<StatusesArrayAdap
         TextView tvBody = holder.tvBody;
         TextView tvRelativeTimeStamp = holder.tvRelativeTimeStamp;
         TextView tvScreenName = holder.tvScreenName;
+        TextView tvRetweetCount = holder.tvRetweetCount;
+        ImageButton ibtnFavorite = holder.ibtnFavorite;
+        ImageButton ibtnRetweet = holder.ibtnRetweet;
 
 
         tvName.setText(status.getUser().getName());
@@ -87,6 +95,20 @@ public class StatusesArrayAdapter extends RecyclerView.Adapter<StatusesArrayAdap
         ivProfileImage.setImageResource(android.R.color.transparent); // Clear imageview
 //            Picasso.with(holder.context).load(status.getUser().getProfileImageUrl()).into(ivProfileImage);
         Glide.with(holder.context).load(status.getUser().getProfileImageUrl()).into(ivProfileImage);
+
+        tvRetweetCount.setText(Integer.toString(status.getRetweetCount()));
+        if (status.getFavorited() == true) {
+            ibtnFavorite.setImageResource(R.drawable.heart_icon_red);
+        } else {
+            ibtnFavorite.setImageResource(R.drawable.heart_icon);
+        }
+
+        if (status.getRetweeted() == true) {
+            ibtnFavorite.setImageResource(R.drawable.retweet_icon_green);
+        } else {
+            ibtnFavorite.setImageResource(R.drawable.retweet_icon);
+        }
+
 
 
     }
