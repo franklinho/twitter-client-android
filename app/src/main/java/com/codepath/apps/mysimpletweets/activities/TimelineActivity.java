@@ -58,7 +58,7 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
 
-        actionBar.setLogo(R.drawable.twitter_icon);
+        actionBar.setLogo(R.drawable.space_between_icon);
         actionBar.setDisplayUseLogoEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setDefaultDisplayHomeAsUpEnabled(false);

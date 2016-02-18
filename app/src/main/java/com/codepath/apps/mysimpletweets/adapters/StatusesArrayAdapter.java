@@ -1,6 +1,7 @@
 package com.codepath.apps.mysimpletweets.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.codepath.apps.mysimpletweets.R;
 import com.codepath.apps.mysimpletweets.TwitterApplication;
+import com.codepath.apps.mysimpletweets.activities.StatusDetailActivity;
 import com.codepath.apps.mysimpletweets.activities.TimelineActivity;
 import com.codepath.apps.mysimpletweets.fragments.ComposeDialog;
 import com.codepath.apps.mysimpletweets.models.Status;
@@ -38,8 +40,9 @@ public class StatusesArrayAdapter extends RecyclerView.Adapter<StatusesArrayAdap
         this.context = context;
     }
 
-    public static class ViewHolder extends  RecyclerView.ViewHolder {
+    public static class ViewHolder extends  RecyclerView.ViewHolder implements View.OnClickListener {
 
+        public Status status;
         @Bind(R.id.tvName) TextView tvName;
         @Bind(R.id.tvRelativeTimeStamp) TextView tvRelativeTimeStamp;
         @Bind(R.id.tvBody) TextView tvBody;
@@ -68,6 +71,15 @@ public class StatusesArrayAdapter extends RecyclerView.Adapter<StatusesArrayAdap
 //            ivProfileImage = (ImageView) itemView.findViewById(R.id.ivProfileImage);
 
             context=itemView.getContext();
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            int position = getLayoutPosition();
+            Intent i = new Intent(context, StatusDetailActivity.class);
+            i.putExtra("status", status );
+            context.startActivity(i);
         }
     }
 
@@ -87,6 +99,7 @@ public class StatusesArrayAdapter extends RecyclerView.Adapter<StatusesArrayAdap
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         final com.codepath.apps.mysimpletweets.models.Status status = mStatuses.get(position);
+        holder.status = status;
 
         ImageView ivProfileImage = holder.ivProfileImage;
         TextView tvName = holder.tvName;
