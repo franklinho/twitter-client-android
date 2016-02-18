@@ -75,7 +75,7 @@
         android:src="@drawable/reply_icon"
         android:background="@android:color/transparent"
         android:scaleType="fitCenter"
-        android:layout_marginRight="10dp"
+        android:layout_marginRight="30dp"
         android:padding="15dp"/>
 
     <ImageButton
@@ -88,7 +88,7 @@
         android:layout_alignBottom="@+id/ibtnReply"
         android:layout_toRightOf="@+id/ibtnReply"
         android:layout_toEndOf="@+id/ibtnReply"
-        android:layout_marginRight="10dp"
+        android:layout_marginRight="0dp"
         android:padding="10dp"
         />
 
@@ -104,7 +104,7 @@
         android:layout_toEndOf="@+id/tvRetweetCount"
         android:layout_alignTop="@+id/ibtnRetweet"
         android:padding="15dp"
-        android:layout_marginLeft="10dp"/>
+        android:layout_marginLeft="30dp"/>
 
     <TextView
         android:layout_width="wrap_content"
