@@ -17,6 +17,7 @@ import com.codepath.apps.mysimpletweets.TwitterApplication;
 import com.codepath.apps.mysimpletweets.activities.StatusDetailActivity;
 import com.codepath.apps.mysimpletweets.activities.TimelineActivity;
 import com.codepath.apps.mysimpletweets.fragments.ComposeDialog;
+import com.codepath.apps.mysimpletweets.models.LinkifiedTextView;
 import com.codepath.apps.mysimpletweets.models.Status;
 import com.codepath.apps.mysimpletweets.networking.TwitterClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -45,7 +46,8 @@ public class StatusesArrayAdapter extends RecyclerView.Adapter<StatusesArrayAdap
         public Status status;
         @Bind(R.id.tvName) TextView tvName;
         @Bind(R.id.tvRelativeTimeStamp) TextView tvRelativeTimeStamp;
-        @Bind(R.id.tvBody) TextView tvBody;
+        @Bind(R.id.tvBody)
+        LinkifiedTextView tvBody;
         @Bind(R.id.tvScreenName) TextView tvScreenName;
         @Bind(R.id.ivProfileImage) ImageView ivProfileImage;
         @Bind(R.id.tvRetweetCount) TextView tvRetweetCount;
@@ -103,7 +105,7 @@ public class StatusesArrayAdapter extends RecyclerView.Adapter<StatusesArrayAdap
 
         ImageView ivProfileImage = holder.ivProfileImage;
         TextView tvName = holder.tvName;
-        TextView tvBody = holder.tvBody;
+        LinkifiedTextView tvBody = holder.tvBody;
         TextView tvRelativeTimeStamp = holder.tvRelativeTimeStamp;
         TextView tvScreenName = holder.tvScreenName;
         final TextView tvRetweetCount = holder.tvRetweetCount;
@@ -116,7 +118,7 @@ public class StatusesArrayAdapter extends RecyclerView.Adapter<StatusesArrayAdap
         tvName.setText(status.getUser().getName());
         tvBody.setText(status.getText());
         tvRelativeTimeStamp.setText(status.getRelativeTimeAgo());
-        tvScreenName.setText(status.getUser().getScreenName());
+        tvScreenName.setText("@"+status.getUser().getScreenName());
 
         ivProfileImage.setImageResource(android.R.color.transparent); // Clear imageview
 //            Picasso.with(holder.context).load(status.getUser().getProfileImageUrl()).into(ivProfileImage);

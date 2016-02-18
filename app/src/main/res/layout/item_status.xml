@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp"
-    android:background="@android:color/white">
+    android:background="@android:color/white"
+    android:descendantFocusability="blocksDescendants">
 
     <com.makeramen.roundedimageview.RoundedImageView
         android:layout_width="50dp"
@@ -31,7 +32,7 @@
         android:textColor="@android:color/black"
         android:textStyle="bold"/>
 
-    <TextView
+    <com.codepath.apps.mysimpletweets.models.LinkifiedTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="New Text"
@@ -43,7 +44,9 @@
         android:linksClickable="true"
         android:textColorLink="@color/twitter_blue"
         android:textColor="@android:color/black"
-        android:layout_marginBottom="10dp"/>
+        android:layout_marginBottom="10dp"
+        android:focusable="false"
+        android:focusableInTouchMode="false"/>
 
     <TextView
         android:layout_width="wrap_content"
