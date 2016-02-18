@@ -52,6 +52,14 @@ public class ComposeDialog extends android.support.v4.app.DialogFragment{
     @Bind(R.id.ivProfileImage)
     ImageView ivProfileImage;
     InsertNewStatus dataPasser;
+    Status replyStatus;
+
+    @Bind(R.id.tvInReplyTo)
+    TextView tvInReplyTo;
+
+    @Bind(R.id.ivDownArrow)
+    ImageView ivDownArrow;
+
 
     private TwitterClient client;
 
@@ -83,6 +91,16 @@ public class ComposeDialog extends android.support.v4.app.DialogFragment{
         View view = inflater.inflate(R.layout.fragment_compose, container);
         ButterKnife.bind(this, view);
 
+        replyStatus = getArguments().getParcelable("status");
+        if (replyStatus != null) {
+            etTweetField.setText("@" + replyStatus.getUser().getScreenName());
+            etTweetField.setSelection(etTweetField.getText().length());
+            ivDownArrow.setVisibility(View.VISIBLE);
+            tvInReplyTo.setText("In reply to " + replyStatus.getUser().getScreenName());
+            tvInReplyTo.setVisibility(View.VISIBLE);
+
+        }
+
         client = TwitterApplication.getRestClient();
 
         User currentUser = client.getCurrentUser();
@@ -112,7 +130,7 @@ public class ComposeDialog extends android.support.v4.app.DialogFragment{
             public void onClick(View v) {
                 if (etTweetField.getText().length() > 0) {
 
-                    client.postStatusUpdate(etTweetField.getText().toString(), new JsonHttpResponseHandler() {
+                    client.postStatusUpdate(etTweetField.getText().toString(),replyStatus, new JsonHttpResponseHandler() {
                         @Override
                         public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                             Toast.makeText(getContext(), "Tweet Posted Successfully", Toast.LENGTH_SHORT).show();

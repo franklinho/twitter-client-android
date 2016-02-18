@@ -1,13 +1,17 @@
 
 package com.codepath.apps.mysimpletweets.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import javax.annotation.Generated;
 
 @Generated("org.jsonschema2pojo")
-public class User {
+
+public class User implements Parcelable {
 
     @SerializedName("name")
     @Expose
@@ -42,9 +46,9 @@ public class User {
     @SerializedName("profile_link_color")
     @Expose
     private String profileLinkColor;
-    @SerializedName("entities")
-    @Expose
-    private Entities_ entities;
+//    @SerializedName("entities")
+//    @Expose
+//    private Entities_ entities;
     @SerializedName("default_profile")
     @Expose
     private Boolean defaultProfile;
@@ -57,9 +61,9 @@ public class User {
     @SerializedName("favourites_count")
     @Expose
     private Integer favouritesCount;
-    @SerializedName("utc_offset")
-    @Expose
-    private Object utcOffset;
+//    @SerializedName("utc_offset")
+//    @Expose
+//    private Object utcOffset;
     @SerializedName("profile_image_url_https")
     @Expose
     private String profileImageUrlHttps;
@@ -99,9 +103,9 @@ public class User {
     @SerializedName("verified")
     @Expose
     private Boolean verified;
-    @SerializedName("time_zone")
-    @Expose
-    private Object timeZone;
+//    @SerializedName("time_zone")
+//    @Expose
+//    private Object timeZone;
     @SerializedName("profile_background_image_url_https")
     @Expose
     private String profileBackgroundImageUrlHttps;
@@ -330,18 +334,18 @@ public class User {
      * @return
      *     The entities
      */
-    public Entities_ getEntities() {
-        return entities;
-    }
+//    public Entities_ getEntities() {
+//        return entities;
+//    }
 
     /**
      * 
      * @param entities
      *     The entities
      */
-    public void setEntities(Entities_ entities) {
-        this.entities = entities;
-    }
+//    public void setEntities(Entities_ entities) {
+//        this.entities = entities;
+//    }
 
     /**
      * 
@@ -420,18 +424,18 @@ public class User {
      * @return
      *     The utcOffset
      */
-    public Object getUtcOffset() {
-        return utcOffset;
-    }
+//    public Object getUtcOffset() {
+//        return utcOffset;
+//    }
 
     /**
      * 
      * @param utcOffset
      *     The utc_offset
      */
-    public void setUtcOffset(Object utcOffset) {
-        this.utcOffset = utcOffset;
-    }
+//    public void setUtcOffset(Object utcOffset) {
+//        this.utcOffset = utcOffset;
+//    }
 
     /**
      * 
@@ -672,18 +676,18 @@ public class User {
      * @return
      *     The timeZone
      */
-    public Object getTimeZone() {
-        return timeZone;
-    }
+//    public Object getTimeZone() {
+//        return timeZone;
+//    }
 
     /**
      * 
      * @param timeZone
      *     The time_zone
      */
-    public void setTimeZone(Object timeZone) {
-        this.timeZone = timeZone;
-    }
+//    public void setTimeZone(Object timeZone) {
+//        this.timeZone = timeZone;
+//    }
 
     /**
      * 
@@ -829,4 +833,103 @@ public class User {
         this.screenName = screenName;
     }
 
+    public User() {
+        super();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.name);
+        dest.writeString(this.profileSidebarFillColor);
+        dest.writeValue(this.profileBackgroundTile);
+        dest.writeString(this.profileSidebarBorderColor);
+        dest.writeString(this.profileImageUrl);
+        dest.writeString(this.createdAt);
+        dest.writeString(this.location);
+        dest.writeValue(this.followRequestSent);
+        dest.writeString(this.idStr);
+        dest.writeValue(this.isTranslator);
+        dest.writeString(this.profileLinkColor);
+//        dest.writeParcelable(this.entities, flags);
+        dest.writeValue(this.defaultProfile);
+        dest.writeString(this.url);
+        dest.writeValue(this.contributorsEnabled);
+        dest.writeValue(this.favouritesCount);
+        dest.writeString(this.profileImageUrlHttps);
+        dest.writeLong(this.id);
+        dest.writeValue(this.listedCount);
+        dest.writeValue(this.profileUseBackgroundImage);
+        dest.writeString(this.profileTextColor);
+        dest.writeValue(this.followersCount);
+        dest.writeString(this.lang);
+        dest.writeValue(this._protected);
+        dest.writeValue(this.geoEnabled);
+        dest.writeValue(this.notifications);
+        dest.writeString(this.description);
+        dest.writeString(this.profileBackgroundColor);
+        dest.writeValue(this.verified);
+        dest.writeString(this.profileBackgroundImageUrlHttps);
+        dest.writeValue(this.statusesCount);
+        dest.writeString(this.profileBackgroundImageUrl);
+        dest.writeValue(this.defaultProfileImage);
+        dest.writeValue(this.friendsCount);
+        dest.writeValue(this.following);
+        dest.writeValue(this.showAllInlineMedia);
+        dest.writeString(this.screenName);
+    }
+
+    protected User(Parcel in) {
+        this.name = in.readString();
+        this.profileSidebarFillColor = in.readString();
+        this.profileBackgroundTile = (Boolean) in.readValue(Boolean.class.getClassLoader());
+        this.profileSidebarBorderColor = in.readString();
+        this.profileImageUrl = in.readString();
+        this.createdAt = in.readString();
+        this.location = in.readString();
+        this.followRequestSent = (Boolean) in.readValue(Boolean.class.getClassLoader());
+        this.idStr = in.readString();
+        this.isTranslator = (Boolean) in.readValue(Boolean.class.getClassLoader());
+        this.profileLinkColor = in.readString();
+//        this.entities = in.readParcelable(Entities_.class.getClassLoader());
+        this.defaultProfile = (Boolean) in.readValue(Boolean.class.getClassLoader());
+        this.url = in.readString();
+        this.contributorsEnabled = (Boolean) in.readValue(Boolean.class.getClassLoader());
+        this.favouritesCount = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.profileImageUrlHttps = in.readString();
+        this.id = in.readLong();
+        this.listedCount = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.profileUseBackgroundImage = (Boolean) in.readValue(Boolean.class.getClassLoader());
+        this.profileTextColor = in.readString();
+        this.followersCount = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.lang = in.readString();
+        this._protected = (Boolean) in.readValue(Boolean.class.getClassLoader());
+        this.geoEnabled = (Boolean) in.readValue(Boolean.class.getClassLoader());
+        this.notifications = (Boolean) in.readValue(Boolean.class.getClassLoader());
+        this.description = in.readString();
+        this.profileBackgroundColor = in.readString();
+        this.verified = (Boolean) in.readValue(Boolean.class.getClassLoader());
+        this.profileBackgroundImageUrlHttps = in.readString();
+        this.statusesCount = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.profileBackgroundImageUrl = in.readString();
+        this.defaultProfileImage = (Boolean) in.readValue(Boolean.class.getClassLoader());
+        this.friendsCount = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.following = (Boolean) in.readValue(Boolean.class.getClassLoader());
+        this.showAllInlineMedia = (Boolean) in.readValue(Boolean.class.getClassLoader());
+        this.screenName = in.readString();
+    }
+
+    public static final Parcelable.Creator<User> CREATOR = new Parcelable.Creator<User>() {
+        public User createFromParcel(Parcel source) {
+            return new User(source);
+        }
+
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };
 }

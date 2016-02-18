@@ -18,8 +18,6 @@ import com.codepath.apps.mysimpletweets.fragments.ComposeDialog;
 import com.codepath.apps.mysimpletweets.models.Status;
 import com.codepath.apps.mysimpletweets.networking.TwitterClient;
 import com.codepath.apps.mysimpletweets.utilities.EndlessRecyclerViewScrollListener;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.apache.http.Header;
@@ -46,11 +44,7 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
     @Bind(R.id.toolbar)
     Toolbar toolbar;
     long maxId;
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
-    private GoogleApiClient client2;
+
 
 
     @Override
@@ -72,7 +66,7 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
         //Create arraylist datasource
         statuses = new ArrayList<>();
         //Construct the adapter
-        aStatuses = new StatusesArrayAdapter(statuses);
+        aStatuses = new StatusesArrayAdapter(statuses, this);
 
         //Connect adapter to listview
         rvTweets.setAdapter(aStatuses);
@@ -99,9 +93,7 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
         client.getCurrentUser();
         populateTimeline(true);
 
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client2 = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+
     }
 
 

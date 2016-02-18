@@ -3,6 +3,7 @@ package com.codepath.apps.mysimpletweets.networking;
 import android.content.Context;
 import android.util.Log;
 
+import com.codepath.apps.mysimpletweets.models.Status;
 import com.codepath.apps.mysimpletweets.models.User;
 import com.codepath.oauth.OAuthBaseClient;
 import com.google.gson.Gson;
@@ -66,11 +67,46 @@ public class TwitterClient extends OAuthBaseClient {
 
     // Post a status update
 
-    public void postStatusUpdate(String text, JsonHttpResponseHandler handler) {
+    public void postStatusUpdate(String text, Status status, JsonHttpResponseHandler handler) {
         String apiUrl = getApiUrl("statuses/update.json");
         RequestParams params = new RequestParams();
         params.put("status",text);
+        if (status != null) {
+            params.put("in_reply_to_status_id", status.getId());
+        }
         getClient().post(apiUrl,params, handler);
+    }
+
+    public void postRetweet(long statusId, JsonHttpResponseHandler handler) {
+        String apiUrl = getApiUrl("statuses/retweet/:id.json");
+        RequestParams params = new RequestParams();
+        params.put("id",statusId);
+        getClient().post(apiUrl, params, handler);
+
+    }
+
+    public void postUnRetweet(long statusId, JsonHttpResponseHandler handler) {
+        String apiUrl = getApiUrl("statuses/unretweet/:id.json");
+        RequestParams params = new RequestParams();
+        params.put("id",statusId);
+        getClient().post(apiUrl, params, handler);
+
+    }
+
+    public void postLike(long statusId, JsonHttpResponseHandler handler) {
+        String apiUrl = getApiUrl("favorites/create.json");
+        RequestParams params = new RequestParams();
+        params.put("id",statusId);
+        getClient().post(apiUrl, params, handler);
+
+    }
+
+    public void postUnlike(long statusId, JsonHttpResponseHandler handler) {
+        String apiUrl = getApiUrl("favorites/destroy.json");
+        RequestParams params = new RequestParams();
+        params.put("id",statusId);
+        getClient().post(apiUrl, params, handler);
+
     }
 
     public User getCurrentUser() {

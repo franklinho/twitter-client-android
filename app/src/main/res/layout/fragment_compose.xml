@@ -57,7 +57,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/etTweetField"
-        android:layout_below="@+id/ibtnClose"
+        android:layout_below="@+id/ivDownArrow"
         android:layout_alignLeft="@+id/ibtnClose"
         android:layout_alignStart="@+id/ibtnClose"
         android:layout_above="@+id/btnTweet"
@@ -89,4 +89,29 @@
         android:gravity="center_vertical|right"
         android:layout_toLeftOf="@+id/btnTweet"
         android:layout_toStartOf="@+id/btnTweet" />
+
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:id="@+id/ivDownArrow"
+        android:src="@drawable/down_arrow"
+        android:scaleType="fitCenter"
+        android:layout_below="@+id/ibtnClose"
+        android:layout_alignLeft="@+id/etTweetField"
+        android:layout_alignStart="@+id/etTweetField"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="5dp"
+        android:visibility="gone"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/tvInReplyTo"
+        android:layout_alignBottom="@+id/ivDownArrow"
+        android:layout_alignTop="@+id/ivDownArrow"
+        android:layout_toRightOf="@+id/ivDownArrow"
+        android:layout_toEndOf="@+id/ivDownArrow"
+        android:gravity="center_vertical"
+        android:visibility="gone"/>
 </RelativeLayout>

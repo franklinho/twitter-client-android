@@ -1,6 +1,9 @@
 
 package com.codepath.apps.mysimpletweets.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.Expose;
@@ -24,11 +27,12 @@ import java.util.Locale;
 import javax.annotation.Generated;
 
 @Generated("org.jsonschema2pojo")
-public class Status {
 
-    @SerializedName("coordinates")
-    @Expose
-    private Object coordinates;
+public class Status implements Parcelable {
+
+//    @SerializedName("coordinates")
+//    @Expose
+//    private Object coordinates;
     @SerializedName("truncated")
     @Expose
     private Boolean truncated;
@@ -41,51 +45,51 @@ public class Status {
     @SerializedName("id_str")
     @Expose
     private String idStr;
-    @SerializedName("in_reply_to_user_id_str")
-    @Expose
-    private Object inReplyToUserIdStr;
+//    @SerializedName("in_reply_to_user_id_str")
+//    @Expose
+//    private Object inReplyToUserIdStr;
     @SerializedName("entities")
     @Expose
     private Entities entities;
     @SerializedName("text")
     @Expose
     private String text;
-    @SerializedName("contributors")
-    @Expose
-    private Object contributors;
+//    @SerializedName("contributors")
+//    @Expose
+//    private Object contributors;
     @SerializedName("id")
     @Expose
     private long id;
     @SerializedName("retweet_count")
     @Expose
     private Integer retweetCount;
-    @SerializedName("in_reply_to_status_id_str")
-    @Expose
-    private Object inReplyToStatusIdStr;
-    @SerializedName("geo")
-    @Expose
-    private Object geo;
+//    @SerializedName("in_reply_to_status_id_str")
+//    @Expose
+//    private Object inReplyToStatusIdStr;
+//    @SerializedName("geo")
+//    @Expose
+//    private Object geo;
     @SerializedName("retweeted")
     @Expose
     private Boolean retweeted;
-    @SerializedName("in_reply_to_user_id")
-    @Expose
-    private Object inReplyToUserId;
-    @SerializedName("place")
-    @Expose
-    private Object place;
+//    @SerializedName("in_reply_to_user_id")
+//    @Expose
+//    private Object inReplyToUserId;
+//    @SerializedName("place")
+//    @Expose
+//    private Object place;
     @SerializedName("source")
     @Expose
     private String source;
     @SerializedName("user")
     @Expose
     private User user;
-    @SerializedName("in_reply_to_screen_name")
-    @Expose
-    private Object inReplyToScreenName;
-    @SerializedName("in_reply_to_status_id")
-    @Expose
-    private Object inReplyToStatusId;
+//    @SerializedName("in_reply_to_screen_name")
+//    @Expose
+//    private Object inReplyToScreenName;
+//    @SerializedName("in_reply_to_status_id")
+//    @Expose
+//    private Object inReplyToStatusId;
 
     public Status() {
         super();
@@ -96,18 +100,18 @@ public class Status {
      * @return
      *     The coordinates
      */
-    public Object getCoordinates() {
-        return coordinates;
-    }
+//    public Object getCoordinates() {
+//        return coordinates;
+//    }
 
     /**
      * 
      * @param coordinates
      *     The coordinates
      */
-    public void setCoordinates(Object coordinates) {
-        this.coordinates = coordinates;
-    }
+//    public void setCoordinates(Object coordinates) {
+//        this.coordinates = coordinates;
+//    }
 
     /**
      * 
@@ -186,18 +190,18 @@ public class Status {
      * @return
      *     The inReplyToUserIdStr
      */
-    public Object getInReplyToUserIdStr() {
-        return inReplyToUserIdStr;
-    }
+//    public Object getInReplyToUserIdStr() {
+//        return inReplyToUserIdStr;
+//    }
 
     /**
      * 
      * @param inReplyToUserIdStr
      *     The in_reply_to_user_id_str
      */
-    public void setInReplyToUserIdStr(Object inReplyToUserIdStr) {
-        this.inReplyToUserIdStr = inReplyToUserIdStr;
-    }
+//    public void setInReplyToUserIdStr(Object inReplyToUserIdStr) {
+//        this.inReplyToUserIdStr = inReplyToUserIdStr;
+//    }
 
     /**
      * 
@@ -240,18 +244,18 @@ public class Status {
      * @return
      *     The contributors
      */
-    public Object getContributors() {
-        return contributors;
-    }
+//    public Object getContributors() {
+//        return contributors;
+//    }
 
     /**
      * 
      * @param contributors
      *     The contributors
      */
-    public void setContributors(Object contributors) {
-        this.contributors = contributors;
-    }
+//    public void setContributors(Object contributors) {
+//        this.contributors = contributors;
+//    }
 
     /**
      * 
@@ -294,36 +298,36 @@ public class Status {
      * @return
      *     The inReplyToStatusIdStr
      */
-    public Object getInReplyToStatusIdStr() {
-        return inReplyToStatusIdStr;
-    }
+//    public Object getInReplyToStatusIdStr() {
+//        return inReplyToStatusIdStr;
+//    }
 
     /**
      * 
      * @param inReplyToStatusIdStr
      *     The in_reply_to_status_id_str
      */
-    public void setInReplyToStatusIdStr(Object inReplyToStatusIdStr) {
-        this.inReplyToStatusIdStr = inReplyToStatusIdStr;
-    }
+//    public void setInReplyToStatusIdStr(Object inReplyToStatusIdStr) {
+//        this.inReplyToStatusIdStr = inReplyToStatusIdStr;
+//    }
 
     /**
      * 
      * @return
      *     The geo
      */
-    public Object getGeo() {
-        return geo;
-    }
+//    public Object getGeo() {
+//        return geo;
+//    }
 
     /**
      * 
      * @param geo
      *     The geo
      */
-    public void setGeo(Object geo) {
-        this.geo = geo;
-    }
+//    public void setGeo(Object geo) {
+//        this.geo = geo;
+//    }
 
     /**
      * 
@@ -348,36 +352,36 @@ public class Status {
      * @return
      *     The inReplyToUserId
      */
-    public Object getInReplyToUserId() {
-        return inReplyToUserId;
-    }
+//    public Object getInReplyToUserId() {
+//        return inReplyToUserId;
+//    }
 
     /**
      * 
      * @param inReplyToUserId
      *     The in_reply_to_user_id
      */
-    public void setInReplyToUserId(Object inReplyToUserId) {
-        this.inReplyToUserId = inReplyToUserId;
-    }
+//    public void setInReplyToUserId(Object inReplyToUserId) {
+//        this.inReplyToUserId = inReplyToUserId;
+//    }
 
     /**
      * 
      * @return
      *     The place
      */
-    public Object getPlace() {
-        return place;
-    }
+//    public Object getPlace() {
+//        return place;
+//    }
 
     /**
      * 
      * @param place
      *     The place
      */
-    public void setPlace(Object place) {
-        this.place = place;
-    }
+//    public void setPlace(Object place) {
+//        this.place = place;
+//    }
 
     /**
      * 
@@ -420,36 +424,36 @@ public class Status {
      * @return
      *     The inReplyToScreenName
      */
-    public Object getInReplyToScreenName() {
-        return inReplyToScreenName;
-    }
+//    public Object getInReplyToScreenName() {
+//        return inReplyToScreenName;
+//    }
 
     /**
      * 
      * @param inReplyToScreenName
      *     The in_reply_to_screen_name
      */
-    public void setInReplyToScreenName(Object inReplyToScreenName) {
-        this.inReplyToScreenName = inReplyToScreenName;
-    }
+//    public void setInReplyToScreenName(Object inReplyToScreenName) {
+//        this.inReplyToScreenName = inReplyToScreenName;
+//    }
 
     /**
      * 
      * @return
      *     The inReplyToStatusId
      */
-    public Object getInReplyToStatusId() {
-        return inReplyToStatusId;
-    }
+//    public Object getInReplyToStatusId() {
+//        return inReplyToStatusId;
+//    }
 
     /**
      * 
      * @param inReplyToStatusId
      *     The in_reply_to_status_id
      */
-    public void setInReplyToStatusId(Object inReplyToStatusId) {
-        this.inReplyToStatusId = inReplyToStatusId;
-    }
+//    public void setInReplyToStatusId(Object inReplyToStatusId) {
+//        this.inReplyToStatusId = inReplyToStatusId;
+//    }
 
     public static List<Status> fromJSONArray(JSONArray json) {
         Type listType = new TypeToken<List<Status>>() {}.getType();
@@ -493,4 +497,66 @@ public class Status {
 
         return relativeDate;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+//        dest.writeParcelable(this.coordinates, flags);
+        dest.writeValue(this.truncated);
+        dest.writeString(this.createdAt);
+        dest.writeValue(this.favorited);
+        dest.writeString(this.idStr);
+//        dest.writeParcelable(this.inReplyToUserIdStr, flags);
+        dest.writeParcelable(this.entities, 0);
+        dest.writeString(this.text);
+//        dest.writeParcelable(this.contributors, flags);
+        dest.writeLong(this.id);
+        dest.writeValue(this.retweetCount);
+//        dest.writeParcelable(this.inReplyToStatusIdStr, flags);
+//        dest.writeParcelable(this.geo, flags);
+        dest.writeValue(this.retweeted);
+//        dest.writeParcelable(this.inReplyToUserId, flags);
+//        dest.writeParcelable(this.place, flags);
+        dest.writeString(this.source);
+        dest.writeParcelable(this.user, flags);
+//        dest.writeParcelable(this.inReplyToScreenName, flags);
+//        dest.writeParcelable(this.inReplyToStatusId, flags);
+    }
+
+    protected Status(Parcel in) {
+//        this.coordinates = in.readParcelable(Object.class.getClassLoader());
+        this.truncated = (Boolean) in.readValue(Boolean.class.getClassLoader());
+        this.createdAt = in.readString();
+        this.favorited = (Boolean) in.readValue(Boolean.class.getClassLoader());
+        this.idStr = in.readString();
+//        this.inReplyToUserIdStr = in.readParcelable(Object.class.getClassLoader());
+        this.entities = in.readParcelable(Entities.class.getClassLoader());
+        this.text = in.readString();
+//        this.contributors = in.readParcelable(Object.class.getClassLoader());
+        this.id = in.readLong();
+        this.retweetCount = (Integer) in.readValue(Integer.class.getClassLoader());
+//        this.inReplyToStatusIdStr = in.readParcelable(Object.class.getClassLoader());
+//        this.geo = in.readParcelable(Object.class.getClassLoader());
+        this.retweeted = (Boolean) in.readValue(Boolean.class.getClassLoader());
+//        this.inReplyToUserId = in.readParcelable(Object.class.getClassLoader());
+//        this.place = in.readParcelable(Object.class.getClassLoader());
+        this.source = in.readString();
+        this.user = in.readParcelable(User.class.getClassLoader());
+//        this.inReplyToScreenName = in.readParcelable(Object.class.getClassLoader());
+//        this.inReplyToStatusId = in.readParcelable(Object.class.getClassLoader());
+    }
+
+    public static final Creator<Status> CREATOR = new Creator<Status>() {
+        public Status createFromParcel(Parcel source) {
+            return new Status(source);
+        }
+
+        public Status[] newArray(int size) {
+            return new Status[size];
+        }
+    };
 }
