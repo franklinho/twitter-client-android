@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     xmlns:app="http://schemas.android.com/apk/res-auto"
 
     tools:context="com.codepath.apps.mysimpletweets.activities.TimelineActivity">
@@ -11,16 +12,15 @@
         android:id="@+id/appBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppBaseTheme"
+        android:theme="@style/AppBaseTheme">
 
-        >
-
-        <!-- Toolbar is the actual app bar with text and the action items -->
+        <!-- Toolbar is the actual app bar with text an
+        d the action items -->
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-
+            app:popupTheme="@style/AppBaseTheme"
             app:layout_scrollFlags="scroll|enterAlways"
             />
     </android.support.design.widget.AppBarLayout>
@@ -28,10 +28,8 @@
     <android.support.v4.widget.SwipeRefreshLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/swipeContainer"
-
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         >
 
