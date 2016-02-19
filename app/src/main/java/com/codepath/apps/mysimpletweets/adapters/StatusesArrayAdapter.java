@@ -334,10 +334,12 @@ public class StatusesArrayAdapter extends RecyclerView.Adapter<RecyclerView.View
             ibtnRetweet.setImageResource(R.drawable.retweet_icon);
         }
 
+        ivStatusImage.setImageResource(android.R.color.transparent);
 //        Medium_ media = status.getEntities().getMedia().get(0);
 //        Medium__ imageMediumSize = media.getSizes().getMedium();
 //        ivStatusImage.setHeightRatio((double) imageMediumSize.getH() / imageMediumSize.getW() );
 //        Glide.with(holder.context).load(media.getMediaUrl()).fitCenter().into(ivStatusImage);
+
 
         Medium_ media = status.getEntities().getMedia().get(0);
         Thumb_ imageThumbSize = media.getSizes().getThumb();
