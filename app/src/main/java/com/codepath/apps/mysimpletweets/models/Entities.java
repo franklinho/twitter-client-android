@@ -4,39 +4,53 @@ package com.codepath.apps.mysimpletweets.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Generated;
 
 @Generated("org.jsonschema2pojo")
-
 public class Entities implements Parcelable {
 
-//    @SerializedName("urls")
-//    @Expose
-//    private List<Object> urls = new ArrayList<Object>();
+    @SerializedName("extended")
+    @Expose
+    private Extended extended;
 //    @SerializedName("hashtags")
 //    @Expose
 //    private List<Object> hashtags = new ArrayList<Object>();
+//    @SerializedName("symbols")
+//    @Expose
+//    private List<Object> symbols = new ArrayList<Object>();
+//    @SerializedName("urls")
+//    @Expose
+//    private List<Object> urls = new ArrayList<Object>();
 //    @SerializedName("user_mentions")
 //    @Expose
 //    private List<Object> userMentions = new ArrayList<Object>();
+    @SerializedName("media")
+    @Expose
+    private List<Medium_> media = new ArrayList<Medium_>();
 
     /**
      * 
      * @return
-     *     The urls
+     *     The extended
      */
-//    public List<Object> getUrls() {
-//        return urls;
-//    }
+    public Extended getExtended() {
+        return extended;
+    }
 
     /**
      * 
-     * @param urls
-     *     The urls
+     * @param extended
+     *     The extended
      */
-//    public void setUrls(List<Object> urls) {
-//        this.urls = urls;
-//    }
+    public void setExtended(Extended extended) {
+        this.extended = extended;
+    }
 
     /**
      * 
@@ -59,6 +73,42 @@ public class Entities implements Parcelable {
     /**
      * 
      * @return
+     *     The symbols
+     */
+//    public List<Object> getSymbols() {
+//        return symbols;
+//    }
+
+    /**
+     * 
+     * @param symbols
+     *     The symbols
+     */
+//    public void setSymbols(List<Object> symbols) {
+//        this.symbols = symbols;
+//    }
+
+    /**
+     * 
+     * @return
+     *     The urls
+     */
+//    public List<Object> getUrls() {
+//        return urls;
+//    }
+
+    /**
+     * 
+     * @param urls
+     *     The urls
+     */
+//    public void setUrls(List<Object> urls) {
+//        this.urls = urls;
+//    }
+
+    /**
+     * 
+     * @return
      *     The userMentions
      */
 //    public List<Object> getUserMentions() {
@@ -74,8 +124,22 @@ public class Entities implements Parcelable {
 //        this.userMentions = userMentions;
 //    }
 
-    public Entities() {
-        super();
+    /**
+     * 
+     * @return
+     *     The media
+     */
+    public List<Medium_> getMedia() {
+        return media;
+    }
+
+    /**
+     * 
+     * @param media
+     *     The media
+     */
+    public void setMedia(List<Medium_> media) {
+        this.media = media;
     }
 
     @Override
@@ -85,21 +149,20 @@ public class Entities implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-//        dest.writeList(this.urls);
-//        dest.writeList(this.hashtags);
-//        dest.writeList(this.userMentions);
+        dest.writeParcelable(this.extended, flags);
+        dest.writeList(this.media);
+    }
+
+    public Entities() {
     }
 
     protected Entities(Parcel in) {
-//        this.urls = new ArrayList<Object>();
-//        in.readList(this.urls, List.class.getClassLoader());
-//        this.hashtags = new ArrayList<Object>();
-//        in.readList(this.hashtags, List.class.getClassLoader());
-//        this.userMentions = new ArrayList<Object>();
-//        in.readList(this.userMentions, List.class.getClassLoader());
+        this.extended = in.readParcelable(Extended.class.getClassLoader());
+        this.media = new ArrayList<Medium_>();
+        in.readList(this.media, List.class.getClassLoader());
     }
 
-    public static final Creator<Entities> CREATOR = new Creator<Entities>() {
+    public static final Parcelable.Creator<Entities> CREATOR = new Parcelable.Creator<Entities>() {
         public Entities createFromParcel(Parcel source) {
             return new Entities(source);
         }

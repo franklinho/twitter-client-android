@@ -17,7 +17,10 @@ import com.codepath.apps.mysimpletweets.TwitterApplication;
 import com.codepath.apps.mysimpletweets.activities.StatusDetailActivity;
 import com.codepath.apps.mysimpletweets.activities.TimelineActivity;
 import com.codepath.apps.mysimpletweets.fragments.ComposeDialog;
+import com.codepath.apps.mysimpletweets.models.DynamicHeightImageView;
 import com.codepath.apps.mysimpletweets.models.LinkifiedTextView;
+import com.codepath.apps.mysimpletweets.models.Medium_;
+import com.codepath.apps.mysimpletweets.models.Medium__;
 import com.codepath.apps.mysimpletweets.models.Status;
 import com.codepath.apps.mysimpletweets.networking.TwitterClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -30,10 +33,11 @@ import butterknife.ButterKnife;
 /**
  * Created by franklinho on 2/16/16.
  */
-public class StatusesArrayAdapter extends RecyclerView.Adapter<StatusesArrayAdapter.ViewHolder> {
+public class StatusesArrayAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<Status> mStatuses;
     private Context context;
     private TwitterClient client;
+    private final int NORMAL = 0, IMAGE = 1, VIDEO = 2;
 
 
     public StatusesArrayAdapter(List<Status> statuses, Context context) {
@@ -41,7 +45,7 @@ public class StatusesArrayAdapter extends RecyclerView.Adapter<StatusesArrayAdap
         this.context = context;
     }
 
-    public static class ViewHolder extends  RecyclerView.ViewHolder implements View.OnClickListener {
+    public static class StatusViewHolder extends  RecyclerView.ViewHolder implements View.OnClickListener {
 
         public Status status;
         @Bind(R.id.tvName) TextView tvName;
@@ -64,7 +68,7 @@ public class StatusesArrayAdapter extends RecyclerView.Adapter<StatusesArrayAdap
         private Context context;
 
 
-        public ViewHolder(View itemView) {
+        public StatusViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
 //            tvUsername = (TextView) itemView.findViewById(R.id.tvUsername);
@@ -85,21 +89,116 @@ public class StatusesArrayAdapter extends RecyclerView.Adapter<StatusesArrayAdap
         }
     }
 
+    public static class ImageStatusViewHolder extends  RecyclerView.ViewHolder implements View.OnClickListener {
 
+        public Status status;
+        @Bind(R.id.tvName) TextView tvName;
+        @Bind(R.id.tvRelativeTimeStamp) TextView tvRelativeTimeStamp;
+        @Bind(R.id.tvBody)
+        LinkifiedTextView tvBody;
+        @Bind(R.id.tvScreenName) TextView tvScreenName;
+        @Bind(R.id.ivProfileImage) ImageView ivProfileImage;
+        @Bind(R.id.tvRetweetCount) TextView tvRetweetCount;
+        @Bind(R.id.ibtnFavorite) ImageButton ibtnFavorite;
+        @Bind(R.id.ibtnRetweet) ImageButton ibtnRetweet;
+        @Bind(R.id.ibtnReply) ImageButton ibtnReply;
+        @Bind(R.id.ivStatusImage) DynamicHeightImageView ivStatusImage;
+
+
+//        TextView tvUsername;
+//        TextView tvRelativeTimeStamp;
+//        TextView tvBody;
+//        ImageView ivProfileImage;
+
+        private Context context;
+
+
+        public ImageStatusViewHolder(View itemView) {
+            super(itemView);
+            ButterKnife.bind(this, itemView);
+//            tvUsername = (TextView) itemView.findViewById(R.id.tvUsername);
+//            tvRelativeTimeStamp = (TextView) itemView.findViewById(R.id.tvRelativeTimeStamp);
+//            tvBody = (TextView) itemView.findViewById(R.id.tvBody);
+//            ivProfileImage = (ImageView) itemView.findViewById(R.id.ivProfileImage);
+
+            context=itemView.getContext();
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            int position = getLayoutPosition();
+            Intent i = new Intent(context, StatusDetailActivity.class);
+            i.putExtra("status", status );
+            context.startActivity(i);
+        }
+    }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public int getItemViewType(int position) {
+         if (mStatuses.get(position).getEntities().getMedia().size() > 0 && mStatuses.get(position).getEntities().getMedia().get(0).getType().equals("photo")) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
+    @Override
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
 
-        View statusView = inflater.inflate(R.layout.item_status, parent, false);
-        ViewHolder viewHolder = new ViewHolder(statusView);
+        RecyclerView.ViewHolder viewHolder;
+
+        switch (viewType) {
+            case IMAGE:
+                View imageView = inflater.inflate(R.layout.item_image_status, parent, false);
+                viewHolder = new ImageStatusViewHolder(imageView);
+                break;
+            default:
+                View statusView = inflater.inflate(R.layout.item_status, parent, false);
+                viewHolder = new StatusViewHolder(statusView);
+                break;
+        }
+
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        switch (holder.getItemViewType()) {
+            case IMAGE:
+                ImageStatusViewHolder imageViewHolder = (ImageStatusViewHolder) holder;
+                configureImageStatusViewHolder(imageViewHolder, position);
+                break;
+            default:
+                StatusViewHolder statusViewHolder = (StatusViewHolder) holder;
+                configureStatusViewHolder(statusViewHolder,position);
+                break;
+        }
+
+
+
+    }
+
+    @Override
+    public int getItemCount() {
+        return mStatuses.size();
+    }
+
+
+    public void clear() {
+        mStatuses.clear();
+        notifyDataSetChanged();
+    }
+
+    public void addAll(List<Status> statuses) {
+        mStatuses.addAll(statuses);
+        notifyDataSetChanged();
+    }
+
+    private void configureStatusViewHolder(StatusViewHolder holder, int position) {
         final com.codepath.apps.mysimpletweets.models.Status status = mStatuses.get(position);
         holder.status = status;
 
@@ -188,25 +287,109 @@ public class StatusesArrayAdapter extends RecyclerView.Adapter<StatusesArrayAdap
             }
         });
 
-
-
-    }
-
-    @Override
-    public int getItemCount() {
-        return mStatuses.size();
     }
 
 
-    public void clear() {
-        mStatuses.clear();
-        notifyDataSetChanged();
+
+    private void configureImageStatusViewHolder(ImageStatusViewHolder holder, int position) {
+        final com.codepath.apps.mysimpletweets.models.Status status = mStatuses.get(position);
+        holder.status = status;
+
+        ImageView ivProfileImage = holder.ivProfileImage;
+        TextView tvName = holder.tvName;
+        LinkifiedTextView tvBody = holder.tvBody;
+        TextView tvRelativeTimeStamp = holder.tvRelativeTimeStamp;
+        TextView tvScreenName = holder.tvScreenName;
+        final TextView tvRetweetCount = holder.tvRetweetCount;
+        final ImageButton ibtnFavorite = holder.ibtnFavorite;
+        final ImageButton ibtnRetweet = holder.ibtnRetweet;
+        ImageButton ibtnReply = holder.ibtnReply;
+        DynamicHeightImageView ivStatusImage = holder.ivStatusImage;
+
+
+
+
+        tvName.setText(status.getUser().getName());
+        tvBody.setText(status.getText());
+        tvRelativeTimeStamp.setText(status.getRelativeTimeAgo());
+        tvScreenName.setText("@"+status.getUser().getScreenName());
+
+        ivProfileImage.setImageResource(android.R.color.transparent); // Clear imageview
+//            Picasso.with(holder.context).load(status.getUser().getProfileImageUrl()).into(ivProfileImage);
+        Glide.with(holder.context).load(status.getUser().getProfileImageUrl()).into(ivProfileImage);
+
+        tvRetweetCount.setText(Integer.toString(status.getRetweetCount()));
+        if (status.getFavorited() == true) {
+            ibtnFavorite.setImageResource(R.drawable.heart_icon_red);
+        } else {
+            ibtnFavorite.setImageResource(R.drawable.heart_icon);
+        }
+
+        if (status.getRetweeted() == true) {
+            ibtnRetweet.setImageResource(R.drawable.retweet_icon_green);
+        } else {
+            ibtnRetweet.setImageResource(R.drawable.retweet_icon);
+        }
+
+        Medium_ media = status.getEntities().getMedia().get(0);
+        Medium__ imageMediumSize = media.getSizes().getMedium();
+        ivStatusImage.setHeightRatio((double) imageMediumSize.getH() / imageMediumSize.getW() );
+        Glide.with(holder.context).load(media.getMediaUrl()).fitCenter().into(ivStatusImage);
+
+        ibtnReply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                android.support.v4.app.FragmentManager fm = ((TimelineActivity) context).getSupportFragmentManager();
+                ComposeDialog composeDialog = ComposeDialog.newInstance();
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("status", status);
+                composeDialog.setArguments(bundle);
+                composeDialog.show(fm, "fragment_compose");
+            }
+        });
+
+        ibtnRetweet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                client = TwitterApplication.getRestClient();
+                if (status.getRetweeted()) {
+                    client.postUnRetweet(status.getId(), new JsonHttpResponseHandler());
+                    status.setRetweeted(false);
+                    status.setRetweetCount(status.getRetweetCount() - 1);
+                    tvRetweetCount.setText(Integer.toString(status.getRetweetCount()));
+                    ibtnRetweet.setImageResource(R.drawable.retweet_icon);
+                } else {
+                    client.postRetweet(status.getId(), new JsonHttpResponseHandler());
+                    status.setRetweeted(true);
+                    status.setRetweetCount(status.getRetweetCount() + 1);
+                    tvRetweetCount.setText(Integer.toString(status.getRetweetCount()));
+                    ibtnRetweet.setImageResource(R.drawable.retweet_icon_green);
+                }
+
+            }
+        });
+
+        ibtnFavorite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                client = TwitterApplication.getRestClient();
+                if (status.getFavorited()) {
+                    client.postUnlike(status.getId(), new JsonHttpResponseHandler());
+                    status.setFavorited(false);
+                    ibtnFavorite.setImageResource(R.drawable.heart_icon);
+                } else {
+                    client.postLike(status.getId(), new JsonHttpResponseHandler());
+                    status.setFavorited(true);
+                    ibtnFavorite.setImageResource(R.drawable.heart_icon_red);
+                }
+
+            }
+        });
+
     }
 
-    public void addAll(List<Status> statuses) {
-        mStatuses.addAll(statuses);
-        notifyDataSetChanged();
-    }
+
 
 
 }
