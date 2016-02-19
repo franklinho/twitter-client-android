@@ -58,6 +58,7 @@ public class ImageStatusDetailActivity extends AppCompatActivity implements Comp
             Medium__ imageMediumSize = media.getSizes().getMedium();
             ivStatusImage.setHeightRatio((double) imageMediumSize.getH() / imageMediumSize.getW());
             Glide.with(this).load(media.getMediaUrl()).fitCenter().into(ivStatusImage);
+            tvTimestamp.setText(status.getFormattedTimeStamp());
 
             if (status.getFavorited() == true) {
                 ibtnFavorite.setImageResource(R.drawable.heart_icon_red);

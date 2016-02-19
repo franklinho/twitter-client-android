@@ -1,12 +1,16 @@
 
 package com.codepath.apps.mysimpletweets.models;
 
-import javax.annotation.Generated;
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import javax.annotation.Generated;
+
 @Generated("org.jsonschema2pojo")
-public class Variant {
+public class Variant implements Parcelable {
 
     @SerializedName("bitrate")
     @Expose
@@ -72,4 +76,34 @@ public class Variant {
         this.url = url;
     }
 
+    public Variant() {
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeValue(this.bitrate);
+        dest.writeString(this.contentType);
+        dest.writeString(this.url);
+    }
+
+    protected Variant(Parcel in) {
+        this.bitrate = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.contentType = in.readString();
+        this.url = in.readString();
+    }
+
+    public static final Creator<Variant> CREATOR = new Creator<Variant>() {
+        public Variant createFromParcel(Parcel source) {
+            return new Variant(source);
+        }
+
+        public Variant[] newArray(int size) {
+            return new Variant[size];
+        }
+    };
 }

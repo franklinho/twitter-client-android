@@ -15,9 +15,9 @@ import javax.annotation.Generated;
 @Generated("org.jsonschema2pojo")
 public class Entities implements Parcelable {
 
-    @SerializedName("extended")
-    @Expose
-    private Extended extended;
+//    @SerializedName("extended_entities")
+//    @Expose
+//    private Extended extended;
 //    @SerializedName("hashtags")
 //    @Expose
 //    private List<Object> hashtags = new ArrayList<Object>();
@@ -39,18 +39,18 @@ public class Entities implements Parcelable {
      * @return
      *     The extended
      */
-    public Extended getExtended() {
-        return extended;
-    }
+//    public Extended getExtended() {
+//        return extended;
+//    }
 
     /**
      * 
      * @param extended
      *     The extended
      */
-    public void setExtended(Extended extended) {
-        this.extended = extended;
-    }
+//    public void setExtended(Extended extended) {
+//        this.extended = extended;
+//    }
 
     /**
      * 
@@ -152,12 +152,12 @@ public class Entities implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeParcelable(this.extended, 0);
+//        dest.writeParcelable(this.extended, 0);
         dest.writeTypedList(media);
     }
 
     protected Entities(Parcel in) {
-        this.extended = in.readParcelable(Extended.class.getClassLoader());
+//        this.extended = in.readParcelable(Extended.class.getClassLoader());
         this.media = in.createTypedArrayList(Medium_.CREATOR);
     }
 

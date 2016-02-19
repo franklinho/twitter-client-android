@@ -21,6 +21,7 @@ import org.json.JSONArray;
 import java.lang.reflect.Type;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -51,6 +52,14 @@ public class Status implements Parcelable {
     @SerializedName("entities")
     @Expose
     private Entities entities;
+
+    public Entities getExtendedEntities() {
+        return extendedEntities;
+    }
+
+    @SerializedName("extended_entities")
+    @Expose
+    private Entities extendedEntities;
     @SerializedName("text")
     @Expose
     private String text;
@@ -463,6 +472,30 @@ public class Status implements Parcelable {
 
     }
 
+    public String getFormattedTimeStamp() {
+
+
+        String twitterFormat = "EEE MMM dd HH:mm:ss ZZZZZ yyyy";
+        SimpleDateFormat sf = new SimpleDateFormat(twitterFormat, Locale.ENGLISH);
+        sf.setLenient(true);
+
+        String formattedDate = "";
+        try {
+            Date createdDate = sf.parse(getCreatedAt());
+
+            String normalFormat = "MMM dd yyyy hh:mm:ss aa";
+            SimpleDateFormat nf = new SimpleDateFormat(normalFormat);
+            formattedDate = nf.format(createdDate).toString();
+        } catch (ParseException e) {
+
+        }
+
+
+
+
+        return formattedDate;
+    }
+
     public String getRelativeTimeAgo() {
         String twitterFormat = "EEE MMM dd HH:mm:ss ZZZZZ yyyy";
         SimpleDateFormat sf = new SimpleDateFormat(twitterFormat, Locale.ENGLISH);
@@ -505,49 +538,33 @@ public class Status implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-//        dest.writeParcelable(this.coordinates, flags);
         dest.writeValue(this.truncated);
         dest.writeString(this.createdAt);
         dest.writeValue(this.favorited);
         dest.writeString(this.idStr);
-//        dest.writeParcelable(this.inReplyToUserIdStr, flags);
         dest.writeParcelable(this.entities, 0);
+        dest.writeParcelable(this.extendedEntities, 0);
         dest.writeString(this.text);
-//        dest.writeParcelable(this.contributors, flags);
         dest.writeLong(this.id);
         dest.writeValue(this.retweetCount);
-//        dest.writeParcelable(this.inReplyToStatusIdStr, flags);
-//        dest.writeParcelable(this.geo, flags);
         dest.writeValue(this.retweeted);
-//        dest.writeParcelable(this.inReplyToUserId, flags);
-//        dest.writeParcelable(this.place, flags);
         dest.writeString(this.source);
-        dest.writeParcelable(this.user, flags);
-//        dest.writeParcelable(this.inReplyToScreenName, flags);
-//        dest.writeParcelable(this.inReplyToStatusId, flags);
+        dest.writeParcelable(this.user, 0);
     }
 
     protected Status(Parcel in) {
-//        this.coordinates = in.readParcelable(Object.class.getClassLoader());
         this.truncated = (Boolean) in.readValue(Boolean.class.getClassLoader());
         this.createdAt = in.readString();
         this.favorited = (Boolean) in.readValue(Boolean.class.getClassLoader());
         this.idStr = in.readString();
-//        this.inReplyToUserIdStr = in.readParcelable(Object.class.getClassLoader());
         this.entities = in.readParcelable(Entities.class.getClassLoader());
+        this.extendedEntities = in.readParcelable(Entities.class.getClassLoader());
         this.text = in.readString();
-//        this.contributors = in.readParcelable(Object.class.getClassLoader());
         this.id = in.readLong();
         this.retweetCount = (Integer) in.readValue(Integer.class.getClassLoader());
-//        this.inReplyToStatusIdStr = in.readParcelable(Object.class.getClassLoader());
-//        this.geo = in.readParcelable(Object.class.getClassLoader());
         this.retweeted = (Boolean) in.readValue(Boolean.class.getClassLoader());
-//        this.inReplyToUserId = in.readParcelable(Object.class.getClassLoader());
-//        this.place = in.readParcelable(Object.class.getClassLoader());
         this.source = in.readString();
         this.user = in.readParcelable(User.class.getClassLoader());
-//        this.inReplyToScreenName = in.readParcelable(Object.class.getClassLoader());
-//        this.inReplyToStatusId = in.readParcelable(Object.class.getClassLoader());
     }
 
     public static final Creator<Status> CREATOR = new Creator<Status>() {

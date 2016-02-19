@@ -45,6 +45,19 @@ public class Medium_ implements Parcelable {
     @SerializedName("sizes")
     @Expose
     private Sizes_ sizes;
+    @SerializedName("video_info")
+    @Expose
+    private VideoInfo videoInfo;
+
+    public VideoInfo getVideoInfo() {
+        return videoInfo;
+    }
+
+    public void setVideoInfo(VideoInfo videoInfo) {
+        this.videoInfo = videoInfo;
+    }
+
+
 
     /**
      * 
@@ -246,6 +259,7 @@ public class Medium_ implements Parcelable {
         dest.writeString(this.expandedUrl);
         dest.writeString(this.type);
         dest.writeParcelable(this.sizes, 0);
+        dest.writeParcelable(this.videoInfo, 0);
     }
 
     protected Medium_(Parcel in) {
@@ -260,6 +274,7 @@ public class Medium_ implements Parcelable {
         this.expandedUrl = in.readString();
         this.type = in.readString();
         this.sizes = in.readParcelable(Sizes_.class.getClassLoader());
+        this.videoInfo = in.readParcelable(VideoInfo.class.getClassLoader());
     }
 
     public static final Creator<Medium_> CREATOR = new Creator<Medium_>() {

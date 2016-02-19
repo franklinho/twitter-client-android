@@ -79,6 +79,9 @@ public class VideoInfo implements Parcelable {
         this.variants = variants;
     }
 
+    public VideoInfo() {
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -88,21 +91,17 @@ public class VideoInfo implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeList(this.aspectRatio);
         dest.writeValue(this.durationMillis);
-        dest.writeList(this.variants);
-    }
-
-    public VideoInfo() {
+        dest.writeTypedList(variants);
     }
 
     protected VideoInfo(Parcel in) {
         this.aspectRatio = new ArrayList<Integer>();
         in.readList(this.aspectRatio, List.class.getClassLoader());
         this.durationMillis = (Integer) in.readValue(Integer.class.getClassLoader());
-        this.variants = new ArrayList<Variant>();
-        in.readList(this.variants, List.class.getClassLoader());
+        this.variants = in.createTypedArrayList(Variant.CREATOR);
     }
 
-    public static final Parcelable.Creator<VideoInfo> CREATOR = new Parcelable.Creator<VideoInfo>() {
+    public static final Creator<VideoInfo> CREATOR = new Creator<VideoInfo>() {
         public VideoInfo createFromParcel(Parcel source) {
             return new VideoInfo(source);
         }
