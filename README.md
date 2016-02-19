@@ -4,7 +4,7 @@
 
 Twitter client is an app that allows a user to view and post Twitter content using their API by logging in through OAuth
 
-Time Spent: 16 hours
+Time Spent: 23 hours
 
 ## User Stories
 
@@ -24,12 +24,12 @@ Time Spent: 16 hours
 		*  :white_check_mark: Advanced: User can refresh tweets timeline by pulling down to refresh (i.e pull-to-refresh) (1 point)
 		*  :white_large_square: Advanced: User can open the twitter app offline and see last loaded tweets
 			*  :white_large_square: 	Tweets are persisted into sqlite and can be displayed from the local DB (2 points)
-		*  :white_large_square: Advanced: User can tap a tweet to display a "detailed" view of that tweet (2 points)
-		*  :white_large_square: Advanced: User can select "reply" from detail view to respond to a tweet (1 point)
+		*  :white_check_mark: Advanced: User can tap a tweet to display a "detailed" view of that tweet (2 points)
+		*  :white_check_mark: Advanced: User can select "reply" from detail view to respond to a tweet (1 point)
 		*  :white_check_mark: Advanced: Improve the user interface and theme the app to feel "twitter branded" (1 to 5 points)
 	* Bonus User Stories
-		*  :white_large_square: Bonus: User can see embedded image media within the tweet detail view (1 point)
-		*  :white_large_square: Bonus: User can watch embedded video within the tweet (1 point)
+		*  :white_check_mark: Bonus: User can see embedded image media within the tweet detail view (1 point)
+		*  :white_check_mark: Bonus: User can watch embedded video within the tweet (1 point)
 		*  :white_check_mark: Bonus: Compose activity is replaced with a modal overlay (2 points)
 		*  :white_check_mark: Bonus: Use Parcelable instead of Serializable using the popular Parceler library. (1 point)
 		*  :white_check_mark: Bonus: Apply the popular Butterknife annotation library to reduce view boilerplate. (1 point)
@@ -38,11 +38,11 @@ Time Spent: 16 hours
 		*  :white_check_mark: Bonus: Move the "Compose" action to a FloatingActionButton instead of on the AppBar. (1 point)
 		*  :white_check_mark: Bonus: Replace Picasso with Glide for more efficient image rendering. (1 point)
 
-<!--## Video Walkthrough -->
-<!---->
-<!--Here's a walkthrough of implemented user stories:-->
-<!---->
-<!--![General Functionality](https://github.com/franklinho/InstagramHomework/blob/master/InstagramHomeworkWalkthrough.gif)-->
+## Video Walkthrough 
+
+Here's a walkthrough of implemented user stories:
+
+![General Functionality](https://github.com/franklinho/twitter-client-android/blob/master/TwitterClientWalkThrough.gif)
 
 
 ## Open-source libraries used

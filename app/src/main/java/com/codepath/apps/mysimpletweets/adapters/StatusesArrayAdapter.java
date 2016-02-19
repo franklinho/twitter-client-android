@@ -167,7 +167,7 @@ public class StatusesArrayAdapter extends RecyclerView.Adapter<RecyclerView.View
         if (extendedEntities != null && extendedEntities.getMedia().get(0).getVideoInfo() != null) {
             return VIDEO;
         }
-         else if (mStatuses.get(position).getEntities().getMedia().size() > 0 && mStatuses.get(position).getEntities().getMedia().get(0).getType().equals("photo")) {
+         else if (extendedEntities != null && mStatuses.get(position).getEntities().getMedia().size() > 0 && mStatuses.get(position).getEntities().getMedia().get(0).getType().equals("photo")) {
             return IMAGE;
         } else {
             return NORMAL;
@@ -257,13 +257,15 @@ public class StatusesArrayAdapter extends RecyclerView.Adapter<RecyclerView.View
         tvName.setText(status.getUser().getName());
         tvBody.setText(status.getText());
         tvRelativeTimeStamp.setText(status.getRelativeTimeAgo());
-        tvScreenName.setText("@"+status.getUser().getScreenName());
+        tvScreenName.setText("@" + status.getUser().getScreenName());
 
         ivProfileImage.setImageResource(android.R.color.transparent); // Clear imageview
 //            Picasso.with(holder.context).load(status.getUser().getProfileImageUrl()).into(ivProfileImage);
         Glide.with(holder.context).load(status.getUser().getProfileImageUrl()).into(ivProfileImage);
 
-        tvRetweetCount.setText(Integer.toString(status.getRetweetCount()));
+        if (status.getRetweetCount() != null) {
+            tvRetweetCount.setText(Integer.toString(status.getRetweetCount()));
+        }
         if (status.getFavorited() == true) {
             ibtnFavorite.setImageResource(R.drawable.heart_icon_red);
         } else {

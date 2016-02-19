@@ -21,14 +21,12 @@ import com.codepath.apps.mysimpletweets.TwitterApplication;
 import com.codepath.apps.mysimpletweets.models.Status;
 import com.codepath.apps.mysimpletweets.models.User;
 import com.codepath.apps.mysimpletweets.networking.TwitterClient;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.apache.http.Header;
 import org.json.JSONObject;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -135,14 +133,17 @@ public class ComposeDialog extends android.support.v4.app.DialogFragment{
                         public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                             Toast.makeText(getContext(), "Tweet Posted Successfully", Toast.LENGTH_SHORT).show();
                             Status status = new Status();
-                            if (client.getCurrentUser() != null) {
-                                status.setUser(client.getCurrentUser());
-                            }
-                            status.setText(etTweetField.getText().toString());
-                            String twitterFormat = "EEE MMM dd HH:mm:ss ZZZZZ yyyy";
-                            SimpleDateFormat sf = new SimpleDateFormat(twitterFormat, Locale.ENGLISH);
-                            status.setCreatedAt(sf.format(new Date()));
+//                            if (client.getCurrentUser() != null) {
+//                                status.setUser(client.getCurrentUser());
+//                            }
+//                            status.setText(etTweetField.getText().toString());
+//                            String twitterFormat = "EEE MMM dd HH:mm:ss ZZZZZ yyyy";
+//                            SimpleDateFormat sf = new SimpleDateFormat(twitterFormat, Locale.ENGLISH);
+//                            status.setCreatedAt(sf.format(new Date()));
 
+                            Gson gson = new GsonBuilder().create();
+
+                            status =  gson.fromJson(response.toString(), Status.class);
                             dataPasser.insertNewStatus(status);
                             dismiss();
                         }

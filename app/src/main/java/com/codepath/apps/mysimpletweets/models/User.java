@@ -4,129 +4,166 @@ package com.codepath.apps.mysimpletweets.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.activeandroid.annotation.Column;
+import com.activeandroid.annotation.Table;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import javax.annotation.Generated;
 
 @Generated("org.jsonschema2pojo")
-
+@Table(name = "Users")
 public class User implements Parcelable {
-
+    @Column(name = "name", unique = false)
     @SerializedName("name")
     @Expose
     private String name;
+    @Column(name = "profile_sidebar_fill_color", unique = false)
     @SerializedName("profile_sidebar_fill_color")
     @Expose
     private String profileSidebarFillColor;
+    @Column(name = "profile_background_tile", unique = false)
     @SerializedName("profile_background_tile")
     @Expose
     private Boolean profileBackgroundTile;
+    @Column(name = "profile_sidebar_border_color", unique = false)
     @SerializedName("profile_sidebar_border_color")
     @Expose
     private String profileSidebarBorderColor;
+    @Column(name = "profile_image_url", unique = false)
     @SerializedName("profile_image_url")
     @Expose
     private String profileImageUrl;
+    @Column(name = "created_at", unique = false)
     @SerializedName("created_at")
     @Expose
     private String createdAt;
+    @Column(name = "location", unique = false)
     @SerializedName("location")
     @Expose
     private String location;
+    @Column(name = "follow_request_sent", unique = false)
     @SerializedName("follow_request_sent")
     @Expose
     private Boolean followRequestSent;
+    @Column(name = "id_str", unique = true, onUniqueConflict = Column.ConflictAction.REPLACE)
     @SerializedName("id_str")
     @Expose
     private String idStr;
+    @Column(name = "is_translator", unique = false)
     @SerializedName("is_translator")
     @Expose
     private Boolean isTranslator;
+    @Column(name = "profile_link_color", unique = false)
     @SerializedName("profile_link_color")
     @Expose
     private String profileLinkColor;
 //    @SerializedName("entities")
 //    @Expose
 //    private Entities_ entities;
+    @Column(name = "default_profile", unique = false)
     @SerializedName("default_profile")
     @Expose
     private Boolean defaultProfile;
+    @Column(name = "url", unique = false)
     @SerializedName("url")
     @Expose
     private String url;
+    @Column(name = "contributors_enabled", unique = false)
     @SerializedName("contributors_enabled")
     @Expose
     private Boolean contributorsEnabled;
+    @Column(name = "favourites_count", unique = false)
     @SerializedName("favourites_count")
     @Expose
     private Integer favouritesCount;
+    @Column(name = "profile_image_url_https", unique = false)
 //    @SerializedName("utc_offset")
 //    @Expose
 //    private Object utcOffset;
     @SerializedName("profile_image_url_https")
     @Expose
     private String profileImageUrlHttps;
+    @Column(name = "id", unique = true, onUniqueConflict = Column.ConflictAction.REPLACE)
     @SerializedName("id")
     @Expose
     private long id;
+    @Column(name = "listed_count", unique = false)
     @SerializedName("listed_count")
     @Expose
     private Integer listedCount;
+    @Column(name = "profile_use_background_image", unique = false)
     @SerializedName("profile_use_background_image")
     @Expose
     private Boolean profileUseBackgroundImage;
+    @Column(name = "profile_text_color", unique = false)
     @SerializedName("profile_text_color")
     @Expose
     private String profileTextColor;
+    @Column(name = "followers_count", unique = false)
     @SerializedName("followers_count")
     @Expose
     private Integer followersCount;
+    @Column(name = "lang", unique = false)
     @SerializedName("lang")
     @Expose
     private String lang;
+    @Column(name = "protected", unique = false)
     @SerializedName("protected")
     @Expose
     private Boolean _protected;
+    @Column(name = "geo_enabled", unique = false)
     @SerializedName("geo_enabled")
     @Expose
     private Boolean geoEnabled;
+    @Column(name = "notifications", unique = false)
     @SerializedName("notifications")
     @Expose
     private Boolean notifications;
+    @Column(name = "description", unique = false)
     @SerializedName("description")
     @Expose
     private String description;
+    @Column(name = "profile_background_color", unique = false)
     @SerializedName("profile_background_color")
     @Expose
     private String profileBackgroundColor;
+    @Column(name = "verified", unique = false)
     @SerializedName("verified")
     @Expose
     private Boolean verified;
+    @Column(name = "profile_background_image_url_https", unique = false)
 //    @SerializedName("time_zone")
 //    @Expose
 //    private Object timeZone;
     @SerializedName("profile_background_image_url_https")
     @Expose
     private String profileBackgroundImageUrlHttps;
+    @Column(name = "statuses_count", unique = false)
     @SerializedName("statuses_count")
     @Expose
     private Integer statusesCount;
+    @Column(name = "profile_background_image_url", unique = false)
     @SerializedName("profile_background_image_url")
     @Expose
     private String profileBackgroundImageUrl;
+    @Column(name = "default_profile_image", unique = false)
     @SerializedName("default_profile_image")
     @Expose
     private Boolean defaultProfileImage;
+    @Column(name = "friends_count", unique = false)
     @SerializedName("friends_count")
     @Expose
     private Integer friendsCount;
+    @Column(name = "following", unique = false)
     @SerializedName("following")
     @Expose
     private Boolean following;
+    @Column(name = "show_all_inline_media", unique = false)
     @SerializedName("show_all_inline_media")
     @Expose
     private Boolean showAllInlineMedia;
+    @Column(name = "screen_name", unique = false)
     @SerializedName("screen_name")
     @Expose
     private String screenName;

@@ -4,6 +4,8 @@ package com.codepath.apps.mysimpletweets.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.activeandroid.annotation.Column;
+import com.activeandroid.annotation.Table;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.Expose;
@@ -28,27 +30,32 @@ import java.util.Locale;
 import javax.annotation.Generated;
 
 @Generated("org.jsonschema2pojo")
-
+@Table(name = "Statuses")
 public class Status implements Parcelable {
 
 //    @SerializedName("coordinates")
 //    @Expose
 //    private Object coordinates;
+    @Column(name = "truncated", unique = false)
     @SerializedName("truncated")
     @Expose
     private Boolean truncated;
+    @Column(name = "created_at", unique = false)
     @SerializedName("created_at")
     @Expose
     private String createdAt;
+    @Column(name = "favorited", unique = false)
     @SerializedName("favorited")
     @Expose
     private Boolean favorited;
+    @Column(name = "id_str", unique = true, onUniqueConflict = Column.ConflictAction.REPLACE)
     @SerializedName("id_str")
     @Expose
     private String idStr;
 //    @SerializedName("in_reply_to_user_id_str")
 //    @Expose
 //    private Object inReplyToUserIdStr;
+    @Column(name = "entities", unique = false)
     @SerializedName("entities")
     @Expose
     private Entities entities;
@@ -56,19 +63,22 @@ public class Status implements Parcelable {
     public Entities getExtendedEntities() {
         return extendedEntities;
     }
-
+    @Column(name = "extended_entities", unique = false)
     @SerializedName("extended_entities")
     @Expose
     private Entities extendedEntities;
+    @Column(name = "text", unique = false)
     @SerializedName("text")
     @Expose
     private String text;
 //    @SerializedName("contributors")
 //    @Expose
 //    private Object contributors;
+    @Column(name = "id", unique = true, onUniqueConflict = Column.ConflictAction.REPLACE)
     @SerializedName("id")
     @Expose
     private long id;
+    @Column(name = "retweet_count", unique = false)
     @SerializedName("retweet_count")
     @Expose
     private Integer retweetCount;
@@ -78,6 +88,7 @@ public class Status implements Parcelable {
 //    @SerializedName("geo")
 //    @Expose
 //    private Object geo;
+    @Column(name = "retweeted", unique = false)
     @SerializedName("retweeted")
     @Expose
     private Boolean retweeted;
@@ -87,9 +98,11 @@ public class Status implements Parcelable {
 //    @SerializedName("place")
 //    @Expose
 //    private Object place;
+    @Column(name = "source", unique = false)
     @SerializedName("source")
     @Expose
     private String source;
+    @Column(name = "user", unique = false)
     @SerializedName("user")
     @Expose
     private User user;
