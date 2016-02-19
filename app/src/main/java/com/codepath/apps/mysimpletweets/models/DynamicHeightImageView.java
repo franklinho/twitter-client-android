@@ -2,12 +2,13 @@ package com.codepath.apps.mysimpletweets.models;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.widget.ImageView;
+
+import com.makeramen.roundedimageview.RoundedImageView;
 
 /**
  * An {@link android.widget.ImageView} layout that maintains a consistent width to height aspect ratio.
  */
-public class DynamicHeightImageView extends ImageView {
+public class DynamicHeightImageView extends RoundedImageView {
 
     private double mHeightRatio;
 

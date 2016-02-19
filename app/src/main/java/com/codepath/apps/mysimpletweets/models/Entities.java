@@ -142,6 +142,9 @@ public class Entities implements Parcelable {
         this.media = media;
     }
 
+    public Entities() {
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -149,20 +152,16 @@ public class Entities implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeParcelable(this.extended, flags);
-        dest.writeList(this.media);
-    }
-
-    public Entities() {
+        dest.writeParcelable(this.extended, 0);
+        dest.writeTypedList(media);
     }
 
     protected Entities(Parcel in) {
         this.extended = in.readParcelable(Extended.class.getClassLoader());
-        this.media = new ArrayList<Medium_>();
-        in.readList(this.media, List.class.getClassLoader());
+        this.media = in.createTypedArrayList(Medium_.CREATOR);
     }
 
-    public static final Parcelable.Creator<Entities> CREATOR = new Parcelable.Creator<Entities>() {
+    public static final Creator<Entities> CREATOR = new Creator<Entities>() {
         public Entities createFromParcel(Parcel source) {
             return new Entities(source);
         }

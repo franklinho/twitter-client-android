@@ -11,6 +11,9 @@ import com.bumptech.glide.Glide;
 import com.codepath.apps.mysimpletweets.R;
 import com.codepath.apps.mysimpletweets.TwitterApplication;
 import com.codepath.apps.mysimpletweets.fragments.ComposeDialog;
+import com.codepath.apps.mysimpletweets.models.DynamicHeightImageView;
+import com.codepath.apps.mysimpletweets.models.Medium_;
+import com.codepath.apps.mysimpletweets.models.Medium__;
 import com.codepath.apps.mysimpletweets.models.Status;
 import com.codepath.apps.mysimpletweets.networking.TwitterClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -18,7 +21,7 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class StatusDetailActivity extends AppCompatActivity implements ComposeDialog.InsertNewStatus {
+public class ImageStatusDetailActivity extends AppCompatActivity implements ComposeDialog.InsertNewStatus {
     Status status;
     @Bind(R.id.ivProfileImage) ImageView ivProfileImage;
     @Bind(R.id.tvName) TextView tvName;
@@ -29,25 +32,33 @@ public class StatusDetailActivity extends AppCompatActivity implements ComposeDi
     @Bind(R.id.ibtnReply) ImageButton ibtnReply;
     @Bind(R.id.ibtnRetweet) ImageButton ibtnRetweet;
     @Bind(R.id.ibtnFavorite) ImageButton ibtnFavorite;
+    @Bind(R.id.ivStatusImage)
+    DynamicHeightImageView ivStatusImage;
     private TwitterClient client;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_status_detail);
+        setContentView(R.layout.activity_image_status_detail);
         ButterKnife.bind(this);
 
         client = TwitterApplication.getRestClient();
         status = getIntent().getParcelableExtra("status");
-
         tvBody.setMaxLines(Integer.MAX_VALUE);
+
         if (status != null) {
             tvName.setText(status.getUser().getName());
             tvScreenName.setText(status.getUser().getScreenName());
             Glide.with(this).load(status.getUser().getProfileImageUrl()).into(ivProfileImage);
             tvRetweetCount.setText(status.getRetweetCount().toString());
             tvBody.setText(status.getText());
+
+            Medium_ media = status.getEntities().getMedia().get(0);
+            Medium__ imageMediumSize = media.getSizes().getMedium();
+            ivStatusImage.setHeightRatio((double) imageMediumSize.getH() / imageMediumSize.getW());
+            Glide.with(this).load(media.getMediaUrl()).fitCenter().into(ivStatusImage);
+
             if (status.getFavorited() == true) {
                 ibtnFavorite.setImageResource(R.drawable.heart_icon_red);
             } else {

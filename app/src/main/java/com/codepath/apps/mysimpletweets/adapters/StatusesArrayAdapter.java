@@ -14,14 +14,15 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.codepath.apps.mysimpletweets.R;
 import com.codepath.apps.mysimpletweets.TwitterApplication;
+import com.codepath.apps.mysimpletweets.activities.ImageStatusDetailActivity;
 import com.codepath.apps.mysimpletweets.activities.StatusDetailActivity;
 import com.codepath.apps.mysimpletweets.activities.TimelineActivity;
 import com.codepath.apps.mysimpletweets.fragments.ComposeDialog;
 import com.codepath.apps.mysimpletweets.models.DynamicHeightImageView;
 import com.codepath.apps.mysimpletweets.models.LinkifiedTextView;
 import com.codepath.apps.mysimpletweets.models.Medium_;
-import com.codepath.apps.mysimpletweets.models.Medium__;
 import com.codepath.apps.mysimpletweets.models.Status;
+import com.codepath.apps.mysimpletweets.models.Thumb_;
 import com.codepath.apps.mysimpletweets.networking.TwitterClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
@@ -128,7 +129,7 @@ public class StatusesArrayAdapter extends RecyclerView.Adapter<RecyclerView.View
         @Override
         public void onClick(View v) {
             int position = getLayoutPosition();
-            Intent i = new Intent(context, StatusDetailActivity.class);
+            Intent i = new Intent(context, ImageStatusDetailActivity.class);
             i.putExtra("status", status );
             context.startActivity(i);
         }
@@ -213,6 +214,7 @@ public class StatusesArrayAdapter extends RecyclerView.Adapter<RecyclerView.View
         ImageButton ibtnReply = holder.ibtnReply;
 
 
+        tvBody.setMaxLines(Integer.MAX_VALUE);
 
         tvName.setText(status.getUser().getName());
         tvBody.setText(status.getText());
@@ -307,6 +309,7 @@ public class StatusesArrayAdapter extends RecyclerView.Adapter<RecyclerView.View
         DynamicHeightImageView ivStatusImage = holder.ivStatusImage;
 
 
+        tvBody.setMaxLines(Integer.MAX_VALUE);
 
 
         tvName.setText(status.getUser().getName());
@@ -331,10 +334,17 @@ public class StatusesArrayAdapter extends RecyclerView.Adapter<RecyclerView.View
             ibtnRetweet.setImageResource(R.drawable.retweet_icon);
         }
 
+//        Medium_ media = status.getEntities().getMedia().get(0);
+//        Medium__ imageMediumSize = media.getSizes().getMedium();
+//        ivStatusImage.setHeightRatio((double) imageMediumSize.getH() / imageMediumSize.getW() );
+//        Glide.with(holder.context).load(media.getMediaUrl()).fitCenter().into(ivStatusImage);
+
         Medium_ media = status.getEntities().getMedia().get(0);
-        Medium__ imageMediumSize = media.getSizes().getMedium();
-        ivStatusImage.setHeightRatio((double) imageMediumSize.getH() / imageMediumSize.getW() );
-        Glide.with(holder.context).load(media.getMediaUrl()).fitCenter().into(ivStatusImage);
+        Thumb_ imageThumbSize = media.getSizes().getThumb();
+//        ivStatusImage.setHeightRatio((double) imageThumbSize.getH() / imageThumbSize.getW() );
+        ivStatusImage.setHeightRatio((double) 260 / 510 );
+        Glide.with(holder.context).load(media.getMediaUrl()).centerCrop().into(ivStatusImage);
+
 
         ibtnReply.setOnClickListener(new View.OnClickListener() {
             @Override

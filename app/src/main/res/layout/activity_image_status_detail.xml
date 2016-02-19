@@ -3,7 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@android:color/white">
+    android:background="@android:color/white"
+    >
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -14,8 +15,8 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.codepath.apps.mysimpletweets.activities.StatusDetailActivity"
-    android:background="@android:color/white">
-
+    android:background="@android:color/white"
+    >
 
 
 
@@ -74,7 +75,7 @@
         android:layout_height="wrap_content"
         android:text="Date"
         android:id="@+id/tvTimestamp"
-        android:layout_below="@+id/tvBody"
+        android:layout_below="@+id/ivStatusImage"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="10dp"/>
@@ -162,6 +163,17 @@
         android:layout_below="@id/ibtnRetweet"
         android:layout_alignParentLeft="true"
         android:id="@+id/viewBorder3" />
+
+    <com.codepath.apps.mysimpletweets.models.DynamicHeightImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ivStatusImage"
+        android:layout_below="@+id/tvBody"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="10dp"
+        app:riv_corner_radius="5dp"/>
+
 
 
 </RelativeLayout>

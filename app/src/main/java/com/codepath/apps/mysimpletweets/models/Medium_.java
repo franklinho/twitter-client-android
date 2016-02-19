@@ -226,6 +226,9 @@ public class Medium_ implements Parcelable {
         this.sizes = sizes;
     }
 
+    public Medium_() {
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -233,7 +236,7 @@ public class Medium_ implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeValue(this.id);
+        dest.writeLong(this.id);
         dest.writeString(this.idStr);
         dest.writeList(this.indices);
         dest.writeString(this.mediaUrl);
@@ -242,14 +245,11 @@ public class Medium_ implements Parcelable {
         dest.writeString(this.displayUrl);
         dest.writeString(this.expandedUrl);
         dest.writeString(this.type);
-        dest.writeParcelable(this.sizes, flags);
-    }
-
-    public Medium_() {
+        dest.writeParcelable(this.sizes, 0);
     }
 
     protected Medium_(Parcel in) {
-        this.id = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.id = in.readLong();
         this.idStr = in.readString();
         this.indices = new ArrayList<Integer>();
         in.readList(this.indices, List.class.getClassLoader());
@@ -262,7 +262,7 @@ public class Medium_ implements Parcelable {
         this.sizes = in.readParcelable(Sizes_.class.getClassLoader());
     }
 
-    public static final Parcelable.Creator<Medium_> CREATOR = new Parcelable.Creator<Medium_>() {
+    public static final Creator<Medium_> CREATOR = new Creator<Medium_>() {
         public Medium_ createFromParcel(Parcel source) {
             return new Medium_(source);
         }
