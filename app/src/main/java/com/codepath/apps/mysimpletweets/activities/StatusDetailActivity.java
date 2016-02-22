@@ -1,7 +1,9 @@
 package com.codepath.apps.mysimpletweets.activities;
 
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -30,6 +32,8 @@ public class StatusDetailActivity extends AppCompatActivity implements ComposeDi
     @Bind(R.id.ibtnRetweet) ImageButton ibtnRetweet;
     @Bind(R.id.ibtnFavorite) ImageButton ibtnFavorite;
     private TwitterClient client;
+    @Bind(R.id.toolbar)
+    Toolbar toolbar;
 
 
     @Override
@@ -37,6 +41,18 @@ public class StatusDetailActivity extends AppCompatActivity implements ComposeDi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_status_detail);
         ButterKnife.bind(this);
+
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+
+        actionBar.setLogo(R.drawable.space_between_icon);
+        actionBar.setDisplayUseLogoEnabled(true);
+        actionBar.setDisplayShowHomeEnabled(true);
+//        actionBar.setDefaultDisplayHomeAsUpEnabled(false);
+//        actionBar.setHomeAsUpIndicator(actionBar.DISPLAY_HOME_AS_UP);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
+        actionBar.setDisplayShowTitleEnabled(false);
 
         client = TwitterApplication.getRestClient();
         status = getIntent().getParcelableExtra("status");

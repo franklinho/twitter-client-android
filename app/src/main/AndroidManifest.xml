@@ -58,9 +58,9 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity android:name=".activities.StatusDetailActivity"></activity>
-        <activity android:name=".activities.ImageStatusDetailActivity"></activity>
-        <activity android:name=".activities.VideoStatusDetailActivity"></activity>
+        <activity android:name=".activities.StatusDetailActivity" android:label="Tweet Detail" android:parentActivityName=".activities.TimelineActivity"></activity>
+        <activity android:name=".activities.ImageStatusDetailActivity" android:label="Tweet Detail" android:parentActivityName=".activities.TimelineActivity"></activity>
+        <activity android:name=".activities.VideoStatusDetailActivity" android:label="Tweet Detail" android:parentActivityName=".activities.TimelineActivity"></activity>
     </application>
 
 </manifest>

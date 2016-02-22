@@ -2,7 +2,9 @@ package com.codepath.apps.mysimpletweets.activities;
 
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -39,12 +41,26 @@ public class VideoStatusDetailActivity extends AppCompatActivity implements Comp
     DynamicHeightVideoView vvStatusVideo;
     private TwitterClient client;
 
+    @Bind(R.id.toolbar)
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video_status_detail);
         ButterKnife.bind(this);
+
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+
+        actionBar.setLogo(R.drawable.space_between_icon);
+        actionBar.setDisplayUseLogoEnabled(true);
+        actionBar.setDisplayShowHomeEnabled(true);
+//        actionBar.setDefaultDisplayHomeAsUpEnabled(false);
+//        actionBar.setHomeAsUpIndicator(actionBar.DISPLAY_HOME_AS_UP);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
+        actionBar.setDisplayShowTitleEnabled(false);
 
         client = TwitterApplication.getRestClient();
         status = getIntent().getParcelableExtra("status");
