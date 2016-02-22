@@ -43,6 +43,7 @@ Time Spent: 23 hours
 Here's a walkthrough of implemented user stories:
 
 ![General Functionality](https://github.com/franklinho/twitter-client-android/blob/master/TwitterClientWalkThrough.gif)
+![Animated Buttons](https://github.com/franklinho/twitter-client-android/blob/master/TwitterClientWalkThrough2.gif)
 
 
 ## Open-source libraries used
