@@ -12,7 +12,7 @@ import com.google.gson.annotations.SerializedName;
 import javax.annotation.Generated;
 
 @Generated("org.jsonschema2pojo")
-@Table(name = "Users")
+@Table(name = "Users", id="_id")
 public class User implements Parcelable {
     @Column(name = "name", unique = false)
     @SerializedName("name")

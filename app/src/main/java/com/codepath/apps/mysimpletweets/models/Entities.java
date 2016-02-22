@@ -4,6 +4,8 @@ package com.codepath.apps.mysimpletweets.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.activeandroid.annotation.Column;
+import com.activeandroid.annotation.Table;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -13,6 +15,7 @@ import java.util.List;
 import javax.annotation.Generated;
 
 @Generated("org.jsonschema2pojo")
+@Table(name = "Entities", id="_id")
 public class Entities implements Parcelable {
 
 //    @SerializedName("extended_entities")
@@ -30,6 +33,7 @@ public class Entities implements Parcelable {
 //    @SerializedName("user_mentions")
 //    @Expose
 //    private List<Object> userMentions = new ArrayList<Object>();
+    @Column(name = "media", unique = false,onUpdate = Column.ForeignKeyAction.CASCADE, onDelete = Column.ForeignKeyAction.CASCADE)
     @SerializedName("media")
     @Expose
     private List<Medium_> media = new ArrayList<Medium_>();

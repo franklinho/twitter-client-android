@@ -4,20 +4,26 @@ package com.codepath.apps.mysimpletweets.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.activeandroid.annotation.Column;
+import com.activeandroid.annotation.Table;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import javax.annotation.Generated;
 
 @Generated("org.jsonschema2pojo")
+@Table(name="Variant", id="_id")
 public class Variant implements Parcelable {
 
+    @Column(name = "bitrate", unique = false)
     @SerializedName("bitrate")
     @Expose
     private Integer bitrate;
+    @Column(name = "content_type", unique = false)
     @SerializedName("content_type")
     @Expose
     private String contentType;
+    @Column(name = "url", unique = false)
     @SerializedName("url")
     @Expose
     private String url;

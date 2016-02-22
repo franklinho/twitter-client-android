@@ -4,6 +4,8 @@ package com.codepath.apps.mysimpletweets.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.activeandroid.annotation.Column;
+import com.activeandroid.annotation.Table;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -13,14 +15,18 @@ import java.util.List;
 import javax.annotation.Generated;
 
 @Generated("org.jsonschema2pojo")
+@Table(name="VideoInfo", id="_id")
 public class VideoInfo implements Parcelable {
 
+    @Column(name = "aspect_ratio", unique = false)
     @SerializedName("aspect_ratio")
     @Expose
     private List<Integer> aspectRatio = new ArrayList<Integer>();
+    @Column(name = "duration_millis", unique = false)
     @SerializedName("duration_millis")
     @Expose
     private Integer durationMillis;
+    @Column(name = "variants", unique = false,onUpdate = Column.ForeignKeyAction.CASCADE, onDelete = Column.ForeignKeyAction.CASCADE)
     @SerializedName("variants")
     @Expose
     private List<Variant> variants = new ArrayList<Variant>();

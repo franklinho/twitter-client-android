@@ -4,23 +4,30 @@ package com.codepath.apps.mysimpletweets.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.activeandroid.annotation.Column;
+import com.activeandroid.annotation.Table;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import javax.annotation.Generated;
 
 @Generated("org.jsonschema2pojo")
+@Table(name="Sizes_", id="_id")
 public class Sizes_ implements Parcelable {
 
+    @Column(name = "medium", unique = false,onUpdate = Column.ForeignKeyAction.CASCADE, onDelete = Column.ForeignKeyAction.CASCADE)
     @SerializedName("medium")
     @Expose
     private Medium__ medium;
+    @Column(name = "thumb", unique = false,onUpdate = Column.ForeignKeyAction.CASCADE, onDelete = Column.ForeignKeyAction.CASCADE)
     @SerializedName("thumb")
     @Expose
     private Thumb_ thumb;
+    @Column(name = "small", unique = false,onUpdate = Column.ForeignKeyAction.CASCADE, onDelete = Column.ForeignKeyAction.CASCADE)
     @SerializedName("small")
     @Expose
     private Small_ small;
+    @Column(name = "large", unique = false,onUpdate = Column.ForeignKeyAction.CASCADE, onDelete = Column.ForeignKeyAction.CASCADE)
     @SerializedName("large")
     @Expose
     private Large_ large;

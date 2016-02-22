@@ -143,6 +143,12 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
                 }
 
                 maxId = statuses.get(statuses.size() - 1).getId() - 1;
+
+//                for(int i=0; i<statuses.size(); i++) {
+//                    Status iteratingStatus  = statuses.get(i);
+////                    iteratingStatus.save();
+//                }
+
                 Log.d("DEBUG", "Status Array: " + statuses.toString());
             }
 

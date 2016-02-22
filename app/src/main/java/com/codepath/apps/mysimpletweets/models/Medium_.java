@@ -4,6 +4,8 @@ package com.codepath.apps.mysimpletweets.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.activeandroid.annotation.Column;
+import com.activeandroid.annotation.Table;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -13,38 +15,51 @@ import java.util.List;
 import javax.annotation.Generated;
 
 @Generated("org.jsonschema2pojo")
+@Table(name = "Medium_", id="_id")
 public class Medium_ implements Parcelable {
 
+
+    @Column(name = "id", unique = false)
     @SerializedName("id")
     @Expose
     private long id;
+    @Column(name = "id_str", unique = false)
     @SerializedName("id_str")
     @Expose
     private String idStr;
+    @Column(name = "indices", unique = false)
     @SerializedName("indices")
     @Expose
     private List<Integer> indices = new ArrayList<Integer>();
+    @Column(name = "media_url", unique = false)
     @SerializedName("media_url")
     @Expose
     private String mediaUrl;
+    @Column(name = "media_url_https", unique = false)
     @SerializedName("media_url_https")
     @Expose
     private String mediaUrlHttps;
+    @Column(name = "url", unique = false)
     @SerializedName("url")
     @Expose
     private String url;
+    @Column(name = "display_url", unique = false)
     @SerializedName("display_url")
     @Expose
     private String displayUrl;
+    @Column(name = "expanded_url", unique = false)
     @SerializedName("expanded_url")
     @Expose
     private String expandedUrl;
+    @Column(name = "type", unique = false)
     @SerializedName("type")
     @Expose
     private String type;
+    @Column(name = "sizes", unique = false,onUpdate = Column.ForeignKeyAction.CASCADE, onDelete = Column.ForeignKeyAction.CASCADE)
     @SerializedName("sizes")
     @Expose
     private Sizes_ sizes;
+    @Column(name = "video_info", unique = false,onUpdate = Column.ForeignKeyAction.CASCADE, onDelete = Column.ForeignKeyAction.CASCADE)
     @SerializedName("video_info")
     @Expose
     private VideoInfo videoInfo;

@@ -30,7 +30,7 @@ import java.util.Locale;
 import javax.annotation.Generated;
 
 @Generated("org.jsonschema2pojo")
-@Table(name = "Statuses")
+@Table(name = "Statuses", id="_id")
 public class Status implements Parcelable {
 
 //    @SerializedName("coordinates")
@@ -55,7 +55,7 @@ public class Status implements Parcelable {
 //    @SerializedName("in_reply_to_user_id_str")
 //    @Expose
 //    private Object inReplyToUserIdStr;
-    @Column(name = "entities", unique = false)
+    @Column(name = "entities", unique = false,onUpdate = Column.ForeignKeyAction.CASCADE, onDelete = Column.ForeignKeyAction.CASCADE)
     @SerializedName("entities")
     @Expose
     private Entities entities;
@@ -63,7 +63,7 @@ public class Status implements Parcelable {
     public Entities getExtendedEntities() {
         return extendedEntities;
     }
-    @Column(name = "extended_entities", unique = false)
+    @Column(name = "extended_entities", unique = false,onUpdate = Column.ForeignKeyAction.CASCADE, onDelete = Column.ForeignKeyAction.CASCADE)
     @SerializedName("extended_entities")
     @Expose
     private Entities extendedEntities;
@@ -102,7 +102,7 @@ public class Status implements Parcelable {
     @SerializedName("source")
     @Expose
     private String source;
-    @Column(name = "user", unique = false)
+    @Column(name = "extended_entities", unique = false,onUpdate = Column.ForeignKeyAction.CASCADE, onDelete = Column.ForeignKeyAction.CASCADE)
     @SerializedName("user")
     @Expose
     private User user;
