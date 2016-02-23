@@ -70,9 +70,11 @@
             android:name=".activities.VideoStatusDetailActivity"
             android:label="Tweet Detail"
             android:parentActivityName=".activities.TimelineActivity" />
-        <activity android:name=".activities.ProfileActivity"
+        <activity
+            android:name=".activities.ProfileActivity"
             android:label="Profile"
-            android:parentActivityName=".activities.TimelineActivity"></activity>
+            android:parentActivityName=".activities.TimelineActivity" />
+        <activity android:name=".activities.SearchResultsActivity"></activity>
     </application>
 
 </manifest>

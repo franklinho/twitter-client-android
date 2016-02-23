@@ -7,142 +7,66 @@
     tools:context="com.codepath.apps.mysimpletweets.activities.ProfileActivity"
     android:background="@android:color/white">
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/llAppBar"
+        app:layout_scrollFlags="scroll|enterAlways">
     <android.support.design.widget.AppBarLayout
         android:id="@+id/statusAppBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/AppBaseTheme"
         xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto">
-
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        >
         <!-- Toolbar is the actual app bar with text an
         d the action items -->
-        <include
-            layout="@layout/toolbar_main"
+        <!--<include-->
+            <!--layout="@layout/toolbar_main"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--app:layout_scrollFlags="scroll|enterAlways"-->
+            <!--/>-->
+
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_scrollFlags="scroll|enterAlways"
-            />
-    </android.support.design.widget.AppBarLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/statusAppBar"
-        android:id="@+id/rlHeader">
-        <com.makeramen.roundedimageview.RoundedImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:id="@+id/ivProfileImage"
-            android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            app:riv_border_width="2dp"
-            app:riv_border_color="@android:color/white"
-            app:riv_corner_radius="5dp"
-            android:layout_marginLeft="@dimen/activity_vertical_margin"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            />
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/flHeader"
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Name"
-            android:id="@+id/tvName"
-            android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/ivProfileImage"
-            android:layout_toEndOf="@+id/ivProfileImage"
-            android:layout_marginLeft="10dp"
-            android:layout_marginBottom="5dp"
-            android:textStyle="bold"
-            android:textColor="@android:color/black"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="ScreenName"
-            android:id="@+id/tvScreenName"
-            android:layout_below="@+id/tvName"
-            android:layout_alignLeft="@+id/tvName"
-            android:layout_alignStart="@+id/tvName" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="0"
-            android:id="@+id/tvFollowingCount"
-            android:layout_below="@+id/ivProfileImage"
-            android:layout_alignLeft="@+id/ivProfileImage"
-            android:layout_alignStart="@+id/ivProfileImage"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:textStyle="bold"
-            android:textColor="@android:color/black"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/following"
-            android:id="@+id/tvFollowingLabel"
-            android:layout_below="@+id/ivProfileImage"
-            android:layout_toRightOf="@id/tvFollowingCount"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="5dp"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="0"
-            android:id="@+id/tvFollowersCount"
-            android:layout_below="@+id/ivProfileImage"
-            android:layout_toRightOf="@id/tvFollowingLabel"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:textStyle="bold"
-            android:textColor="@android:color/black"
-            android:layout_marginLeft="10dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/followers"
-            android:id="@+id/tvFollowersLabel"
-            android:layout_below="@+id/ivProfileImage"
-            android:layout_toRightOf="@id/tvFollowersCount"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="5dp"
-            android:layout_marginLeft="5dp"
-            />
-
-        <View
-            android:layout_width="match_parent"
-            android:background="#969696"
-            android:layout_height="3dp"
-            android:layout_below="@id/tvFollowersLabel"
-            android:layout_marginTop="10dp"
-            android:layout_alignParentLeft="true"
-            android:id="@+id/viewBorder1"
-            android:layout_marginLeft="@dimen/activity_vertical_margin"
-            android:layout_marginRight="@dimen/activity_vertical_margin"
-            android:layout_marginBottom="5dp"/>
+            >
+        </FrameLayout>
+    </android.support.design.widget.AppBarLayout>
+    </LinearLayout>
 
 
 
-    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_below="@+id/llAppBar"
+        >
     <FrameLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/rlHeader"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:id="@+id/flContainer"></FrameLayout>
+        android:id="@+id/flContainer"
+        >
+
+    </FrameLayout>
+    </RelativeLayout>
 
 
 

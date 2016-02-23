@@ -78,6 +78,14 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
 
 
     public void showComposeDialog(View v) {
+        showComposeFragment();
+    }
+
+    public void onCompose(MenuItem item) {
+        showComposeFragment();
+    }
+
+    public void showComposeFragment() {
         FragmentManager fm = getSupportFragmentManager();
         ComposeDialog composeDialog = ComposeDialog.newInstance();
         composeDialog.show(fm, "fragment_compose");

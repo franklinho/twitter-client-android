@@ -6,6 +6,14 @@
         android:icon="@drawable/ic_profile"
         app:showAsAction="ifRoom|withText"
         android:title="Profile"
-        android:onClick="onProfileView">
+        android:onClick="onProfileView"
+        >
+    </item>
+    <item
+        android:id="@+id/miCompose"
+        android:icon="@drawable/compose_icon"
+        app:showAsAction="ifRoom|withText"
+        android:title="Profile"
+        android:onClick="onCompose">
     </item>
 </menu>

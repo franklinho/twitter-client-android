@@ -2,9 +2,12 @@ package com.codepath.apps.mysimpletweets.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -156,4 +159,23 @@ public class ImageStatusDetailActivity extends AppCompatActivity implements Comp
     public void insertNewStatus(Status status) {
 
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    public void onProfileView(MenuItem item) {
+        Intent i = new Intent(this, ProfileActivity.class);
+//        i.putExtra("userId",client.getCurrentUser().getId());
+        startActivity(i);
+    }
+
+    public void onCompose(MenuItem item) {
+        FragmentManager fm = getSupportFragmentManager();
+        ComposeDialog composeDialog = ComposeDialog.newInstance();
+        composeDialog.show(fm, "fragment_compose");
+    }
+
 }

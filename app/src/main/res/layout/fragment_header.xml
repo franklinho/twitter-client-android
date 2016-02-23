@@ -1,0 +1,108 @@
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/statusAppBar"
+    android:id="@+id/rlHeader"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@android:color/white">
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:id="@+id/ivBackground"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:scaleType="centerCrop"/>
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/ivProfileImage"
+        android:layout_below="@+id/ivBackground"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        app:riv_border_width="2dp"
+        app:riv_border_color="@android:color/white"
+        app:riv_corner_radius="5dp"
+        android:layout_marginLeft="@dimen/activity_vertical_margin"
+        android:layout_marginTop="-25dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Name"
+        android:id="@+id/tvName"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/ivProfileImage"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="5dp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="10dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ScreenName"
+        android:id="@+id/tvScreenName"
+        android:layout_below="@+id/tvName"
+        android:layout_alignLeft="@+id/tvName"
+        android:layout_alignStart="@+id/tvName" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:id="@+id/tvFollowingCount"
+        android:layout_below="@+id/tvScreenName"
+        android:layout_alignLeft="@+id/tvScreenName"
+        android:layout_alignStart="@+id/tvScreenName"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/following"
+        android:id="@+id/tvFollowingLabel"
+        android:layout_alignTop="@+id/tvFollowingCount"
+        android:layout_toRightOf="@id/tvFollowingCount"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="5dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:id="@+id/tvFollowersCount"
+        android:layout_alignTop="@+id/tvFollowingCount"
+        android:layout_toRightOf="@id/tvFollowingLabel"
+        android:layout_marginBottom="10dp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:layout_marginLeft="10dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/followers"
+        android:id="@+id/tvFollowersLabel"
+        android:layout_alignTop="@+id/tvFollowingCount"
+        android:layout_toRightOf="@id/tvFollowersCount"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="5dp"
+        />
+
+
+
+
+</RelativeLayout>
