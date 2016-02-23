@@ -521,7 +521,9 @@ public class StatusesArrayAdapter extends RecyclerView.Adapter<RecyclerView.View
             vvStatusVideo.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                 @Override
                 public void onPrepared(MediaPlayer mp) {
+                    mp.setLooping(true);
                     vvStatusVideo.start();
+
                 }
             });
 
