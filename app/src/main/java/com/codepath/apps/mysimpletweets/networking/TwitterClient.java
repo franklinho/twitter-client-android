@@ -90,11 +90,13 @@ public class TwitterClient extends OAuthBaseClient {
         getClient().get(apiUrl, params, handler);
     }
 
-    public void getSearchTimeline(JsonHttpResponseHandler handler, String query ) {
+    public void getSearchTimeline(JsonHttpResponseHandler handler, long maxId, String query ) {
         String apiUrl = getApiUrl("search/tweets.json");
         RequestParams params = new RequestParams();
         params.put("count", 25);
-        params.put("q",query);
+        if (query != null) {
+            params.put("q",query);
+        }
         getClient().get(apiUrl, params, handler);
     }
 

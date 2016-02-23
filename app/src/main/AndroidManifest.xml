@@ -74,7 +74,8 @@
             android:name=".activities.ProfileActivity"
             android:label="Profile"
             android:parentActivityName=".activities.TimelineActivity" />
-        <activity android:name=".activities.SearchResultsActivity"></activity>
+        <activity android:name=".activities.SearchResultsActivity"
+            android:parentActivityName=".activities.TimelineActivity"></activity>
     </application>
 
 </manifest>

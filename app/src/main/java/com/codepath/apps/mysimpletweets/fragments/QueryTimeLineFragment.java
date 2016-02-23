@@ -15,12 +15,21 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.apache.http.Header;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
  * Created by franklinho on 2/22/16.
  */
-public class HomeTimeLineFragment extends TweetsListFragment{
+public class QueryTimeLineFragment extends TweetsListFragment{
+
+    public static QueryTimeLineFragment newInstance(String query) {
+        QueryTimeLineFragment queryTimeLineFragment = new QueryTimeLineFragment();
+        Bundle args = new Bundle();
+        args.putString("query", query);
+        queryTimeLineFragment.setArguments(args);
+        return queryTimeLineFragment;
+    }
 
     @Nullable
     @Override
@@ -50,33 +59,64 @@ public class HomeTimeLineFragment extends TweetsListFragment{
     // Send api request to get timeline json and fills listview with tweet objects
     private void populateTimeline(final boolean newTimeline) {
         if (newTimeline == true) {
-            maxId = 0L;
+            setMaxId(0L);
             statuses.clear();
         }
 
-        final int curSize = statuses.size();
+        String query = getArguments().getString("query");
 
-        client.getHomeTimeline(new JsonHttpResponseHandler() {
+        client.getSearchTimeline(new JsonHttpResponseHandler() {
+
+//            @Override
+//            public void onSuccess(int statusCode, Header[] headers, JSONArray json) {
+//                Log.d("DEBUG", json.toString());
+////                Toast.makeText(getBaseContext(), "SuccessArray", Toast.LENGTH_SHORT).show();
+//
+//
+//                int curSize = statuses.size();
+//                //Add them to the adapter
+//
+//                statuses.addAll(Status.fromJSONArray(json));
+//
+//                //Add them to the adapter
+//                statuses.addAll(statuses);
+//                if (newTimeline == false) {
+//                    aStatuses.notifyItemRangeInserted(curSize, statuses.size() - 1);
+//                } else {
+//                    aStatuses.notifyDataSetChanged();
+//                }
+//
+//                maxId = statuses.get(statuses.size() - 1).getId() - 1;
+//
+//                Log.d("DEBUG", "Status Array: " + statuses.toString());
+//            }
 
             @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONArray json) {
+            public void onSuccess(int statusCode, Header[] headers, JSONObject json) {
                 Log.d("DEBUG", json.toString());
 //                Toast.makeText(getBaseContext(), "SuccessArray", Toast.LENGTH_SHORT).show();
 
 
-
+                int curSize = statuses.size();
                 //Add them to the adapter
 
-                statuses.addAll(Status.fromJSONArray(json));
-                if (newTimeline == false) {
-                    aStatuses.notifyItemRangeInserted(curSize, statuses.size() - 1);
-                } else {
-                    aStatuses.notifyDataSetChanged();
+                try {
+                    JSONArray jsonStatuses = json.getJSONArray("statuses");
+                    statuses.addAll(Status.fromJSONArray(jsonStatuses));
+
+                    if (newTimeline == false) {
+                        aStatuses.notifyItemRangeInserted(curSize, statuses.size() - 1);
+                    } else {
+                        aStatuses.notifyDataSetChanged();
+                    }
+
+                    setMaxId(statuses.get(statuses.size() - 1).getId() - 1) ;
+
+                    Log.d("DEBUG", "Status Array: " + statuses.toString());
+                } catch (JSONException e) {
+                    Log.d("DEBUG", e.toString());
                 }
 
-                maxId = statuses.get(statuses.size() - 1).getId() - 1 ;
-
-                Log.d("DEBUG", "Status Array: " + statuses.toString());
             }
 
             @Override
@@ -86,7 +126,7 @@ public class HomeTimeLineFragment extends TweetsListFragment{
             }
 
 
-        }, maxId);
+        }, getMaxId(), query);
 
         swipeContainer.setRefreshing(false);
 

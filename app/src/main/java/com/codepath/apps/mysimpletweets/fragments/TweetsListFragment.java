@@ -15,7 +15,6 @@ import com.codepath.apps.mysimpletweets.TwitterApplication;
 import com.codepath.apps.mysimpletweets.adapters.StatusesArrayAdapter;
 import com.codepath.apps.mysimpletweets.models.Status;
 import com.codepath.apps.mysimpletweets.networking.TwitterClient;
-import com.codepath.apps.mysimpletweets.utilities.EndlessRecyclerViewScrollListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,8 +27,6 @@ import butterknife.ButterKnife;
  */
 public class TweetsListFragment extends Fragment {
 
-
-
     public List<Status> getStatuses() {
         return statuses;
     }
@@ -37,8 +34,6 @@ public class TweetsListFragment extends Fragment {
     public void setStatuses(List<Status> statuses) {
         this.statuses = statuses;
     }
-
-
 
     List<Status> statuses;
     StatusesArrayAdapter aStatuses;
@@ -88,27 +83,11 @@ public class TweetsListFragment extends Fragment {
         client = TwitterApplication.getRestClient();
         //Connect adapter to listview
         rvTweets.setAdapter(aStatuses);
-
         swipeContainer.setColorSchemeResources(R.color.twitter_blue);
-
-
-
-
         return v;
     }
 
-    public void addOnScrollListener(EndlessRecyclerViewScrollListener listener) {
-        rvTweets.addOnScrollListener(listener);
-    }
-
-    public void setOnRefreshListener(SwipeRefreshLayout.OnRefreshListener listener) {
-        swipeContainer.setOnRefreshListener(listener);
-    }
-
-
     //Creation lifecycle
-
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -121,56 +100,11 @@ public class TweetsListFragment extends Fragment {
 
     }
 
-
-
-
-
-
-//    public String loadJSONFromAsset() {
-//        String json = null;
-//        try {
-//
-//            InputStream is = getAssets().open("jsonplaceholder.json");
-//
-//            int size = is.available();
-//
-//            byte[] buffer = new byte[size];
-//
-//            is.read(buffer);
-//
-//            is.close();
-//
-//            json = new String(buffer, "UTF-8");
-//
-//
-//        } catch (IOException ex) {
-//            ex.printStackTrace();
-//            return null;
-//        }
-//        return json;
-//
-//    }
-
     public void insertNewStatus(Status status) {
         statuses.add(0, status);
         aStatuses.notifyItemInserted(0);
         rvTweets.scrollToPosition(0);
     }
 
-    public void clearStatuses() {
-        statuses.clear();
-    }
 
-    public void addAll(List<Status> statuses, boolean newTimeline) {
-        int curSize = statuses.size();
-        //Add them to the adapter
-        this.statuses.addAll(statuses);
-        if (newTimeline == false) {
-            aStatuses.notifyItemRangeInserted(curSize, statuses.size() - 1);
-        } else {
-            aStatuses.notifyDataSetChanged();
-        }
-
-        maxId = statuses.get(statuses.size() - 1).getId() - 1;
-    }
 }

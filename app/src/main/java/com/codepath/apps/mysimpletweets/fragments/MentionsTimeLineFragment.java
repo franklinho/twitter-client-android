@@ -51,7 +51,7 @@ public class MentionsTimeLineFragment extends TweetsListFragment{
     private void populateTimeline(final boolean newTimeline) {
         if (newTimeline == true) {
             setMaxId(0L);
-            clearStatuses();
+            statuses.clear();
         }
 
 
@@ -67,16 +67,13 @@ public class MentionsTimeLineFragment extends TweetsListFragment{
                 //Add them to the adapter
 
                 statuses.addAll(Status.fromJSONArray(json));
-
-                //Add them to the adapter
-                statuses.addAll(statuses);
                 if (newTimeline == false) {
                     aStatuses.notifyItemRangeInserted(curSize, statuses.size() - 1);
                 } else {
                     aStatuses.notifyDataSetChanged();
                 }
 
-                maxId = statuses.get(statuses.size() - 1).getId() - 1;
+                setMaxId(statuses.get(statuses.size() - 1).getId() - 1) ;
 
                 Log.d("DEBUG", "Status Array: " + statuses.toString());
             }
