@@ -27,8 +27,9 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/statusAppBar">
+        android:layout_height="wrap_content"
+        android:layout_below="@id/statusAppBar"
+        android:id="@+id/rlHeader">
         <com.makeramen.roundedimageview.RoundedImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
@@ -67,22 +68,81 @@
             android:layout_alignLeft="@+id/tvName"
             android:layout_alignStart="@+id/tvName" />
 
-        <fragment
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:name="com.codepath.apps.mysimpletweets.fragments.ProfileTimeLineFragment"
-            android:id="@+id/profileTimelineFragment"
+            android:text="0"
+            android:id="@+id/tvFollowingCount"
             android:layout_below="@+id/ivProfileImage"
+            android:layout_alignLeft="@+id/ivProfileImage"
+            android:layout_alignStart="@+id/ivProfileImage"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/following"
+            android:id="@+id/tvFollowingLabel"
+            android:layout_below="@+id/ivProfileImage"
+            android:layout_toRightOf="@id/tvFollowingCount"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="5dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:id="@+id/tvFollowersCount"
+            android:layout_below="@+id/ivProfileImage"
+            android:layout_toRightOf="@id/tvFollowingLabel"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:layout_marginLeft="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/followers"
+            android:id="@+id/tvFollowersLabel"
+            android:layout_below="@+id/ivProfileImage"
+            android:layout_toRightOf="@id/tvFollowersCount"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:background="#969696"
+            android:layout_height="3dp"
+            android:layout_below="@id/tvFollowersLabel"
+            android:layout_marginTop="10dp"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            tools:layout="@android:layout/simple_expandable_list_item_1"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="10dp"/>
+            android:id="@+id/viewBorder1"
+            android:layout_marginLeft="@dimen/activity_vertical_margin"
+            android:layout_marginRight="@dimen/activity_vertical_margin"
+            android:layout_marginBottom="5dp"/>
+
 
 
     </RelativeLayout>
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rlHeader"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/flContainer"></FrameLayout>
 
 
 

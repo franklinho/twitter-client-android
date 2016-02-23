@@ -35,6 +35,7 @@ public class TwitterClient extends OAuthBaseClient {
 	public static final String REST_CONSUMER_SECRET = "JGQutpCG0MDmn1BtXGPHdzlQO6xLB8szP4n1OPik0HhzTzzlvh"; // Change this
 	public static final String REST_CALLBACK_URL = "oauth://cpsimpletweets"; // Change this (here and in manifest)
     public static User currentUser;
+    public static User user;
 
 	public TwitterClient(Context context) {
 		super(context, REST_API_CLASS, REST_URL, REST_CONSUMER_KEY, REST_CONSUMER_SECRET, REST_CALLBACK_URL);
@@ -79,7 +80,7 @@ public class TwitterClient extends OAuthBaseClient {
 
     //UserTimeline timeline
     public void getUserTimeline(JsonHttpResponseHandler handler, long maxId , long userId) {
-        String apiUrl = getApiUrl("statuses/mentions_timeline.json");
+        String apiUrl = getApiUrl("statuses/user_timeline.json");
         RequestParams params = new RequestParams();
         params.put("count", 25);
         params.put("user_id", userId);
@@ -153,6 +154,16 @@ public class TwitterClient extends OAuthBaseClient {
         }
 
         return currentUser;
+
+
+    }
+
+    public void getUserProfile(long userId, JsonHttpResponseHandler handler) {
+
+        String apiUrl = getApiUrl("users/show.json");
+        RequestParams params = new RequestParams();
+        params.put("user_id", userId);
+        getClient().get(apiUrl,params,handler);
 
 
     }

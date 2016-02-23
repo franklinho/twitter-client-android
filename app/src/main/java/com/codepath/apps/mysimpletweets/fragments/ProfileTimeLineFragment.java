@@ -22,6 +22,17 @@ import org.json.JSONObject;
  */
 public class ProfileTimeLineFragment extends TweetsListFragment{
 
+
+    public static ProfileTimeLineFragment newInstance(long userId) {
+        ProfileTimeLineFragment profileTimeLineFragment = new ProfileTimeLineFragment();
+        Bundle args = new Bundle();
+        args.putLong("userId", userId);
+        profileTimeLineFragment.setArguments(args);
+        return profileTimeLineFragment;
+    }
+
+
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -48,7 +59,8 @@ public class ProfileTimeLineFragment extends TweetsListFragment{
     }
 
     // Send api request to get timeline json and fills listview with tweet objects
-    private void populateTimeline(final boolean newTimeline) {
+    public void populateTimeline(final boolean newTimeline) {
+        long userId = getArguments().getLong("userId");
         if (newTimeline == true) {
             setMaxId(0L);
             clearStatuses();
@@ -56,6 +68,7 @@ public class ProfileTimeLineFragment extends TweetsListFragment{
 
 
         client.getUserTimeline(new JsonHttpResponseHandler() {
+
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray json) {
@@ -88,7 +101,7 @@ public class ProfileTimeLineFragment extends TweetsListFragment{
             }
 
 
-        }, getMaxId(), client.getCurrentUser().getId());
+        }, getMaxId(), userId);
 
         swipeContainer.setRefreshing(false);
 

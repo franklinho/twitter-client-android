@@ -19,6 +19,7 @@ import com.bumptech.glide.Glide;
 import com.codepath.apps.mysimpletweets.R;
 import com.codepath.apps.mysimpletweets.TwitterApplication;
 import com.codepath.apps.mysimpletweets.activities.ImageStatusDetailActivity;
+import com.codepath.apps.mysimpletweets.activities.ProfileActivity;
 import com.codepath.apps.mysimpletweets.activities.StatusDetailActivity;
 import com.codepath.apps.mysimpletweets.activities.TimelineActivity;
 import com.codepath.apps.mysimpletweets.activities.VideoStatusDetailActivity;
@@ -338,6 +339,15 @@ public class StatusesArrayAdapter extends RecyclerView.Adapter<RecyclerView.View
             }
         });
 
+        ivProfileImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(context, ProfileActivity.class);
+                i.putExtra("user", status.getUser());
+                context.startActivity(i);
+            }
+        });
+
     }
 
 
@@ -445,6 +455,14 @@ public class StatusesArrayAdapter extends RecyclerView.Adapter<RecyclerView.View
                     ibtnFavorite.setImageResource(R.drawable.heart_icon_red);
                 }
 
+            }
+        });
+        ivProfileImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(context, ProfileActivity.class);
+                i.putExtra("user", status.getUser());
+                context.startActivity(i);
             }
         });
 
@@ -579,6 +597,14 @@ public class StatusesArrayAdapter extends RecyclerView.Adapter<RecyclerView.View
                     ibtnFavorite.setImageResource(R.drawable.heart_icon_red);
                 }
 
+            }
+        });
+        ivProfileImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(context, ProfileActivity.class);
+                i.putExtra("user", status.getUser());
+                context.startActivity(i);
             }
         });
 
