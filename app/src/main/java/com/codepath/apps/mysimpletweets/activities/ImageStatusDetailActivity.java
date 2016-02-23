@@ -1,5 +1,6 @@
 package com.codepath.apps.mysimpletweets.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -136,6 +137,15 @@ public class ImageStatusDetailActivity extends AppCompatActivity implements Comp
                         ibtnFavorite.setImageResource(R.drawable.heart_icon_red);
                     }
 
+                }
+            });
+
+            ivProfileImage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(ImageStatusDetailActivity.this, ProfileActivity.class);
+                    i.putExtra("user", status.getUser());
+                    startActivity(i);
                 }
             });
 

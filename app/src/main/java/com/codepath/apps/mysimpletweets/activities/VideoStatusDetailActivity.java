@@ -1,5 +1,6 @@
 package com.codepath.apps.mysimpletweets.activities;
 
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -155,6 +156,15 @@ public class VideoStatusDetailActivity extends AppCompatActivity implements Comp
                         ibtnFavorite.setImageResource(R.drawable.heart_icon_red);
                     }
 
+                }
+            });
+
+            ivProfileImage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(VideoStatusDetailActivity.this, ProfileActivity.class);
+                    i.putExtra("user", status.getUser());
+                    startActivity(i);
                 }
             });
 

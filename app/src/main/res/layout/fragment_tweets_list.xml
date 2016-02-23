@@ -10,7 +10,6 @@
         android:id="@+id/swipeContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         >
 
         <android.support.v7.widget.RecyclerView
@@ -25,19 +24,4 @@
             android:layout_alignParentEnd="true"
             android:background="@android:color/white"/>
     </android.support.v4.widget.SwipeRefreshLayout>
-
-    <android.support.design.widget.FloatingActionButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:fabSize= "normal"
-        android:src="@drawable/compose_icon"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        app:backgroundTint="@color/twitter_blue"
-        app:layout_anchor="@id/rvTweets"
-        app:layout_anchorGravity="bottom|right|end"
-        android:layout_margin="16dp"
-        app:layout_behavior="com.codepath.apps.mysimpletweets.utilities.ScrollAwareFABBehavior"
-        android:onClick="showComposeDialog"/>
 </android.support.design.widget.CoordinatorLayout>

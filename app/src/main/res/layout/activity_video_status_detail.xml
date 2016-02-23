@@ -24,7 +24,7 @@
             app:layout_scrollFlags="scroll|enterAlways"
             />
     </android.support.design.widget.AppBarLayout>
-    <ScrollView
+    <android.support.v4.widget.NestedScrollView
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
@@ -215,5 +215,5 @@
 
 
 </RelativeLayout>
-</ScrollView>
+</android.support.v4.widget.NestedScrollView>
 </RelativeLayout>
