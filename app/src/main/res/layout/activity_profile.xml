@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,67 +7,195 @@
     tools:context="com.codepath.apps.mysimpletweets.activities.ProfileActivity"
     android:background="@android:color/white">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/llAppBar"
-        app:layout_scrollFlags="scroll|enterAlways">
     <android.support.design.widget.AppBarLayout
-        android:id="@+id/statusAppBar"
+        android:id="@+id/appbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppBaseTheme"
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        >
-        <!-- Toolbar is the actual app bar with text an
-        d the action items -->
+        android:layout_height="215dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:fitsSystemWindows="true">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_scrollFlags="scroll|enterAlways"
+            android:fitsSystemWindows="true"
+            app:contentScrim="?attr/colorPrimary"
+            app:expandedTitleMarginStart="48dp"
+            app:expandedTitleMarginEnd="64dp">
+
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:id="@+id/flHeader"
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:layout_collapseMode="parallax"
+                ></FrameLayout>
+
+
+            <!--<include-->
+                <!--layout="@layout/toolbar_main"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--app:layout_collapseMode="pin"-->
+                <!--/>-->
+
+
+
+            </RelativeLayout>
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+
+
+    </android.support.design.widget.AppBarLayout>
+
+
+    <!--<android.support.design.widget.CollapsingToolbarLayout-->
+        <!--android:id="@+id/collapsing_toolbar"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:fitsSystemWindows="true"-->
+        <!--app:contentScrim="?attr/colorPrimary"-->
+        <!--app:expandedTitleMarginEnd="64dp"-->
+        <!--app:expandedTitleMarginStart="48dp"-->
+        <!--app:layout_scrollFlags="scroll|enterAlways">-->
+
         <!--<include-->
             <!--layout="@layout/toolbar_main"-->
             <!--android:layout_width="match_parent"-->
             <!--android:layout_height="wrap_content"-->
             <!--app:layout_scrollFlags="scroll|enterAlways"-->
             <!--/>-->
+        <!--<FrameLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            <!--android:layout_alignParentLeft="true"-->
+            <!--android:layout_alignParentStart="true"-->
+            <!--android:layout_alignParentBottom="true"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_alignParentEnd="true"-->
+            <!--android:id="@+id/flHeader"-->
+            <!--></FrameLayout>-->
+        <!--<com.astuetz.PagerSlidingTabStrip-->
+            <!--android:id="@+id/tabs"-->
+            <!--app:pstsShouldExpand="true"-->
+            <!--app:pstsTextAllCaps="true"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="48dp"-->
+            <!--android:background="@android:color/white"-->
+            <!--android:textColor="@color/twitter_blue"-->
+            <!--app:pstsIndicatorColor="@color/twitter_blue"-->
+            <!--android:fillViewport="false" />-->
 
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:id="@+id/flHeader"
+    <!--</android.support.design.widget.CollapsingToolbarLayout>-->
+
+        <!--<android.support.design.widget.AppBarLayout-->
+            <!--android:id="@+id/statusAppBar"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:theme="@style/AppBaseTheme"-->
+            <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
+            <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+            <!--app:layout_scrollFlags="scroll|enterAlways"-->
+            <!-->-->
+            <!--&lt;!&ndash; Toolbar is the actual app bar with text an-->
+            <!--d the action items &ndash;&gt;-->
+            <!--<include-->
+            <!--layout="@layout/toolbar_main"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--app:layout_scrollFlags="scroll|enterAlways"-->
+            <!--/>-->
+
+            <!--<FrameLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+
+                <!--android:layout_alignParentLeft="true"-->
+                <!--android:layout_alignParentStart="true"-->
+                <!--android:layout_alignParentBottom="true"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:layout_alignParentEnd="true"-->
+                <!--android:id="@+id/flHeader"-->
+                <!-->-->
+            <!--</FrameLayout>-->
+            <!--<com.astuetz.PagerSlidingTabStrip-->
+                <!--android:id="@+id/tabs"-->
+                <!--app:pstsShouldExpand="true"-->
+                <!--app:pstsTextAllCaps="true"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="48dp"-->
+                <!--android:background="@android:color/white"-->
+                <!--android:textColor="@color/twitter_blue"-->
+                <!--app:pstsIndicatorColor="@color/twitter_blue"-->
+                <!--android:fillViewport="false" />-->
+        <!--</android.support.design.widget.AppBarLayout>-->
 
 
-            >
-        </FrameLayout>
-    </android.support.design.widget.AppBarLayout>
-    </LinearLayout>
 
 
 
     <RelativeLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:layout_below="@+id/llAppBar"
-        >
-    <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:id="@+id/flContainer"
-        >
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        <com.astuetz.PagerSlidingTabStrip
+            android:id="@+id/tabs"
+            app:pstsShouldExpand="true"
+            app:pstsTextAllCaps="true"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:background="@android:color/white"
+            android:textColor="@color/twitter_blue"
+            app:pstsIndicatorColor="@color/twitter_blue"
+            android:fillViewport="false" />
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewpager"
+            android:layout_width="match_parent"
 
-    </FrameLayout>
+            android:layout_below="@id/tabs"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+
+            />
     </RelativeLayout>
 
 
 
-</RelativeLayout>
+
+    <!--<RelativeLayout-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--app:layout_behavior="@string/appbar_scrolling_view_behavior"-->
+        <!--android:layout_below="@+id/llAppBar"-->
+        <!-->-->
+    <!--<FrameLayout-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_alignParentEnd="true"-->
+        <!--android:id="@+id/flContainer"-->
+        <!-->-->
+
+    <!--</FrameLayout>-->
+    <!--</RelativeLayout>-->
+
+
+
+</android.support.design.widget.CoordinatorLayout>
