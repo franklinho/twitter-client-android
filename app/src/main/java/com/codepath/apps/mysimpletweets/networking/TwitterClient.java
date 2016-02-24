@@ -3,8 +3,8 @@ package com.codepath.apps.mysimpletweets.networking;
 import android.content.Context;
 import android.util.Log;
 
-import com.codepath.apps.mysimpletweets.models.Status;
-import com.codepath.apps.mysimpletweets.models.User;
+import com.codepath.apps.mysimpletweets.models.statuses.Status;
+import com.codepath.apps.mysimpletweets.models.statuses.User;
 import com.codepath.oauth.OAuthBaseClient;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

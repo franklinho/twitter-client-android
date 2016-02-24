@@ -1,5 +1,5 @@
 
-package com.codepath.apps.mysimpletweets.models;
+package com.codepath.apps.mysimpletweets.models.statuses;
 
 import android.os.Parcel;
 import android.os.Parcelable;

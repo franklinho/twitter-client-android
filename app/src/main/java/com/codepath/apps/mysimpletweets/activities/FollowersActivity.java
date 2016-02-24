@@ -5,7 +5,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 
 import com.codepath.apps.mysimpletweets.TwitterApplication;
-import com.codepath.apps.mysimpletweets.models.User;
+import com.codepath.apps.mysimpletweets.models.statuses.User;
 import com.codepath.apps.mysimpletweets.networking.TwitterClient;
 import com.codepath.apps.mysimpletweets.utilities.EndlessRecyclerViewScrollListener;
 import com.loopj.android.http.JsonHttpResponseHandler;

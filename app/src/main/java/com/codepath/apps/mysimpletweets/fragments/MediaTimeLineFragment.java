@@ -9,7 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.codepath.apps.mysimpletweets.models.Status;
+import com.codepath.apps.mysimpletweets.models.statuses.Status;
 import com.codepath.apps.mysimpletweets.utilities.EndlessRecyclerViewScrollListener;
 import com.loopj.android.http.JsonHttpResponseHandler;
 

@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 import com.codepath.apps.mysimpletweets.R;
 import com.codepath.apps.mysimpletweets.TwitterApplication;
 import com.codepath.apps.mysimpletweets.adapters.StatusesArrayAdapter;
-import com.codepath.apps.mysimpletweets.models.Status;
+import com.codepath.apps.mysimpletweets.models.statuses.Status;
 import com.codepath.apps.mysimpletweets.networking.TwitterClient;
 
 import java.util.ArrayList;

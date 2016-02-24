@@ -26,13 +26,13 @@ import com.codepath.apps.mysimpletweets.activities.VideoStatusDetailActivity;
 import com.codepath.apps.mysimpletweets.fragments.ComposeDialog;
 import com.codepath.apps.mysimpletweets.models.DynamicHeightImageView;
 import com.codepath.apps.mysimpletweets.models.DynamicHeightVideoView;
-import com.codepath.apps.mysimpletweets.models.Entities;
+import com.codepath.apps.mysimpletweets.models.statuses.Entities;
 import com.codepath.apps.mysimpletweets.models.LinkifiedTextView;
-import com.codepath.apps.mysimpletweets.models.Medium_;
-import com.codepath.apps.mysimpletweets.models.Status;
-import com.codepath.apps.mysimpletweets.models.Thumb_;
-import com.codepath.apps.mysimpletweets.models.Variant;
-import com.codepath.apps.mysimpletweets.models.VideoInfo;
+import com.codepath.apps.mysimpletweets.models.statuses.Medium_;
+import com.codepath.apps.mysimpletweets.models.statuses.Status;
+import com.codepath.apps.mysimpletweets.models.statuses.Thumb_;
+import com.codepath.apps.mysimpletweets.models.statuses.Variant;
+import com.codepath.apps.mysimpletweets.models.statuses.VideoInfo;
 import com.codepath.apps.mysimpletweets.networking.TwitterClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
@@ -242,7 +242,7 @@ public class StatusesArrayAdapter extends RecyclerView.Adapter<RecyclerView.View
     }
 
     private void configureStatusViewHolder(StatusViewHolder holder, int position) {
-        final com.codepath.apps.mysimpletweets.models.Status status = mStatuses.get(position);
+        final Status status = mStatuses.get(position);
         holder.status = status;
 
         ImageView ivProfileImage = holder.ivProfileImage;
@@ -353,7 +353,7 @@ public class StatusesArrayAdapter extends RecyclerView.Adapter<RecyclerView.View
 
 
     private void configureImageStatusViewHolder(ImageStatusViewHolder holder, int position) {
-        final com.codepath.apps.mysimpletweets.models.Status status = mStatuses.get(position);
+        final Status status = mStatuses.get(position);
         holder.status = status;
 
         ImageView ivProfileImage = holder.ivProfileImage;
@@ -471,7 +471,7 @@ public class StatusesArrayAdapter extends RecyclerView.Adapter<RecyclerView.View
 
 
     private void configureVideoStatusViewHolder(VideoStatusViewHolder holder, int position) {
-        final com.codepath.apps.mysimpletweets.models.Status status = mStatuses.get(position);
+        final Status status = mStatuses.get(position);
         holder.status = status;
 
         ImageView ivProfileImage = holder.ivProfileImage;

@@ -13,7 +13,7 @@ import com.codepath.apps.mysimpletweets.TwitterApplication;
 import com.codepath.apps.mysimpletweets.fragments.FavoritesTimeLineFragment;
 import com.codepath.apps.mysimpletweets.fragments.HeaderFragment;
 import com.codepath.apps.mysimpletweets.fragments.ProfileTimeLineFragment;
-import com.codepath.apps.mysimpletweets.models.User;
+import com.codepath.apps.mysimpletweets.models.statuses.User;
 import com.codepath.apps.mysimpletweets.networking.TwitterClient;
 
 import butterknife.Bind;

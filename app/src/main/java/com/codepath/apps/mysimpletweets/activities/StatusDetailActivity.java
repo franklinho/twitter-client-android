@@ -20,7 +20,7 @@ import com.bumptech.glide.Glide;
 import com.codepath.apps.mysimpletweets.R;
 import com.codepath.apps.mysimpletweets.TwitterApplication;
 import com.codepath.apps.mysimpletweets.fragments.ComposeDialog;
-import com.codepath.apps.mysimpletweets.models.Status;
+import com.codepath.apps.mysimpletweets.models.statuses.Status;
 import com.codepath.apps.mysimpletweets.networking.TwitterClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 

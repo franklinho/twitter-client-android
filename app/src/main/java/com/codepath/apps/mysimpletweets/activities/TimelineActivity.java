@@ -24,7 +24,7 @@ import com.codepath.apps.mysimpletweets.fragments.ComposeDialog;
 import com.codepath.apps.mysimpletweets.fragments.HomeTimeLineFragment;
 import com.codepath.apps.mysimpletweets.fragments.MentionsTimeLineFragment;
 import com.codepath.apps.mysimpletweets.fragments.TweetsListFragment;
-import com.codepath.apps.mysimpletweets.models.Status;
+import com.codepath.apps.mysimpletweets.models.statuses.Status;
 import com.codepath.apps.mysimpletweets.networking.TwitterClient;
 
 import java.lang.reflect.Field;

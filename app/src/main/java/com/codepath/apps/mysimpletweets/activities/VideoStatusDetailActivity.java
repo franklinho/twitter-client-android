@@ -23,10 +23,10 @@ import com.codepath.apps.mysimpletweets.R;
 import com.codepath.apps.mysimpletweets.TwitterApplication;
 import com.codepath.apps.mysimpletweets.fragments.ComposeDialog;
 import com.codepath.apps.mysimpletweets.models.DynamicHeightVideoView;
-import com.codepath.apps.mysimpletweets.models.Entities;
-import com.codepath.apps.mysimpletweets.models.Status;
-import com.codepath.apps.mysimpletweets.models.Variant;
-import com.codepath.apps.mysimpletweets.models.VideoInfo;
+import com.codepath.apps.mysimpletweets.models.statuses.Entities;
+import com.codepath.apps.mysimpletweets.models.statuses.Status;
+import com.codepath.apps.mysimpletweets.models.statuses.Variant;
+import com.codepath.apps.mysimpletweets.models.statuses.VideoInfo;
 import com.codepath.apps.mysimpletweets.networking.TwitterClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 

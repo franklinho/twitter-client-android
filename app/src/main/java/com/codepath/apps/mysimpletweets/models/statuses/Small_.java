@@ -1,26 +1,50 @@
 
-package com.codepath.apps.mysimpletweets.models;
+package com.codepath.apps.mysimpletweets.models.statuses;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.activeandroid.annotation.Column;
+import com.activeandroid.annotation.Table;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import javax.annotation.Generated;
 
 @Generated("org.jsonschema2pojo")
-public class Small implements Parcelable {
+@Table(name="Small_", id="_id")
+public class Small_ implements Parcelable {
 
-    @SerializedName("h")
-    @Expose
-    private Integer h;
-    @SerializedName("resize")
-    @Expose
-    private String resize;
+    @Column(name = "w", unique = false)
     @SerializedName("w")
     @Expose
     private Integer w;
+    @Column(name = "h", unique = false)
+    @SerializedName("h")
+    @Expose
+    private Integer h;
+    @Column(name = "resize", unique = false)
+    @SerializedName("resize")
+    @Expose
+    private String resize;
+
+    /**
+     * 
+     * @return
+     *     The w
+     */
+    public Integer getW() {
+        return w;
+    }
+
+    /**
+     * 
+     * @param w
+     *     The w
+     */
+    public void setW(Integer w) {
+        this.w = w;
+    }
 
     /**
      * 
@@ -58,24 +82,6 @@ public class Small implements Parcelable {
         this.resize = resize;
     }
 
-    /**
-     * 
-     * @return
-     *     The w
-     */
-    public Integer getW() {
-        return w;
-    }
-
-    /**
-     * 
-     * @param w
-     *     The w
-     */
-    public void setW(Integer w) {
-        this.w = w;
-    }
-
     @Override
     public int describeContents() {
         return 0;
@@ -83,27 +89,27 @@ public class Small implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeValue(this.w);
         dest.writeValue(this.h);
         dest.writeString(this.resize);
-        dest.writeValue(this.w);
     }
 
-    public Small() {
+    public Small_() {
     }
 
-    protected Small(Parcel in) {
+    protected Small_(Parcel in) {
+        this.w = (Integer) in.readValue(Integer.class.getClassLoader());
         this.h = (Integer) in.readValue(Integer.class.getClassLoader());
         this.resize = in.readString();
-        this.w = (Integer) in.readValue(Integer.class.getClassLoader());
     }
 
-    public static final Parcelable.Creator<Small> CREATOR = new Parcelable.Creator<Small>() {
-        public Small createFromParcel(Parcel source) {
-            return new Small(source);
+    public static final Parcelable.Creator<Small_> CREATOR = new Parcelable.Creator<Small_>() {
+        public Small_ createFromParcel(Parcel source) {
+            return new Small_(source);
         }
 
-        public Small[] newArray(int size) {
-            return new Small[size];
+        public Small_[] newArray(int size) {
+            return new Small_[size];
         }
     };
 }

@@ -10,7 +10,7 @@ import android.support.v7.widget.Toolbar;
 
 import com.codepath.apps.mysimpletweets.R;
 import com.codepath.apps.mysimpletweets.adapters.UsersArrayAdapter;
-import com.codepath.apps.mysimpletweets.models.User;
+import com.codepath.apps.mysimpletweets.models.statuses.User;
 
 import java.util.ArrayList;
 import java.util.List;

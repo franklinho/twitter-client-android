@@ -10,7 +10,6 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:id="@+id/ivProfileImage"
-        android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         app:riv_border_width="2dp"
@@ -41,7 +40,8 @@
         android:id="@+id/tvScreenName"
         android:layout_below="@+id/tvName"
         android:layout_alignLeft="@+id/tvName"
-        android:layout_alignStart="@+id/tvName" />
+        android:layout_alignStart="@+id/tvName"
+        android:layout_marginBottom="5dp"/>
 
     <Button
         android:layout_width="wrap_content"
@@ -51,18 +51,30 @@
         android:layout_below="@id/ivBackground"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
+        android:layout_alignTop="@id/ivProfileImage"
         android:textAllCaps="false"
         android:layout_marginRight="@dimen/activity_vertical_margin"
         android:background="@drawable/unfollowed_button_border"
         android:textColor="@color/twitter_blue"
-        android:layout_centerVertical="true"
         />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bio"
+        android:id="@+id/tvBio"
+        android:layout_below="@+id/tvScreenName"
+        android:layout_alignLeft="@+id/tvScreenName"
+        android:layout_alignStart="@+id/tvScreenName"
+        android:textColor="@android:color/black"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="@dimen/activity_vertical_margin"/>
 
     <View
         android:layout_width="match_parent"
         android:background="#7c969696"
         android:layout_height="1dp"
-        android:layout_below="@id/ivProfileImage"
+        android:layout_below="@id/tvBio"
         android:layout_alignParentLeft="true"
         android:id="@+id/viewBorder3"
         android:layout_marginLeft="10dp"

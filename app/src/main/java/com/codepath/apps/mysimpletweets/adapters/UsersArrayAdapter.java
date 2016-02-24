@@ -15,7 +15,7 @@ import com.bumptech.glide.Glide;
 import com.codepath.apps.mysimpletweets.R;
 import com.codepath.apps.mysimpletweets.TwitterApplication;
 import com.codepath.apps.mysimpletweets.activities.ProfileActivity;
-import com.codepath.apps.mysimpletweets.models.User;
+import com.codepath.apps.mysimpletweets.models.statuses.User;
 import com.codepath.apps.mysimpletweets.networking.TwitterClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
@@ -50,6 +50,8 @@ public class UsersArrayAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         TextView tvName;
         @Bind(R.id.btnFollow)
         Button btnFollow;
+        @Bind(R.id.tvBio)
+        TextView tvBio;
 
 
         public UserViewHolder(View itemView) {
@@ -90,16 +92,19 @@ public class UsersArrayAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
         final UserViewHolder holder = (UserViewHolder) viewHolder;
-        final com.codepath.apps.mysimpletweets.models.User user = mUsers.get(position);
+        final User user = mUsers.get(position);
         holder.user = user;
 
         ImageView ivProfileImage = holder.ivProfileImage;
         TextView tvName = holder.tvName;
         TextView tvScreenName = holder.tvScreenName;
         final Button btnFollow = holder.btnFollow;
+        TextView tvBio = holder.tvBio;
+
 
         tvName.setText(user.getName());
         tvScreenName.setText("@" + user.getScreenName());
+        tvBio.setText(user.getDescription().toString());
 
         ivProfileImage.setImageResource(android.R.color.transparent); // Clear imageview
         Glide.with(holder.context).load(user.getProfileImageUrl()).into(ivProfileImage);
