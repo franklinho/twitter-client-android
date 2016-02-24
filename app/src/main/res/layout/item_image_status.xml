@@ -132,4 +132,15 @@
         app:riv_corner_radius="5dp"
         />
 
+
+    <View
+        android:layout_width="match_parent"
+        android:background="#7c969696"
+        android:layout_height="1dp"
+        android:layout_below="@id/ibtnRetweet"
+        android:layout_alignParentLeft="true"
+        android:id="@+id/viewBorder3"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"/>
+
 </RelativeLayout>

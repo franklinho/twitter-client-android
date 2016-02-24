@@ -1,5 +1,6 @@
 package com.codepath.apps.mysimpletweets.fragments;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -13,6 +14,8 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.codepath.apps.mysimpletweets.R;
 import com.codepath.apps.mysimpletweets.TwitterApplication;
+import com.codepath.apps.mysimpletweets.activities.FollowersActivity;
+import com.codepath.apps.mysimpletweets.activities.FollowingActivity;
 import com.codepath.apps.mysimpletweets.models.User;
 import com.codepath.apps.mysimpletweets.networking.TwitterClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -36,6 +39,11 @@ public class HeaderFragment extends Fragment {
     @Bind(R.id.ivBackground) ImageView ivBackground;
     @Bind(R.id.btnFollow)
     Button btnFollow;
+
+    @Bind(R.id.tvFollowersLabel)
+    TextView tvFollowersLabel;
+    @Bind(R.id.tvFollowingLabel)
+    TextView tvFollowingLabel;
 
     public HeaderFragment() {
         // Required empty public constructor
@@ -105,6 +113,30 @@ public class HeaderFragment extends Fragment {
 
             }
         });
+
+        View.OnClickListener followingClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getContext(), FollowingActivity.class);
+                i.putExtra("user", user );
+                getContext().startActivity(i);
+            }
+        };
+        tvFollowingCount.setOnClickListener(followingClickListener);
+        tvFollowingLabel.setOnClickListener(followingClickListener);
+
+        View.OnClickListener followersClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getContext(), FollowersActivity.class);
+                i.putExtra("user", user );
+                getContext().startActivity(i);
+            }
+        };
+        tvFollowersCount.setOnClickListener(followersClickListener);
+        tvFollowersLabel.setOnClickListener(followersClickListener);
+
+
 
 
         return v;

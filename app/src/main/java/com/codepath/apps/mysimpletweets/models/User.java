@@ -6,8 +6,17 @@ import android.os.Parcelable;
 
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.google.gson.reflect.TypeToken;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.lang.reflect.Type;
+import java.util.List;
 
 import javax.annotation.Generated;
 
@@ -969,4 +978,20 @@ public class User implements Parcelable {
             return new User[size];
         }
     };
+
+    public static User fromJson(JSONObject json) {
+
+        Gson gson = new GsonBuilder().create();
+
+        return (User) gson.fromJson(json.toString(), User.class);
+
+    }
+
+    public static List<User> fromJSONArray(JSONArray json) {
+        Type listType = new TypeToken<List<User>>() {}.getType();
+        Gson gson = new GsonBuilder().create();
+
+        return (List<User>) gson.fromJson(json.toString(), listType);
+
+    }
 }
