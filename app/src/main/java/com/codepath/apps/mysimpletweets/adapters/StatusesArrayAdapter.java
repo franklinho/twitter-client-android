@@ -527,6 +527,7 @@ public class StatusesArrayAdapter extends RecyclerView.Adapter<RecyclerView.View
         Entities extendedEntities = status.getExtendedEntities();
         VideoInfo videoInfo = extendedEntities.getMedia().get(0).getVideoInfo();
         if (videoInfo != null) {
+            vvStatusVideo.setVisibility(View.VISIBLE);
             Variant videoVariant = videoInfo.getVariants().get(0);
             vvStatusVideo.setHeightRatio((double) videoInfo.getAspectRatio().get(1) / videoInfo.getAspectRatio().get(0));
 
@@ -542,6 +543,14 @@ public class StatusesArrayAdapter extends RecyclerView.Adapter<RecyclerView.View
                     mp.setLooping(true);
                     vvStatusVideo.start();
 
+                }
+            });
+
+            vvStatusVideo.setOnErrorListener(new MediaPlayer.OnErrorListener() {
+                @Override
+                public boolean onError(MediaPlayer mp, int what, int extra) {
+                    vvStatusVideo.setVisibility(View.GONE);
+                    return true;
                 }
             });
 

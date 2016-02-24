@@ -47,7 +47,7 @@ public class Recipient implements Parcelable {
     private Boolean geoEnabled;
     @SerializedName("id")
     @Expose
-    private Integer id;
+    private long id;
     @SerializedName("id_str")
     @Expose
     private String idStr;
@@ -330,7 +330,7 @@ public class Recipient implements Parcelable {
      * @return
      *     The id
      */
-    public Integer getId() {
+    public long getId() {
         return id;
     }
 
@@ -339,7 +339,7 @@ public class Recipient implements Parcelable {
      * @param id
      *     The id
      */
-    public void setId(Integer id) {
+    public void setId(long id) {
         this.id = id;
     }
 

@@ -204,6 +204,10 @@ public class ImageStatusDetailActivity extends AppCompatActivity implements Comp
 //        i.putExtra("userId",client.getCurrentUser().getId());
         startActivity(i);
     }
+    public void onDirectMessages(MenuItem item) {
+        Intent i = new Intent(this, DirectMessagesActivity.class);
+        startActivity(i);
+    }
 
     public void onCompose(MenuItem item) {
         FragmentManager fm = getSupportFragmentManager();

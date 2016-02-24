@@ -78,11 +78,16 @@
             android:name=".activities.SearchResultsActivity"
             android:label="Search Results"
             android:parentActivityName=".activities.TimelineActivity" />
-        <activity android:name=".activities.FollowingActivity"
+        <activity
+            android:name=".activities.FollowingActivity"
             android:label="Following"
-            android:parentActivityName=".activities.TimelineActivity"></activity>
-        <activity android:name=".activities.FollowersActivity"
+            android:parentActivityName=".activities.TimelineActivity" />
+        <activity
+            android:name=".activities.FollowersActivity"
             android:label="Followers"
+            android:parentActivityName=".activities.TimelineActivity" />
+        <activity android:name=".activities.DirectMessagesActivity"
+            android:label="Messages"
             android:parentActivityName=".activities.TimelineActivity"></activity>
     </application>
 

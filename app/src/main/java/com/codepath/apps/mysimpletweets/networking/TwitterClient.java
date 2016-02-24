@@ -127,6 +127,16 @@ public class TwitterClient extends OAuthBaseClient {
         getClient().get(apiUrl, params, handler);
     }
 
+    // Post a direct message
+
+    public void postDirectMessage(String screen_name, String text, JsonHttpResponseHandler handler) {
+        String apiUrl = getApiUrl("direct_messages/new.json");
+        RequestParams params = new RequestParams();
+        params.put("text",text);
+        params.put("screen_name",screen_name);
+        getClient().post(apiUrl, params, handler);
+    }
+
     // Post a status update
 
     public void postStatusUpdate(String text, Status status, JsonHttpResponseHandler handler) {
@@ -213,6 +223,16 @@ public class TwitterClient extends OAuthBaseClient {
         }
         getClient().get(apiUrl, params, handler);
 
+    }
+
+    public void getDirectMessages(long maxId, JsonHttpResponseHandler handler ) {
+        String apiUrl = getApiUrl("direct_messages.json");
+        RequestParams params = new RequestParams();
+        params.put("count", 25);
+        if (maxId != 0L) {
+            params.put("max_id", maxId);
+        }
+        getClient().get(apiUrl, params, handler);
     }
 
     public User getCurrentUser() {

@@ -10,11 +10,21 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.reflect.TypeToken;
 
+import org.joda.time.DateTime;
+import org.joda.time.Days;
+import org.joda.time.Hours;
+import org.joda.time.Minutes;
+import org.joda.time.Months;
+import org.joda.time.Seconds;
+import org.joda.time.Weeks;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.lang.reflect.Type;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
 
 import javax.annotation.Generated;
 
@@ -29,7 +39,7 @@ public class DirectMessage implements Parcelable {
     private Entities entities;
     @SerializedName("id")
     @Expose
-    private Integer id;
+    private long id;
     @SerializedName("id_str")
     @Expose
     private String idStr;
@@ -96,7 +106,7 @@ public class DirectMessage implements Parcelable {
      * @return
      *     The id
      */
-    public Integer getId() {
+    public long getId() {
         return id;
     }
 
@@ -105,7 +115,7 @@ public class DirectMessage implements Parcelable {
      * @param id
      *     The id
      */
-    public void setId(Integer id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -314,5 +324,46 @@ public class DirectMessage implements Parcelable {
 
         return (DirectMessage) gson.fromJson(json.toString(), DirectMessage.class);
 
+    }
+
+    public String getRelativeTimeAgo() {
+        String twitterFormat = "EEE MMM dd HH:mm:ss ZZZZZ yyyy";
+        SimpleDateFormat sf = new SimpleDateFormat(twitterFormat, Locale.ENGLISH);
+        sf.setLenient(true);
+
+
+        String relativeDate = "";
+        try {
+            DateTime createdDateTime = new DateTime(sf.parse(getCreatedAt()).getTime());
+            DateTime currentDateTime = new DateTime();
+
+
+
+
+            int secondDifference = Seconds.secondsBetween(createdDateTime.toLocalDateTime(), currentDateTime.toLocalDateTime()).getSeconds();
+            if (secondDifference < 60) {
+                relativeDate = Integer.toString(secondDifference) + "s";
+            } else if (Minutes.minutesBetween(createdDateTime.toLocalDateTime(), currentDateTime.toLocalDateTime()).getMinutes() < 60) {
+                relativeDate = Integer.toString(Minutes.minutesBetween(createdDateTime.toLocalDateTime(), currentDateTime.toLocalDateTime()).getMinutes())+"m";
+            } else if (Hours.hoursBetween(createdDateTime.toLocalDateTime(), currentDateTime.toLocalDateTime()).getHours() < 24) {
+                relativeDate = Integer.toString(Hours.hoursBetween(createdDateTime.toLocalDateTime(),currentDateTime.toLocalDateTime()).getHours())+"h";
+            } else if (Weeks.weeksBetween(createdDateTime.toLocalDateTime(), currentDateTime.toLocalDateTime()).getWeeks() < 1) {
+                relativeDate = Integer.toString(Days.daysBetween(createdDateTime.toLocalDateTime(), currentDateTime.toLocalDateTime()).getDays()) + "d";
+            } else if (Months.monthsBetween(createdDateTime.toLocalDateTime(), currentDateTime.toLocalDateTime()).getMonths() < 1) {
+                relativeDate = Integer.toString(Weeks.weeksBetween(createdDateTime.toLocalDateTime(), currentDateTime.toLocalDateTime()).getWeeks()) + "w";
+            } else {
+//                relativeDate = Integer.toString(Months.monthsBetween(createdDateTime.toLocalDateTime(), currentDateTime.toLocalDateTime()).getMonths())+"M";
+                String dateFormat = "MM/dd/yyyy";
+                SimpleDateFormat nf = new SimpleDateFormat(dateFormat);
+                relativeDate = nf.format(sf.parse(getCreatedAt())).toString();
+
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+
+        }
+
+
+        return relativeDate;
     }
 }

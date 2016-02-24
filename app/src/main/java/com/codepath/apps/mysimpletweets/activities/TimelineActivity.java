@@ -108,6 +108,11 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
         startActivity(i);
     }
 
+    public void onDirectMessages(MenuItem item) {
+        Intent i = new Intent(this, DirectMessagesActivity.class);
+        startActivity(i);
+    }
+
     // return order of fragments in viewpager
     public class TweetsPagerAdapter extends FragmentPagerAdapter {
 

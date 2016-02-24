@@ -536,7 +536,11 @@ public class Status implements Parcelable {
             } else if (Months.monthsBetween(createdDateTime.toLocalDateTime(), currentDateTime.toLocalDateTime()).getMonths() < 1) {
                 relativeDate = Integer.toString(Weeks.weeksBetween(createdDateTime.toLocalDateTime(), currentDateTime.toLocalDateTime()).getWeeks()) + "w";
             } else {
-                relativeDate = Integer.toString(Months.monthsBetween(createdDateTime.toLocalDateTime(), currentDateTime.toLocalDateTime()).getMonths())+"M";
+//                relativeDate = Integer.toString(Months.monthsBetween(createdDateTime.toLocalDateTime(), currentDateTime.toLocalDateTime()).getMonths())+"M";
+                String dateFormat = "MM/dd/yyyy";
+                SimpleDateFormat nf = new SimpleDateFormat(dateFormat);
+                relativeDate = nf.format(sf.parse(getCreatedAt())).toString();
+
             }
         } catch (ParseException e) {
             e.printStackTrace();
