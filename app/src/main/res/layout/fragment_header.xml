@@ -102,7 +102,20 @@
         android:layout_marginLeft="5dp"
         />
 
-
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:text="Follow"
+        android:id="@+id/btnFollow"
+        android:layout_below="@id/ivBackground"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:textAllCaps="false"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/unfollowed_button_border"
+        android:textColor="@color/twitter_blue"
+        />
 
 
 </RelativeLayout>

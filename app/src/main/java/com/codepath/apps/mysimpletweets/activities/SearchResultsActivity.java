@@ -31,7 +31,8 @@ public class SearchResultsActivity extends AppCompatActivity {
 //        actionBar.setHomeAsUpIndicator(actionBar.DISPLAY_HOME_AS_UP);
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        actionBar.setDisplayShowTitleEnabled(false);
+        actionBar.setDisplayShowTitleEnabled(true);
+
 
 
         String query = getIntent().getStringExtra("query");

@@ -153,6 +153,8 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
         final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
 
 
+
+
         AutoCompleteTextView searchTextView = (AutoCompleteTextView) searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
 
         try {

@@ -109,7 +109,7 @@ public class TwitterClient extends OAuthBaseClient {
         if (status != null) {
             params.put("in_reply_to_status_id", status.getId());
         }
-        getClient().post(apiUrl,params, handler);
+        getClient().post(apiUrl, params, handler);
     }
 
     public void postRetweet(long statusId, JsonHttpResponseHandler handler) {
@@ -140,6 +140,22 @@ public class TwitterClient extends OAuthBaseClient {
         String apiUrl = getApiUrl("favorites/destroy.json");
         RequestParams params = new RequestParams();
         params.put("id",statusId);
+        getClient().post(apiUrl, params, handler);
+
+    }
+
+    public void postFollow(long userId, JsonHttpResponseHandler handler) {
+        String apiUrl = getApiUrl("friendships/create.json");
+        RequestParams params = new RequestParams();
+        params.put("user_id",userId);
+        getClient().post(apiUrl, params, handler);
+
+    }
+
+    public void postUnfollow(long userId, JsonHttpResponseHandler handler) {
+        String apiUrl = getApiUrl("friendships/destroy.json");
+        RequestParams params = new RequestParams();
+        params.put("user_id",userId);
         getClient().post(apiUrl, params, handler);
 
     }
