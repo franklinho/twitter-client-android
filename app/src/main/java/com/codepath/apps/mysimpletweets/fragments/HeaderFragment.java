@@ -44,6 +44,7 @@ public class HeaderFragment extends Fragment {
     TextView tvFollowersLabel;
     @Bind(R.id.tvFollowingLabel)
     TextView tvFollowingLabel;
+    @Bind(R.id.tvBio) TextView tvBio;
 
     public HeaderFragment() {
         // Required empty public constructor
@@ -72,6 +73,7 @@ public class HeaderFragment extends Fragment {
         tvScreenName.setText("@"+user.getScreenName());
         tvFollowersCount.setText(user.getFollowersCount().toString());
         tvFollowingCount.setText(user.getFriendsCount().toString());
+        tvBio.setText(user.getDescription().toString());
         Glide.with(this).load(user.getProfileImageUrl()).into(ivProfileImage);
         Glide.with(this).load(user.getProfileBackgroundImageUrl()).into(ivBackground);
 

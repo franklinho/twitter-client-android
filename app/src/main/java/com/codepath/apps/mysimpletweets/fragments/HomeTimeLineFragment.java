@@ -74,7 +74,9 @@ public class HomeTimeLineFragment extends TweetsListFragment{
                     aStatuses.notifyDataSetChanged();
                 }
 
-                maxId = statuses.get(statuses.size() - 1).getId() - 1 ;
+                if (statuses.size() > 0) {
+                    setMaxId(statuses.get(statuses.size() - 1).getId() - 1);
+                }
 
                 Log.d("DEBUG", "Status Array: " + statuses.toString());
             }

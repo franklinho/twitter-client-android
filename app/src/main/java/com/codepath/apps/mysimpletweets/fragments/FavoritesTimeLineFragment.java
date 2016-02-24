@@ -112,7 +112,9 @@ public class FavoritesTimeLineFragment extends TweetsListFragment{
                     aStatuses.notifyDataSetChanged();
                 }
 
-                setMaxId(statuses.get(statuses.size() - 1).getId() - 1) ;
+                if (statuses.size() > 0) {
+                    setMaxId(statuses.get(statuses.size() - 1).getId() - 1);
+                }
 
                 Log.d("DEBUG", "Status Array: " + statuses.toString());
             }

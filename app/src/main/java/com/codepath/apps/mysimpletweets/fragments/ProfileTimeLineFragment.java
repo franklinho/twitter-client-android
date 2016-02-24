@@ -120,7 +120,9 @@ public class ProfileTimeLineFragment extends TweetsListFragment{
                     aStatuses.notifyDataSetChanged();
                 }
 
-                setMaxId(statuses.get(statuses.size() - 1).getId() - 1) ;
+                if (statuses.size() > 0) {
+                    setMaxId(tempStatusesArray.get(tempStatusesArray.size() - 1).getId() - 1) ;
+                }
 
                 Log.d("DEBUG", "Status Array: " + statuses.toString());
             }

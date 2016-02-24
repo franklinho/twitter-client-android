@@ -56,15 +56,17 @@
         android:layout_alignLeft="@+id/tvName"
         android:layout_alignStart="@+id/tvName" />
 
+
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="0"
         android:id="@+id/tvFollowingCount"
-        android:layout_below="@+id/tvScreenName"
-        android:layout_alignLeft="@+id/tvScreenName"
-        android:layout_alignStart="@+id/tvScreenName"
-        android:layout_marginTop="10dp"
+        android:layout_below="@+id/tvBio"
+        android:layout_alignLeft="@+id/tvBio"
+        android:layout_alignStart="@+id/tvBio"
+        android:layout_marginTop="5dp"
         android:layout_marginBottom="10dp"
         android:textStyle="bold"
         android:textColor="@android:color/black"/>
@@ -117,6 +119,21 @@
         android:background="@drawable/unfollowed_button_border"
         android:textColor="@color/twitter_blue"
         />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bio"
+        android:id="@+id/tvBio"
+        android:layout_below="@+id/tvScreenName"
+        android:layout_alignLeft="@+id/tvScreenName"
+        android:layout_alignStart="@+id/tvScreenName"
+        android:layout_alignEnd="@+id/btnFollow"
+        android:layout_alignRight="@+id/btnFollow"
+        android:layout_marginTop="5dp"
+        android:gravity="center_vertical"
+        android:minLines="4"
+        android:textColor="@android:color/black"/>
 
 
 </RelativeLayout>
