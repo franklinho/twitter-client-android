@@ -24,21 +24,33 @@
             />
     </android.support.design.widget.AppBarLayout>
 
-
-    <android.support.v4.widget.SwipeRefreshLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/swipeContainer"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        >
-        <android.support.v7.widget.RecyclerView
+        android:id="@+id/pagerContainer">
+        <com.astuetz.PagerSlidingTabStrip
+            android:id="@+id/tabs"
+            app:pstsShouldExpand="true"
+            app:pstsTextAllCaps="true"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/rvDirectMessages"
+            android:layout_height="48dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:background="@android:color/white"
+            android:textColor="@color/twitter_blue"
+            app:pstsIndicatorColor="@color/twitter_blue"
+            android:fillViewport="false" />
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewpager"
+            android:layout_width="match_parent"
 
-            ></android.support.v7.widget.RecyclerView>
-    </android.support.v4.widget.SwipeRefreshLayout>
+            android:layout_below="@id/tabs"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+
+            />
+    </RelativeLayout>
 
     <android.support.design.widget.FloatingActionButton
         android:layout_width="wrap_content"
@@ -49,7 +61,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         app:backgroundTint="@color/twitter_blue"
-        app:layout_anchor="@+id/swipeContainer"
+        app:layout_anchor="@+id/pagerContainer"
         app:layout_anchorGravity="bottom|right|end"
         android:layout_margin="16dp"
         app:layout_behavior="com.codepath.apps.mysimpletweets.utilities.ScrollAwareFABBehavior"

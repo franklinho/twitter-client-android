@@ -235,6 +235,16 @@ public class TwitterClient extends OAuthBaseClient {
         getClient().get(apiUrl, params, handler);
     }
 
+    public void getSentDirectMessages(long maxId, JsonHttpResponseHandler handler ) {
+        String apiUrl = getApiUrl("direct_messages/sent.json");
+        RequestParams params = new RequestParams();
+        params.put("count", 25);
+        if (maxId != 0L) {
+            params.put("max_id", maxId);
+        }
+        getClient().get(apiUrl, params, handler);
+    }
+
     public User getCurrentUser() {
         if (currentUser == null) {
             String apiUrl = getApiUrl("account/verify_credentials.json");

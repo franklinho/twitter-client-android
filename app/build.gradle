@@ -39,9 +39,8 @@ dependencies {
     // Picasso for remote image loading
     // Android Async Http for sending async network requests
     // ActiveAndroid for simple persistence with an ORM
-    compile "com.android.support:appcompat-v7:23.0.0"
-    compile 'org.parceler:parceler-api:1.0.4'
     compile 'com.android.support:appcompat-v7:23.1.1'
+    compile 'org.parceler:parceler-api:1.0.4'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.loopj.android:android-async-http:1.4.8'
     compile 'com.michaelpardo:activeandroid:3.1.0-SNAPSHOT'
