@@ -30,8 +30,15 @@
         android:id="@+id/miCompose"
         android:icon="@drawable/compose_icon"
         app:showAsAction="ifRoom|withText"
-        android:title="Profile"
+        android:title="New Tweet"
         android:orderInCategory="20"
         android:onClick="onCompose">
     </item>
+    <item
+        android:id="@+id/miActionProgress"
+        android:title="Loading..."
+        android:visible="false"
+        android:orderInCategory="100"
+        app:showAsAction="ifRoom"
+        app:actionLayout="@layout/action_view_progress" />
 </menu>

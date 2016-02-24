@@ -47,6 +47,9 @@ public class DirectMessageFragment extends Fragment {
 
 
 
+    @Bind(R.id.pbProgressAction)
+    View pbProgessAction;
+
     TwitterClient client;
 
 
@@ -82,6 +85,16 @@ public class DirectMessageFragment extends Fragment {
 
 
 
+    }
+
+    public void showProgressBar() {
+        // Show progress item
+        pbProgessAction.setVisibility(View.VISIBLE);
+    }
+
+    public void hideProgressBar() {
+        // Hide progress item
+        pbProgessAction.setVisibility(View.GONE);
     }
 
 

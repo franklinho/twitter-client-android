@@ -41,4 +41,11 @@
     </android.support.v4.widget.SwipeRefreshLayout>
 
 
+    <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/pbProgressAction"
+        android:visibility="gone"
+        android:layout_gravity="center"/>
 </android.support.design.widget.CoordinatorLayout>

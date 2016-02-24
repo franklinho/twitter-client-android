@@ -61,6 +61,7 @@ public class QueryTimeLineFragment extends TweetsListFragment{
         if (newTimeline == true) {
             maxId = 0L;
             statuses.clear();
+            showProgressBar();
         }
 
         String query = getArguments().getString("query");
@@ -118,6 +119,7 @@ public class QueryTimeLineFragment extends TweetsListFragment{
                 } catch (JSONException e) {
                     Log.d("DEBUG", e.toString());
                 }
+                hideProgressBar();
 
             }
 
@@ -125,6 +127,7 @@ public class QueryTimeLineFragment extends TweetsListFragment{
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                 Log.d("DEBUG", errorResponse.toString());
 //                Toast.makeText(getBaseContext(), "FailureObject", Toast.LENGTH_SHORT).show();
+                hideProgressBar();
             }
 
 

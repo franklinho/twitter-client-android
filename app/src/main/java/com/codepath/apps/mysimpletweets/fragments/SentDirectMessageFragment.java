@@ -48,6 +48,7 @@ public class SentDirectMessageFragment extends DirectMessageFragment {
         if (newTimeline == true) {
             maxId = 0L;
             directMessages.clear();
+            showProgressBar();
         }
 
 
@@ -73,6 +74,7 @@ public class SentDirectMessageFragment extends DirectMessageFragment {
                 maxId = directMessages.get(directMessages.size() - 1).getId() - 1;
 
                 Log.d("DEBUG", "DirectMessage Array: " + directMessages.toString());
+                hideProgressBar();
 
             }
 
@@ -80,6 +82,7 @@ public class SentDirectMessageFragment extends DirectMessageFragment {
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                 Log.d("DEBUG", errorResponse.toString());
 //                Toast.makeText(getBaseContext(), "FailureObject", Toast.LENGTH_SHORT).show();
+                hideProgressBar();
             }
 
 

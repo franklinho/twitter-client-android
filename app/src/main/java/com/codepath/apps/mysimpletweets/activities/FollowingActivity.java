@@ -44,6 +44,7 @@ public class FollowingActivity extends UserListActivity {
         if (newTimeline == true) {
             cursor = 0L;
             users.clear();
+            showProgressBar();
         }
 
 
@@ -78,6 +79,7 @@ public class FollowingActivity extends UserListActivity {
                     Log.d("DEBUG", e.toString());
                 }
 
+                hideProgressBar();
             }
 
 
@@ -86,6 +88,7 @@ public class FollowingActivity extends UserListActivity {
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                 Log.d("DEBUG", errorResponse.toString());
 //                Toast.makeText(getBaseContext(), "FailureObject", Toast.LENGTH_SHORT).show();
+                hideProgressBar();
             }
 
 

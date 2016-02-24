@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.astuetz.PagerSlidingTabStrip;
@@ -45,6 +46,7 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
     HomeTimeLineFragment homeTimeLineFragment;
     MentionsTimeLineFragment mentionsTimeLineFragment;
 
+    MenuItem miActionProgressItem;
 
 
     @Override
@@ -158,6 +160,10 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
         final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
 
 
+        miActionProgressItem = menu.findItem(R.id.miActionProgress);
+        // Extract the action-view from the menu item
+        ProgressBar v =  (ProgressBar) MenuItemCompat.getActionView(miActionProgressItem);
+
 
 
         AutoCompleteTextView searchTextView = (AutoCompleteTextView) searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
@@ -185,4 +191,6 @@ public class TimelineActivity extends AppCompatActivity implements ComposeDialog
         });
         return true;
     }
+
+
 }

@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 
 import com.codepath.apps.mysimpletweets.R;
 import com.codepath.apps.mysimpletweets.adapters.UsersArrayAdapter;
@@ -29,6 +30,10 @@ public class UserListActivity extends AppCompatActivity {
     @Bind(R.id.toolbar)
     Toolbar toolbar;
     long cursor;
+
+    @Bind(R.id.pbProgressAction)
+    View pbProgessAction;
+
 
     @Bind(R.id.swipeContainer)
     SwipeRefreshLayout swipeContainer;
@@ -63,6 +68,16 @@ public class UserListActivity extends AppCompatActivity {
 
 
 
+    }
+
+    public void showProgressBar() {
+        // Show progress item
+        pbProgessAction.setVisibility(View.VISIBLE);
+    }
+
+    public void hideProgressBar() {
+        // Hide progress item
+        pbProgessAction.setVisibility(View.GONE);
     }
 
 

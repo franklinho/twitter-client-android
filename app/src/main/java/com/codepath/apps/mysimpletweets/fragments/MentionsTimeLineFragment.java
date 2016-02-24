@@ -52,6 +52,7 @@ public class MentionsTimeLineFragment extends TweetsListFragment{
         if (newTimeline == true) {
             setMaxId(0L);
             statuses.clear();
+            showProgressBar();
         }
 
 
@@ -78,12 +79,14 @@ public class MentionsTimeLineFragment extends TweetsListFragment{
                 }
 
                 Log.d("DEBUG", "Status Array: " + statuses.toString());
+                hideProgressBar();
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                 Log.d("DEBUG", errorResponse.toString());
 //                Toast.makeText(getBaseContext(), "FailureObject", Toast.LENGTH_SHORT).show();
+                hideProgressBar();
             }
 
 

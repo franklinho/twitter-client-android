@@ -40,6 +40,9 @@ public class TweetsListFragment extends Fragment {
     @Bind(R.id.rvTweets)
     public RecyclerView rvTweets;
 
+    @Bind(R.id.pbProgressAction)
+    View pbProgessAction;
+
     public SwipeRefreshLayout getSwipeContainer() {
         return swipeContainer;
     }
@@ -106,5 +109,14 @@ public class TweetsListFragment extends Fragment {
         rvTweets.scrollToPosition(0);
     }
 
+    public void showProgressBar() {
+        // Show progress item
+        pbProgessAction.setVisibility(View.VISIBLE);
+    }
+
+    public void hideProgressBar() {
+        // Hide progress item
+        pbProgessAction.setVisibility(View.GONE);
+    }
 
 }
