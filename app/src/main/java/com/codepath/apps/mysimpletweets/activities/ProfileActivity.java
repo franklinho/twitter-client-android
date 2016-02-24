@@ -10,9 +10,9 @@ import android.support.v7.app.AppCompatActivity;
 import com.astuetz.PagerSlidingTabStrip;
 import com.codepath.apps.mysimpletweets.R;
 import com.codepath.apps.mysimpletweets.TwitterApplication;
+import com.codepath.apps.mysimpletweets.fragments.FavoritesTimeLineFragment;
 import com.codepath.apps.mysimpletweets.fragments.HeaderFragment;
 import com.codepath.apps.mysimpletweets.fragments.ProfileTimeLineFragment;
-import com.codepath.apps.mysimpletweets.fragments.QueryTimeLineFragment;
 import com.codepath.apps.mysimpletweets.models.User;
 import com.codepath.apps.mysimpletweets.networking.TwitterClient;
 
@@ -28,7 +28,8 @@ public class ProfileActivity extends AppCompatActivity {
     @Bind(R.id.tabs)
     PagerSlidingTabStrip tabstrip;
     ProfileTimeLineFragment profileTimeLineFragment;
-    QueryTimeLineFragment queryTimeLineFragment;
+    ProfileTimeLineFragment mediaProfileTimeLineFragment;
+    FavoritesTimeLineFragment favoritesTimeLineFragment;
     User user;
 //    @Bind(R.id.toolbar)
 //    Toolbar toolbar;
@@ -96,7 +97,7 @@ public class ProfileActivity extends AppCompatActivity {
     // return order of fragments in viewpager
     public class TweetsPagerAdapter extends FragmentPagerAdapter {
 
-        private String tabTitles[] = { "Tweets", "Media" };
+        private String tabTitles[] = { "Tweets", "Media", "Favorites" };
 
         public TweetsPagerAdapter(FragmentManager fm) {
             super(fm);
@@ -109,8 +110,11 @@ public class ProfileActivity extends AppCompatActivity {
                 profileTimeLineFragment = ProfileTimeLineFragment.newInstance(user.getId());
                 return profileTimeLineFragment;
             } else if (position == 1){
-                queryTimeLineFragment = QueryTimeLineFragment.newInstance("from:"+user.getScreenName().toString()+" AND filter:media");
-                return queryTimeLineFragment;
+                mediaProfileTimeLineFragment = ProfileTimeLineFragment.newInstance(user.getId(), true);
+                return mediaProfileTimeLineFragment;
+            } else if (position == 2) {
+                favoritesTimeLineFragment = FavoritesTimeLineFragment.newInstance(user.getId());
+                return favoritesTimeLineFragment;
             } else {
                 return null;
             }

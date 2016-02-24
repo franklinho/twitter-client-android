@@ -23,26 +23,18 @@ import java.util.List;
 /**
  * Created by franklinho on 2/22/16.
  */
-public class ProfileTimeLineFragment extends TweetsListFragment{
+public class FavoritesTimeLineFragment extends TweetsListFragment{
 
     long userId;
     boolean mediaOnly;
-    public static ProfileTimeLineFragment newInstance(long userId) {
-        ProfileTimeLineFragment profileTimeLineFragment = new ProfileTimeLineFragment();
+    public static FavoritesTimeLineFragment newInstance(long userId) {
+        FavoritesTimeLineFragment profileTimeLineFragment = new FavoritesTimeLineFragment();
         Bundle args = new Bundle();
         args.putLong("userId", userId);
         profileTimeLineFragment.setArguments(args);
         return profileTimeLineFragment;
     }
 
-    public static ProfileTimeLineFragment newInstance(long userId, boolean mediaOnly) {
-        ProfileTimeLineFragment profileTimeLineFragment = new ProfileTimeLineFragment();
-        Bundle args = new Bundle();
-        args.putLong("userId", userId);
-        args.putBoolean("media", mediaOnly);
-        profileTimeLineFragment.setArguments(args);
-        return profileTimeLineFragment;
-    }
 
 
 
@@ -84,7 +76,7 @@ public class ProfileTimeLineFragment extends TweetsListFragment{
         }
 
 
-        client.getUserTimeline(new JsonHttpResponseHandler() {
+        client.getFavoritesTimeline(new JsonHttpResponseHandler() {
 
 
             @Override

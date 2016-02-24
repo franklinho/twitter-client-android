@@ -102,6 +102,17 @@ public class TwitterClient extends OAuthBaseClient {
         getClient().get(apiUrl, params, handler);
     }
 
+    public void getFavoritesTimeline(JsonHttpResponseHandler handler, long maxId , long userId) {
+        String apiUrl = getApiUrl("favorites/list.json");
+        RequestParams params = new RequestParams();
+        params.put("count", 25);
+        params.put("user_id", userId);
+        if (maxId != 0L) {
+            params.put("max_id", maxId);
+        }
+        getClient().get(apiUrl, params, handler);
+    }
+
     public void getSearchTimeline(JsonHttpResponseHandler handler, long maxId, String query ) {
         String apiUrl = getApiUrl("search/tweets.json");
         RequestParams params = new RequestParams();
