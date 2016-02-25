@@ -92,6 +92,7 @@ Walkthrough of stories for part 2:
  * [Joda Time Android](https://github.com/dlew/joda-time-android) - Date formatting and handling libarary
  * [Parceler](https://github.com/johncarl81/parceler) - Simplifies parceling objects
  * [PagerSlidingTabStrip](https://github.com/astuetz/PagerSlidingTabStrip) - Allows easy implementation of sliding tab layout
+ * [VideoPlayerManager](https://github.com/danylovolokh/VideoPlayerManager) - Textureview based video player for loading video in RecyclerView
 
 ## License
 
