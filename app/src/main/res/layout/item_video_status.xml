@@ -124,7 +124,7 @@
         android:layout_alignTop="@+id/ibtnRetweet"
         android:gravity="center_vertical"/>
 
-    <com.codepath.apps.mysimpletweets.models.DynamicHeightVideoView
+    <com.codepath.apps.mysimpletweets.models.DynamicHeightVideoPlayerManagerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/vvStatusVideo"

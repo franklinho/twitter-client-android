@@ -2,7 +2,6 @@ package com.codepath.apps.mysimpletweets.adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,7 +11,6 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.MediaController;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -25,9 +23,9 @@ import com.codepath.apps.mysimpletweets.activities.TimelineActivity;
 import com.codepath.apps.mysimpletweets.activities.VideoStatusDetailActivity;
 import com.codepath.apps.mysimpletweets.fragments.ComposeDialog;
 import com.codepath.apps.mysimpletweets.models.DynamicHeightImageView;
-import com.codepath.apps.mysimpletweets.models.DynamicHeightVideoView;
-import com.codepath.apps.mysimpletweets.models.statuses.Entities;
+import com.codepath.apps.mysimpletweets.models.DynamicHeightVideoPlayerManagerView;
 import com.codepath.apps.mysimpletweets.models.LinkifiedTextView;
+import com.codepath.apps.mysimpletweets.models.statuses.Entities;
 import com.codepath.apps.mysimpletweets.models.statuses.Medium_;
 import com.codepath.apps.mysimpletweets.models.statuses.Status;
 import com.codepath.apps.mysimpletweets.models.statuses.Thumb_;
@@ -35,6 +33,11 @@ import com.codepath.apps.mysimpletweets.models.statuses.Variant;
 import com.codepath.apps.mysimpletweets.models.statuses.VideoInfo;
 import com.codepath.apps.mysimpletweets.networking.TwitterClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
+import com.volokh.danylo.video_player_manager.manager.PlayerItemChangeListener;
+import com.volokh.danylo.video_player_manager.manager.SingleVideoPlayerManager;
+import com.volokh.danylo.video_player_manager.manager.VideoPlayerManager;
+import com.volokh.danylo.video_player_manager.meta.MetaData;
+import com.volokh.danylo.video_player_manager.ui.SimpleMainThreadMediaPlayerListener;
 
 import java.util.List;
 
@@ -49,6 +52,12 @@ public class StatusesArrayAdapter extends RecyclerView.Adapter<RecyclerView.View
     private Context context;
     private TwitterClient client;
     private final int NORMAL = 0, IMAGE = 1, VIDEO = 2;
+    private VideoPlayerManager<MetaData> mVideoPlayerManager = new SingleVideoPlayerManager(new PlayerItemChangeListener() {
+        @Override
+        public void onPlayerItemChanged(MetaData metaData) {
+
+        }
+    });
 
 
 
@@ -141,7 +150,8 @@ public class StatusesArrayAdapter extends RecyclerView.Adapter<RecyclerView.View
         @Bind(R.id.ibtnFavorite) ImageButton ibtnFavorite;
         @Bind(R.id.ibtnRetweet) ImageButton ibtnRetweet;
         @Bind(R.id.ibtnReply) ImageButton ibtnReply;
-        @Bind(R.id.vvStatusVideo) DynamicHeightVideoView vvStatusVideo;
+        @Bind(R.id.vvStatusVideo)
+        DynamicHeightVideoPlayerManagerView vvStatusVideo;
 
 
 
@@ -483,7 +493,7 @@ public class StatusesArrayAdapter extends RecyclerView.Adapter<RecyclerView.View
         final ImageButton ibtnFavorite = holder.ibtnFavorite;
         final ImageButton ibtnRetweet = holder.ibtnRetweet;
         ImageButton ibtnReply = holder.ibtnReply;
-        final DynamicHeightVideoView vvStatusVideo = holder.vvStatusVideo;
+        final DynamicHeightVideoPlayerManagerView vvStatusVideo = holder.vvStatusVideo;
 
 
         tvBody.setMaxLines(Integer.MAX_VALUE);
@@ -530,29 +540,37 @@ public class StatusesArrayAdapter extends RecyclerView.Adapter<RecyclerView.View
             vvStatusVideo.setVisibility(View.VISIBLE);
             Variant videoVariant = videoInfo.getVariants().get(0);
             vvStatusVideo.setHeightRatio((double) videoInfo.getAspectRatio().get(1) / videoInfo.getAspectRatio().get(0));
-
-
-            vvStatusVideo.setVideoPath(videoVariant.getUrl());
-            MediaController mediaController = new MediaController(holder.context);
-            mediaController.setAnchorView(holder.vvStatusVideo);
-//            vvStatusVideo.setMediaController(mediaController);
-//            vvStatusVideo.requestFocus();
-            vvStatusVideo.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            vvStatusVideo.addMediaPlayerListener(new SimpleMainThreadMediaPlayerListener() {
                 @Override
-                public void onPrepared(MediaPlayer mp) {
-                    mp.setLooping(true);
+                public void onVideoCompletionMainThread() {
                     vvStatusVideo.start();
-
                 }
             });
 
-            vvStatusVideo.setOnErrorListener(new MediaPlayer.OnErrorListener() {
-                @Override
-                public boolean onError(MediaPlayer mp, int what, int extra) {
-                    vvStatusVideo.setVisibility(View.GONE);
-                    return true;
-                }
-            });
+            mVideoPlayerManager.playNewVideo(null, vvStatusVideo, videoVariant.getUrl());
+
+
+//            vvStatusVideo.setVideoPath(videoVariant.getUrl());
+//            MediaController mediaController = new MediaController(holder.context);
+//            mediaController.setAnchorView(holder.vvStatusVideo);
+////            vvStatusVideo.setMediaController(mediaController);
+////            vvStatusVideo.requestFocus();
+//            vvStatusVideo.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+//                @Override
+//                public void onPrepared(MediaPlayer mp) {
+//                    mp.setLooping(true);
+//                    vvStatusVideo.start();
+//
+//                }
+//            });
+//
+//            vvStatusVideo.setOnErrorListener(new MediaPlayer.OnErrorListener() {
+//                @Override
+//                public boolean onError(MediaPlayer mp, int what, int extra) {
+//                    vvStatusVideo.setVisibility(View.GONE);
+//                    return true;
+//                }
+//            });
 
         }
 
