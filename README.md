@@ -38,6 +38,12 @@ Time Spent: 23 hours
 		*  :white_check_mark: Bonus: Move the "Compose" action to a FloatingActionButton instead of on the AppBar. (1 point)
 		*  :white_check_mark: Bonus: Replace Picasso with Glide for more efficient image rendering. (1 point)
 
+
+Walkthrough of stories for part 1:
+
+![Part 1](https://github.com/franklinho/twitter-client-android/blob/master/TwitterClientWalkThrough.gif)
+
+
 ## Part 2
 ## User Stories
 
@@ -68,10 +74,6 @@ Time Spent: 23 hours
 	*  :white_check_mark: Bonus: User can view their Twitter direct messages (and/or send new ones) (2 points)
 
 ## Video Walkthrough 
-
-Walkthrough of stories for part 1:
-
-![Part 1](https://github.com/franklinho/twitter-client-android/blob/master/TwitterClientWalkThrough.gif)
 
 Walkthrough of stories for part 2:
 
