@@ -132,7 +132,6 @@
         android:layout_alignRight="@+id/btnFollow"
         android:layout_marginTop="5dp"
         android:gravity="center_vertical"
-        android:minLines="4"
         android:textColor="@android:color/black"/>
 
 
