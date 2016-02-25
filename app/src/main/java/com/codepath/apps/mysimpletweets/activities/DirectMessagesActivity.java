@@ -15,11 +15,12 @@ import com.codepath.apps.mysimpletweets.R;
 import com.codepath.apps.mysimpletweets.fragments.ComposeDirectMessageDialog;
 import com.codepath.apps.mysimpletweets.fragments.InboxDirectMessageFragment;
 import com.codepath.apps.mysimpletweets.fragments.SentDirectMessageFragment;
+import com.codepath.apps.mysimpletweets.models.direct_messages.DirectMessage;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class DirectMessagesActivity extends AppCompatActivity {
+public class DirectMessagesActivity extends AppCompatActivity implements ComposeDirectMessageDialog.InsertNewDirectMessage {
 
 
     @Bind(R.id.toolbar)
@@ -112,6 +113,8 @@ public class DirectMessagesActivity extends AppCompatActivity {
         composeDirectMessageDialog.show(fm, "fragment_new_direct_message");
     }
 
-
-
+    @Override
+    public void insertNewDirectMessage(DirectMessage directMessage) {
+        sentDirectMessageFragment.insertNewDirectMessage(directMessage);
+    }
 }

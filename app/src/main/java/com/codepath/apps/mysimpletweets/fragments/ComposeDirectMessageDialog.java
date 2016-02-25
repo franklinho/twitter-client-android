@@ -1,5 +1,6 @@
 package com.codepath.apps.mysimpletweets.fragments;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.codepath.apps.mysimpletweets.R;
 import com.codepath.apps.mysimpletweets.TwitterApplication;
+import com.codepath.apps.mysimpletweets.models.direct_messages.DirectMessage;
 import com.codepath.apps.mysimpletweets.models.statuses.Status;
 import com.codepath.apps.mysimpletweets.models.statuses.User;
 import com.codepath.apps.mysimpletweets.networking.TwitterClient;
@@ -51,6 +53,7 @@ public class ComposeDirectMessageDialog extends android.support.v4.app.DialogFra
     ImageView ivProfileImage;
 
     Status replyStatus;
+    InsertNewDirectMessage dataPasser;
 
 
 
@@ -59,6 +62,18 @@ public class ComposeDirectMessageDialog extends android.support.v4.app.DialogFra
     public ComposeDirectMessageDialog() {
 
     }
+
+    public interface  InsertNewDirectMessage {
+        public void insertNewDirectMessage(DirectMessage directMessage);
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        dataPasser = (InsertNewDirectMessage) activity;
+    }
+
+
 
 
     public static ComposeDirectMessageDialog newInstance() {
@@ -109,7 +124,7 @@ public class ComposeDirectMessageDialog extends android.support.v4.app.DialogFra
                         @Override
                         public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                             Toast.makeText(getContext(), "Direct Message Sent Successfully", Toast.LENGTH_SHORT).show();
-                            Status status = new Status();
+                            DirectMessage directMessage = new DirectMessage();
 //                            if (client.getCurrentUser() != null) {
 //                                status.setUser(client.getCurrentUser());
 //                            }
@@ -120,7 +135,8 @@ public class ComposeDirectMessageDialog extends android.support.v4.app.DialogFra
 
                             Gson gson = new GsonBuilder().create();
 
-                            status = gson.fromJson(response.toString(), Status.class);
+                            directMessage = gson.fromJson(response.toString(), DirectMessage.class);
+                            dataPasser.insertNewDirectMessage(directMessage);
                             dismiss();
                         }
 

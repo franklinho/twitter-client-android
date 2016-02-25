@@ -145,4 +145,10 @@ public class DirectMessageFragment extends Fragment {
         }
 
     }
+
+    public void insertNewDirectMessage(DirectMessage directMessage) {
+        directMessages.add(0, directMessage);
+        aDirectMessages.notifyItemInserted(0);
+        rvDirectMessages.scrollToPosition(0);
+    }
 }
