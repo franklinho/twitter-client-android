@@ -94,13 +94,22 @@ public class DirectMessagesArrayAdapter extends RecyclerView.Adapter<RecyclerVie
         TextView tvBody = holder.tvBody;
         TextView tvTimestamp = holder.tvTimestamp;
 
+        ivProfileImage.setImageResource(android.R.color.transparent); // Clear imageview
+        if (directMessage.getSender().getId() != TwitterClient.currentUser.getId()){
+            Glide.with(holder.context).load(directMessage.getSender().getProfileImageUrl()).into(ivProfileImage);
+            tvName.setText(directMessage.getSender().getName().toString());
+            ;
+        } else {
+            Glide.with(holder.context).load(directMessage.getRecipient().getProfileImageUrl()).into(ivProfileImage);
+            tvName.setText(directMessage.getRecipient().getName().toString());
 
-        tvName.setText(directMessage.getSender().getName().toString());
+        }
+
         tvBody.setText(directMessage.getText().toString());
         tvTimestamp.setText(directMessage.getRelativeTimeAgo().toString());
 
-        ivProfileImage.setImageResource(android.R.color.transparent); // Clear imageview
-        Glide.with(holder.context).load(directMessage.getSender().getProfileImageUrl()).into(ivProfileImage);
+
+
 
 
 
