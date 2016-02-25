@@ -1,6 +1,6 @@
 # Project 3 - Twitter Client
 
-## Overview
+## Part 1
 
 Twitter client is an app that allows a user to view and post Twitter content using their API by logging in through OAuth
 
@@ -37,6 +37,35 @@ Time Spent: 23 hours
 		*  :white_check_mark: Bonus: Leverage RecyclerView as a replacement for the ListView and ArrayAdapter for all lists of tweets. (2 points)
 		*  :white_check_mark: Bonus: Move the "Compose" action to a FloatingActionButton instead of on the AppBar. (1 point)
 		*  :white_check_mark: Bonus: Replace Picasso with Glide for more efficient image rendering. (1 point)
+
+## Part 2
+## User Stories
+
+  * Required User Stories
+		*  :white_check_mark: Includes all required user stories from Week 3 Twitter Client
+		*  :white_check_mark: User can switch between Timeline and Mention views using tabs. (4 points)
+			*  :white_check_mark: User can view their home timeline tweets.
+			*  :white_check_mark: User can view the recent mentions of their username.
+		*  :white_check_mark: User can navigate to view their own profile (3 points)
+			*  :white_check_mark: User can see picture, tagline, # of followers, # of following, and tweets on their profile.
+		*  :white_check_mark: User can click on the profile image in any tweet to see another user's profile. (2 points)
+			*  :white_check_mark: User can see picture, tagline, # of followers, # of following, and tweets of clicked user.
+			*  :white_check_mark: Profile view should include that user's timeline
+			*  :white_check_mark: Optional: User can view following / followers list through the profile
+		*  :white_check_mark: User can infinitely paginate any of these timelines (home, mentions, user) by scrolling to the bottom (1 point)
+	* Advanced User Stories
+		*  :white_check_mark: Advanced: Robust error handling, check if internet is available, handle error cases, network failures (1 point)
+		*  :white_check_mark: Advanced: When a network request is sent, user sees an indeterminate progress indicator (1 point)
+		*  :white_check_mark: Advanced: User can "reply" to any tweet on their home timeline (1 point)
+			*  :white_check_mark: The user that wrote the original tweet is automatically "@" replied in compose (1 point)
+		*  :white_check_mark: Advanced: User can click on a tweet to be taken to a "detail view" of that tweet (1 point)
+			*  :white_check_mark: Advanced: User can take favorite (and unfavorite) or retweet actions on a tweet (1 point)
+		*  :white_check_mark: Advanced: Improve the user interface and theme the app to feel "twitter branded" (1 to 5 points)
+		*  :white_check_mark: Advanced: User can search for tweets matching a particular query and see results (2 points)
+		*  :white_check_mark: Bonus: Use Parcelable instead of Serializable using the popular Parceler library. (1 point)
+		*  :white_check_mark: Bonus: Apply the popular Butterknife annotation library to reduce view boilerplate. (1 point)
+		*  :white_check_mark: Bonus: Leverage the popular GSON library to streamline the parsing of JSON data. (1 point)
+		*  :white_check_mark: Bonus: User can view their Twitter direct messages (and/or send new ones) (2 points)
 
 ## Video Walkthrough 
 
