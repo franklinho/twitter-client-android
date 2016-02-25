@@ -3,6 +3,7 @@ package com.codepath.apps.mysimpletweets.activities;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
+import android.view.View;
 
 import com.codepath.apps.mysimpletweets.TwitterApplication;
 import com.codepath.apps.mysimpletweets.models.statuses.User;
@@ -37,63 +38,71 @@ public class FollowersActivity extends UserListActivity {
         });
 
         populateUsers(true);
+        btnNetwork.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                populateUsers(true);
+            }
+        });
 
     }
 
     private void populateUsers(final boolean newTimeline) {
-        if (newTimeline == true) {
-            cursor = 0L;
-            users.clear();
-            showProgressBar();
-        }
+        if (!isConnected()) {
+            btnNetwork.setVisibility(View.VISIBLE);
+        } else {
+            btnNetwork.setVisibility(View.GONE);
+            if (newTimeline == true) {
+                cursor = 0L;
+                users.clear();
+                showProgressBar();
+            }
 
 
-        TwitterClient client = TwitterApplication.getRestClient();
-        client.getFollowers(user.getId(), cursor, new JsonHttpResponseHandler() {
+            TwitterClient client = TwitterApplication.getRestClient();
+            client.getFollowers(user.getId(), cursor, new JsonHttpResponseHandler() {
 
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject json) {
-                Log.d("DEBUG", json.toString());
-//                Toast.makeText(getBaseContext(), "SuccessArray", Toast.LENGTH_SHORT).show();
-
-
-                int curSize = users.size();
-                //Add them to the adapter
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, JSONObject json) {
+                    Log.d("DEBUG", json.toString());
+                    //                Toast.makeText(getBaseContext(), "SuccessArray", Toast.LENGTH_SHORT).show();
 
 
+                    int curSize = users.size();
+                    //Add them to the adapter
 
-                try {
-                    cursor = json.getLong("next_cursor");
-                    JSONArray jsonUsers = json.getJSONArray("users");
-                    users.addAll(User.fromJSONArray(jsonUsers));
-                    if (newTimeline == false) {
-                        aUsers.notifyItemRangeInserted(curSize, users.size() - 1);
-                    } else {
-                        aUsers.notifyDataSetChanged();
+
+                    try {
+                        cursor = json.getLong("next_cursor");
+                        JSONArray jsonUsers = json.getJSONArray("users");
+                        users.addAll(User.fromJSONArray(jsonUsers));
+                        if (newTimeline == false) {
+                            aUsers.notifyItemRangeInserted(curSize, users.size() - 1);
+                        } else {
+                            aUsers.notifyDataSetChanged();
+                        }
+
+                        maxId = users.get(users.size() - 1).getId() - 1;
+
+                        Log.d("DEBUG", "Status Array: " + users.toString());
+                    } catch (JSONException e) {
+                        Log.d("DEBUG", e.toString());
                     }
 
-                    maxId = users.get(users.size() - 1).getId() - 1 ;
-
-                    Log.d("DEBUG", "Status Array: " + users.toString());
-                } catch (JSONException e) {
-                    Log.d("DEBUG", e.toString());
+                    hideProgressBar();
                 }
 
-                hideProgressBar();
-            }
+
+                @Override
+                public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                    Log.d("DEBUG", errorResponse.toString());
+                    //                Toast.makeText(getBaseContext(), "FailureObject", Toast.LENGTH_SHORT).show();
+                    hideProgressBar();
+                }
 
 
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                Log.d("DEBUG", errorResponse.toString());
-//                Toast.makeText(getBaseContext(), "FailureObject", Toast.LENGTH_SHORT).show();
-                hideProgressBar();
-            }
-
-
-
-        });
+            });
+        }
 
         swipeContainer.setRefreshing(false);
 

@@ -1,5 +1,8 @@
 package com.codepath.apps.mysimpletweets.fragments;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.codepath.apps.mysimpletweets.R;
 import com.codepath.apps.mysimpletweets.TwitterApplication;
@@ -16,6 +20,7 @@ import com.codepath.apps.mysimpletweets.adapters.StatusesArrayAdapter;
 import com.codepath.apps.mysimpletweets.models.statuses.Status;
 import com.codepath.apps.mysimpletweets.networking.TwitterClient;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,6 +80,9 @@ public class TweetsListFragment extends Fragment {
     public long maxId;
     TwitterClient client;
 
+    @Bind(R.id.btnNetwork)
+    Button btnNetwork;
+
 
     // Inflation logic
 
@@ -87,6 +95,16 @@ public class TweetsListFragment extends Fragment {
         //Connect adapter to listview
         rvTweets.setAdapter(aStatuses);
         swipeContainer.setColorSchemeResources(R.color.twitter_blue);
+
+        if (!isConnected()) {
+            btnNetwork.setVisibility(View.VISIBLE);
+        } else {
+            btnNetwork.setVisibility(View.GONE);
+        }
+
+
+
+
         return v;
     }
 
@@ -119,4 +137,40 @@ public class TweetsListFragment extends Fragment {
         pbProgessAction.setVisibility(View.GONE);
     }
 
+    public boolean isConnected() {
+        if (isNetworkAvailable() && isOnline()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnectedOrConnecting();
+    }
+
+    public boolean isOnline() {
+        Runtime runtime = Runtime.getRuntime();
+        try {
+            Process ipProcess = runtime.exec("/system/bin/ping -c 1 8.8.8.8");
+            int     exitValue = ipProcess.waitFor();
+            return (exitValue == 0);
+        } catch (IOException e)          { e.printStackTrace(); }
+        catch (InterruptedException e) { e.printStackTrace(); }
+        return false;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (!isConnected()) {
+            btnNetwork.setVisibility(View.VISIBLE);
+        } else {
+            btnNetwork.setVisibility(View.GONE);
+        }
+
+    }
 }

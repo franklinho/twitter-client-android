@@ -62,14 +62,15 @@ public class ProfileActivity extends AppCompatActivity {
             user = TwitterClient.currentUser;
         }
 
-//        actionBar.setTitle("@" + user.getScreenName());
+        if (user != null) {
+            //        actionBar.setTitle("@" + user.getScreenName());
 
 //
-        android.support.v4.app.FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            android.support.v4.app.FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 //        // Create header fragment
 //
-        HeaderFragment headerFragment = HeaderFragment.newInstance(user);
-        ft.replace(R.id.flHeader, headerFragment);
+            HeaderFragment headerFragment = HeaderFragment.newInstance(user);
+            ft.replace(R.id.flHeader, headerFragment);
 ////
 //
 //        //Create user timeline fragment
@@ -78,18 +79,20 @@ public class ProfileActivity extends AppCompatActivity {
 //        //Display user fragment (dynamically)
 //
 //        ft.replace(R.id.flContainer, profileTimeLineFragment);
-        ft.commit();
+            ft.commit();
 
 
-        //Get viewpager
+            //Get viewpager
 
-        //Set Viewpager adapter
-        viewpager.setAdapter(new TweetsPagerAdapter(getSupportFragmentManager()));
+            //Set Viewpager adapter
+            viewpager.setAdapter(new TweetsPagerAdapter(getSupportFragmentManager()));
 
 
 
-        //Attach the pager tabs to the viewpager
-        tabstrip.setViewPager(viewpager);
+            //Attach the pager tabs to the viewpager
+            tabstrip.setViewPager(viewpager);
+        }
+
 
 
     }
@@ -106,18 +109,20 @@ public class ProfileActivity extends AppCompatActivity {
         //Get the fragment for the tab
         @Override
         public Fragment getItem(int position) {
-            if (position == 0 ) {
-                profileTimeLineFragment = ProfileTimeLineFragment.newInstance(user.getId());
-                return profileTimeLineFragment;
-            } else if (position == 1){
-                mediaProfileTimeLineFragment = ProfileTimeLineFragment.newInstance(user.getId(), true);
-                return mediaProfileTimeLineFragment;
-            } else if (position == 2) {
-                favoritesTimeLineFragment = FavoritesTimeLineFragment.newInstance(user.getId());
-                return favoritesTimeLineFragment;
-            } else {
-                return null;
-            }
+
+                if (position == 0 ) {
+                    profileTimeLineFragment = ProfileTimeLineFragment.newInstance(user.getId());
+                    return profileTimeLineFragment;
+                } else if (position == 1){
+                    mediaProfileTimeLineFragment = ProfileTimeLineFragment.newInstance(user.getId(), true);
+                    return mediaProfileTimeLineFragment;
+                } else if (position == 2) {
+                    favoritesTimeLineFragment = FavoritesTimeLineFragment.newInstance(user.getId());
+                    return favoritesTimeLineFragment;
+                } else {
+                    return null;
+                }
+
         }
 
 

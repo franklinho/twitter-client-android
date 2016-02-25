@@ -25,22 +25,42 @@
     </android.support.design.widget.AppBarLayout>
 
 
+<RelativeLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnNetwork"
+        android:text="No Internet Connection. Try Again?"
+        android:background="@android:color/holo_orange_light"
+        android:textColor="@android:color/white"
+        android:visibility="gone"
+        />
+
+
     <android.support.v4.widget.SwipeRefreshLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/swipeContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+
         >
+
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/rvUsers"
 
+
         ></android.support.v7.widget.RecyclerView>
     </android.support.v4.widget.SwipeRefreshLayout>
 
 
+
+
+</RelativeLayout>
     <ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
         style="?android:attr/progressBarStyleLarge"
         android:layout_width="wrap_content"

@@ -53,85 +53,96 @@ public class QueryTimeLineFragment extends TweetsListFragment{
         });
 
         populateTimeline(true);
+        btnNetwork.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                populateTimeline(true);
+            }
+        });
         return v;
     }
 
     // Send api request to get timeline json and fills listview with tweet objects
     private void populateTimeline(final boolean newTimeline) {
-        if (newTimeline == true) {
-            maxId = 0L;
-            statuses.clear();
-            showProgressBar();
-        }
+        if (!isConnected()) {
+            btnNetwork.setVisibility(View.VISIBLE);
+        } else {
+            btnNetwork.setVisibility(View.GONE);
+            if (newTimeline == true) {
+                maxId = 0L;
+                statuses.clear();
+                showProgressBar();
+            }
 
-        String query = getArguments().getString("query");
+            String query = getArguments().getString("query");
 
-        client.getSearchTimeline(new JsonHttpResponseHandler() {
+            client.getSearchTimeline(new JsonHttpResponseHandler() {
 
-//            @Override
-//            public void onSuccess(int statusCode, Header[] headers, JSONArray json) {
-//                Log.d("DEBUG", json.toString());
-////                Toast.makeText(getBaseContext(), "SuccessArray", Toast.LENGTH_SHORT).show();
-//
-//
-//                int curSize = statuses.size();
-//                //Add them to the adapter
-//
-//                statuses.addAll(Status.fromJSONArray(json));
-//
-//                //Add them to the adapter
-//                statuses.addAll(statuses);
-//                if (newTimeline == false) {
-//                    aStatuses.notifyItemRangeInserted(curSize, statuses.size() - 1);
-//                } else {
-//                    aStatuses.notifyDataSetChanged();
-//                }
-//
-//                maxId = statuses.get(statuses.size() - 1).getId() - 1;
-//
-//                Log.d("DEBUG", "Status Array: " + statuses.toString());
-//            }
+                //            @Override
+                //            public void onSuccess(int statusCode, Header[] headers, JSONArray json) {
+                //                Log.d("DEBUG", json.toString());
+                ////                Toast.makeText(getBaseContext(), "SuccessArray", Toast.LENGTH_SHORT).show();
+                //
+                //
+                //                int curSize = statuses.size();
+                //                //Add them to the adapter
+                //
+                //                statuses.addAll(Status.fromJSONArray(json));
+                //
+                //                //Add them to the adapter
+                //                statuses.addAll(statuses);
+                //                if (newTimeline == false) {
+                //                    aStatuses.notifyItemRangeInserted(curSize, statuses.size() - 1);
+                //                } else {
+                //                    aStatuses.notifyDataSetChanged();
+                //                }
+                //
+                //                maxId = statuses.get(statuses.size() - 1).getId() - 1;
+                //
+                //                Log.d("DEBUG", "Status Array: " + statuses.toString());
+                //            }
 
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject json) {
-                Log.d("DEBUG", json.toString());
-//                Toast.makeText(getBaseContext(), "SuccessArray", Toast.LENGTH_SHORT).show();
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, JSONObject json) {
+                    Log.d("DEBUG", json.toString());
+                    //                Toast.makeText(getBaseContext(), "SuccessArray", Toast.LENGTH_SHORT).show();
 
 
-                int curSize = statuses.size();
-                //Add them to the adapter
+                    int curSize = statuses.size();
+                    //Add them to the adapter
 
-                try {
-                    JSONArray jsonStatuses = json.getJSONArray("statuses");
-                    statuses.addAll(Status.fromJSONArray(jsonStatuses));
+                    try {
+                        JSONArray jsonStatuses = json.getJSONArray("statuses");
+                        statuses.addAll(Status.fromJSONArray(jsonStatuses));
 
-                    if (newTimeline == false) {
-                        aStatuses.notifyItemRangeInserted(curSize, statuses.size() - 1);
-                    } else {
-                        aStatuses.notifyDataSetChanged();
+                        if (newTimeline == false) {
+                            aStatuses.notifyItemRangeInserted(curSize, statuses.size() - 1);
+                        } else {
+                            aStatuses.notifyDataSetChanged();
+                        }
+
+                        if (statuses.size() > 0) {
+                            maxId = statuses.get(statuses.size() - 1).getId() - 1;
+                        }
+
+                        Log.d("DEBUG", "Status Array: " + statuses.toString());
+                    } catch (JSONException e) {
+                        Log.d("DEBUG", e.toString());
                     }
+                    hideProgressBar();
 
-                    if (statuses.size() > 0) {
-                        maxId = statuses.get(statuses.size() - 1).getId() - 1 ;
-                    }
-
-                    Log.d("DEBUG", "Status Array: " + statuses.toString());
-                } catch (JSONException e) {
-                    Log.d("DEBUG", e.toString());
                 }
-                hideProgressBar();
 
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                Log.d("DEBUG", errorResponse.toString());
-//                Toast.makeText(getBaseContext(), "FailureObject", Toast.LENGTH_SHORT).show();
-                hideProgressBar();
-            }
+                @Override
+                public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                    Log.d("DEBUG", errorResponse.toString());
+                    //                Toast.makeText(getBaseContext(), "FailureObject", Toast.LENGTH_SHORT).show();
+                    hideProgressBar();
+                }
 
 
-        }, maxId, query);
+            }, maxId, query);
+        }
 
         swipeContainer.setRefreshing(false);
 

@@ -42,52 +42,63 @@ public class InboxDirectMessageFragment extends DirectMessageFragment {
         swipeContainer.setColorSchemeResources(R.color.twitter_blue);
 
         populateMessages(true);
+        btnNetwork.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                populateMessages(true);
+            }
+        });
         return v;
     }
 
     private void populateMessages(final boolean newTimeline) {
-        if (newTimeline == true) {
-            maxId = 0L;
-            directMessages.clear();
-            showProgressBar();
-        }
+        if (!isConnected()) {
+            btnNetwork.setVisibility(View.VISIBLE);
+        } else {
+            btnNetwork.setVisibility(View.GONE);
+            if (newTimeline == true) {
+                maxId = 0L;
+                directMessages.clear();
+                showProgressBar();
+            }
 
 
-        TwitterClient client = TwitterApplication.getRestClient();
-        client.getDirectMessages(maxId, new JsonHttpResponseHandler() {
+            TwitterClient client = TwitterApplication.getRestClient();
+            client.getDirectMessages(maxId, new JsonHttpResponseHandler() {
 
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONArray json) {
-                Log.d("DEBUG", json.toString());
-//                Toast.makeText(getBaseContext(), "SuccessArray", Toast.LENGTH_SHORT).show();
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, JSONArray json) {
+                    Log.d("DEBUG", json.toString());
+                    //                Toast.makeText(getBaseContext(), "SuccessArray", Toast.LENGTH_SHORT).show();
 
 
-                int curSize = directMessages.size();
-                //Add them to the adapter
+                    int curSize = directMessages.size();
+                    //Add them to the adapter
 
-                directMessages.addAll(DirectMessage.fromJSONArray(json));
-                if (newTimeline == false) {
-                    aDirectMessages.notifyItemRangeInserted(curSize, directMessages.size() - 1);
-                } else {
-                    aDirectMessages.notifyDataSetChanged();
+                    directMessages.addAll(DirectMessage.fromJSONArray(json));
+                    if (newTimeline == false) {
+                        aDirectMessages.notifyItemRangeInserted(curSize, directMessages.size() - 1);
+                    } else {
+                        aDirectMessages.notifyDataSetChanged();
+                    }
+
+                    maxId = directMessages.get(directMessages.size() - 1).getId() - 1;
+
+                    Log.d("DEBUG", "DirectMessage Array: " + directMessages.toString());
+
+                    hideProgressBar();
                 }
 
-                maxId = directMessages.get(directMessages.size() - 1).getId() - 1;
-
-                Log.d("DEBUG", "DirectMessage Array: " + directMessages.toString());
-
-                hideProgressBar();
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                Log.d("DEBUG", errorResponse.toString());
-//                Toast.makeText(getBaseContext(), "FailureObject", Toast.LENGTH_SHORT).show();
-                hideProgressBar();
-            }
+                @Override
+                public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                    Log.d("DEBUG", errorResponse.toString());
+                    //                Toast.makeText(getBaseContext(), "FailureObject", Toast.LENGTH_SHORT).show();
+                    hideProgressBar();
+                }
 
 
-        });
+            });
+        }
 
         swipeContainer.setRefreshing(false);
 

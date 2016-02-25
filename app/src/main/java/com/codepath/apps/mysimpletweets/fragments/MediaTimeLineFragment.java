@@ -55,56 +55,67 @@ public class MediaTimeLineFragment extends TweetsListFragment{
         });
 
         populateTimeline(true);
+        btnNetwork.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                populateTimeline(true);
+            }
+        });
         return v;
     }
 
     // Send api request to get timeline json and fills listview with tweet objects
     public void populateTimeline(final boolean newTimeline) {
-        long userId = getArguments().getLong("userId");
-        if (newTimeline == true) {
-            setMaxId(0L);
-            statuses.clear();
-            showProgressBar();
+        if (!isConnected()) {
+            btnNetwork.setVisibility(View.VISIBLE);
+        } else {
+            btnNetwork.setVisibility(View.GONE);
+            long userId = getArguments().getLong("userId");
+            if (newTimeline == true) {
+                setMaxId(0L);
+                statuses.clear();
+                showProgressBar();
+            }
+
+
+            client.getMediaTimeline(new JsonHttpResponseHandler() {
+
+
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, JSONArray json) {
+                    Log.d("DEBUG", json.toString());
+                    //                Toast.makeText(getBaseContext(), "SuccessArray", Toast.LENGTH_SHORT).show();
+
+
+                    int curSize = statuses.size();
+                    //Add them to the adapter
+
+                    statuses.addAll(Status.fromJSONArray(json));
+
+                    if (newTimeline == false) {
+                        aStatuses.notifyItemRangeInserted(curSize, statuses.size() - 1);
+                    } else {
+                        aStatuses.notifyDataSetChanged();
+                    }
+
+                    if (statuses.size() > 0) {
+                        setMaxId(statuses.get(statuses.size() - 1).getId() - 1);
+                    }
+
+                    Log.d("DEBUG", "Status Array: " + statuses.toString());
+                    hideProgressBar();
+                }
+
+                @Override
+                public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                    Log.d("DEBUG", errorResponse.toString());
+                    //                Toast.makeText(getBaseContext(), "FailureObject", Toast.LENGTH_SHORT).show();
+                    hideProgressBar();
+                }
+
+
+            }, getMaxId(), userId);
         }
-
-
-        client.getMediaTimeline(new JsonHttpResponseHandler() {
-
-
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONArray json) {
-                Log.d("DEBUG", json.toString());
-//                Toast.makeText(getBaseContext(), "SuccessArray", Toast.LENGTH_SHORT).show();
-
-
-                int curSize = statuses.size();
-                //Add them to the adapter
-
-                statuses.addAll(Status.fromJSONArray(json));
-
-                if (newTimeline == false) {
-                    aStatuses.notifyItemRangeInserted(curSize, statuses.size() - 1);
-                } else {
-                    aStatuses.notifyDataSetChanged();
-                }
-
-                if (statuses.size() > 0) {
-                    setMaxId(statuses.get(statuses.size() - 1).getId() - 1);
-                }
-
-                Log.d("DEBUG", "Status Array: " + statuses.toString());
-                hideProgressBar();
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                Log.d("DEBUG", errorResponse.toString());
-//                Toast.makeText(getBaseContext(), "FailureObject", Toast.LENGTH_SHORT).show();
-                hideProgressBar();
-            }
-
-
-        }, getMaxId(), userId);
 
         swipeContainer.setRefreshing(false);
 

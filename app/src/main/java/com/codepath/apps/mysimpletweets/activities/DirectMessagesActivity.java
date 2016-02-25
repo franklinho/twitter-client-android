@@ -33,6 +33,7 @@ public class DirectMessagesActivity extends AppCompatActivity {
     SentDirectMessageFragment sentDirectMessageFragment;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,7 +62,6 @@ public class DirectMessagesActivity extends AppCompatActivity {
 
         //Attach the pager tabs to the viewpager
         tabstrip.setViewPager(viewpager);
-
 
     }
 
@@ -111,6 +111,7 @@ public class DirectMessagesActivity extends AppCompatActivity {
         ComposeDirectMessageDialog composeDirectMessageDialog = ComposeDirectMessageDialog.newInstance();
         composeDirectMessageDialog.show(fm, "fragment_new_direct_message");
     }
+
 
 
 }

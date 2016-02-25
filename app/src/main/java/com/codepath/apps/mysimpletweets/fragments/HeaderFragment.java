@@ -69,74 +69,78 @@ public class HeaderFragment extends Fragment {
         ButterKnife.bind(this, v);
 
         final User user = getArguments().getParcelable("user");
-        tvName.setText(user.getName());
-        tvScreenName.setText("@"+user.getScreenName());
-        tvFollowersCount.setText(user.getFollowersCount().toString());
-        tvFollowingCount.setText(user.getFriendsCount().toString());
-        tvBio.setText(user.getDescription().toString());
-        Glide.with(this).load(user.getProfileImageUrl()).into(ivProfileImage);
-        Glide.with(this).load(user.getProfileBackgroundImageUrl()).into(ivBackground);
+        if (user != null) {
+            tvName.setText(user.getName());
+            tvScreenName.setText("@"+user.getScreenName());
+            tvFollowersCount.setText(user.getFollowersCount().toString());
+            tvFollowingCount.setText(user.getFriendsCount().toString());
+            tvBio.setText(user.getDescription().toString());
+            Glide.with(this).load(user.getProfileImageUrl()).into(ivProfileImage);
+            Glide.with(this).load(user.getProfileBackgroundImageUrl()).into(ivBackground);
 
-        final TwitterClient client = TwitterApplication.getRestClient();
+            final TwitterClient client = TwitterApplication.getRestClient();
 //        final Animation animScale = AnimationUtils.loadAnimation(getContext(), R.anim.anim_scale);
-        if (user.getFollowing()) {
-            client.postFollow(user.getId(), new JsonHttpResponseHandler());
-            user.setFollowing(true);
-            btnFollow.setBackground(getResources().getDrawable(R.drawable.followed_button_border));
-            btnFollow.setTextColor(Color.parseColor("#FFFFFF"));
-            btnFollow.setText("Unfollow");
-        } else {
-            client.postUnfollow(user.getId(), new JsonHttpResponseHandler());
-            user.setFollowing(false);
-            btnFollow.setBackground(getResources().getDrawable(R.drawable.unfollowed_button_border));
-            btnFollow.setTextColor(Color.parseColor("#55acee"));
-            btnFollow.setText("Follow");
+            if (user.getFollowing()) {
+                client.postFollow(user.getId(), new JsonHttpResponseHandler());
+                user.setFollowing(true);
+                btnFollow.setBackground(getResources().getDrawable(R.drawable.followed_button_border));
+                btnFollow.setTextColor(Color.parseColor("#FFFFFF"));
+                btnFollow.setText("Unfollow");
+            } else {
+                client.postUnfollow(user.getId(), new JsonHttpResponseHandler());
+                user.setFollowing(false);
+                btnFollow.setBackground(getResources().getDrawable(R.drawable.unfollowed_button_border));
+                btnFollow.setTextColor(Color.parseColor("#55acee"));
+                btnFollow.setText("Follow");
+            }
+
+            btnFollow.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    if (user.getFollowing()) {
+                        client.postUnfollow(user.getId(), new JsonHttpResponseHandler());
+                        user.setFollowing(false);
+                        btnFollow.setBackground(getResources().getDrawable(R.drawable.unfollowed_button_border));
+                        btnFollow.setTextColor(Color.parseColor("#55acee"));
+                        btnFollow.setText("Follow");
+//                    v.startAnimation(animScale);
+                    } else {
+                        client.postFollow(user.getId(), new JsonHttpResponseHandler());
+                        user.setFollowing(true);
+                        btnFollow.setBackground(getResources().getDrawable(R.drawable.followed_button_border));
+                        btnFollow.setTextColor(Color.parseColor("#FFFFFF"));
+                        btnFollow.setText("Unfollow");
+//                    v.startAnimation(animScale);
+                    }
+
+                }
+            });
+
+            View.OnClickListener followingClickListener = new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(getContext(), FollowingActivity.class);
+                    i.putExtra("user", user );
+                    getContext().startActivity(i);
+                }
+            };
+            tvFollowingCount.setOnClickListener(followingClickListener);
+            tvFollowingLabel.setOnClickListener(followingClickListener);
+
+            View.OnClickListener followersClickListener = new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(getContext(), FollowersActivity.class);
+                    i.putExtra("user", user );
+                    getContext().startActivity(i);
+                }
+            };
+            tvFollowersCount.setOnClickListener(followersClickListener);
+            tvFollowersLabel.setOnClickListener(followersClickListener);
+
         }
 
-        btnFollow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if (user.getFollowing()) {
-                    client.postUnfollow(user.getId(), new JsonHttpResponseHandler());
-                    user.setFollowing(false);
-                    btnFollow.setBackground(getResources().getDrawable(R.drawable.unfollowed_button_border));
-                    btnFollow.setTextColor(Color.parseColor("#55acee"));
-                    btnFollow.setText("Follow");
-//                    v.startAnimation(animScale);
-                } else {
-                    client.postFollow(user.getId(), new JsonHttpResponseHandler());
-                    user.setFollowing(true);
-                    btnFollow.setBackground(getResources().getDrawable(R.drawable.followed_button_border));
-                    btnFollow.setTextColor(Color.parseColor("#FFFFFF"));
-                    btnFollow.setText("Unfollow");
-//                    v.startAnimation(animScale);
-                }
-
-            }
-        });
-
-        View.OnClickListener followingClickListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getContext(), FollowingActivity.class);
-                i.putExtra("user", user );
-                getContext().startActivity(i);
-            }
-        };
-        tvFollowingCount.setOnClickListener(followingClickListener);
-        tvFollowingLabel.setOnClickListener(followingClickListener);
-
-        View.OnClickListener followersClickListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getContext(), FollowersActivity.class);
-                i.putExtra("user", user );
-                getContext().startActivity(i);
-            }
-        };
-        tvFollowersCount.setOnClickListener(followersClickListener);
-        tvFollowersLabel.setOnClickListener(followersClickListener);
 
 
 
