@@ -62,7 +62,7 @@ public class ProfileActivity extends AppCompatActivity {
             user = TwitterClient.currentUser;
         }
 
-        if (user != null) {
+
             //        actionBar.setTitle("@" + user.getScreenName());
 
 //
@@ -91,7 +91,7 @@ public class ProfileActivity extends AppCompatActivity {
 
             //Attach the pager tabs to the viewpager
             tabstrip.setViewPager(viewpager);
-        }
+
 
 
 

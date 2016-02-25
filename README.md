@@ -69,10 +69,13 @@ Time Spent: 23 hours
 
 ## Video Walkthrough 
 
-Here's a walkthrough of implemented user stories:
+Walkthrough of stories for part 1:
 
-![General Functionality](https://github.com/franklinho/twitter-client-android/blob/master/TwitterClientWalkThrough.gif)
-![Animated Buttons](https://github.com/franklinho/twitter-client-android/blob/master/TwitterClientWalkThrough2.gif)
+![Part 1](https://github.com/franklinho/twitter-client-android/blob/master/TwitterClientWalkThrough.gif)
+
+Walkthrough of stories for part 2:
+
+![Part 2](https://github.com/franklinho/twitter-client-android/blob/master/TwitterClientWalkThrough2.gif)
 
 
 ## Open-source libraries used
@@ -86,6 +89,7 @@ Here's a walkthrough of implemented user stories:
  * [Butterknife](http://jakewharton.github.io/butterknife/) - Removes boilerplate code by binding view IDs to objects
  * [Joda Time Android](https://github.com/dlew/joda-time-android) - Date formatting and handling libarary
  * [Parceler](https://github.com/johncarl81/parceler) - Simplifies parceling objects
+ * [PagerSlidingTabStrip](https://github.com/astuetz/PagerSlidingTabStrip) - Allows easy implementation of sliding tab layout
 
 ## License
 
