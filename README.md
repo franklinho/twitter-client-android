@@ -45,6 +45,11 @@ Walkthrough of stories for part 1:
 
 
 ## Part 2
+
+Improvement on pre-existing Twitter Client.
+
+Time Spent: 24 hours
+
 ## User Stories
 
   * Required User Stories
@@ -78,6 +83,7 @@ Walkthrough of stories for part 1:
 Walkthrough of stories for part 2:
 
 ![Part 2](https://github.com/franklinho/twitter-client-android/blob/master/TwitterClientWalkThrough2.gif)
+![Offline Network Functionality](https://github.com/franklinho/twitter-client-android/blob/master/TwitterClientWalkThrough4.gif)
 
 
 ## Open-source libraries used
